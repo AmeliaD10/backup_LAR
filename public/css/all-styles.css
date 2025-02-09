@@ -1,0 +1,927 @@
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffddd2;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+
+/* Topnav */
+.topnav {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 50px;
+    margin-right: 10px;
+    margin-left: 50px;
+}
+.sur {
+    width: 300px; 
+    height: auto;
+}
+
+.brand-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+}
+
+.nav-links li {
+    margin-left: 30px;
+    justify-items: center;
+}
+
+.nav-links li a {
+    font-size: 18px;
+    color: #333;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: #FA8C01;
+    
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+/* Profile dropdown styling */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 3px;
+    border-radius: 10px;
+    margin-top: 100px;
+    margin-left: 60px;
+    z-index: 1;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show the dropdown when it is active */
+.show {
+    display: block;
+}
+
+/* Main Section */
+/*Appointment card*/
+
+.main-section {
+    text-align: center;
+    padding: 50px 0px;
+    margin-top: 100px;
+    margin-bottom: 243px;
+
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 60px;
+}
+
+
+.card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    transition: transform 0.3s ease; 
+    height: 200px;
+    border-radius: 40px;
+    margin-bottom: auto;
+    margin-top: 50px;
+}
+
+.card:hover {
+    transform: scale(1.05); 
+}
+
+.sur {
+     width: 160px; /* Set width for the circle */
+  height: 165px; /* Set height to match the width */
+  border-radius: 50%; /* Make it circular */
+  object-fit: cover; /* Ensure the image covers the circle */
+  border: 2px solid #ccc; /* Optional: add a border around the circle */
+}
+.laugo {
+    width: 154px;
+    height: 160px;
+}
+
+
+.card h3 {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+
+
+
+/* Welcome Section */
+.welcome-section {
+    padding: 60px 20px;
+    background-color: #FFDDD2;
+}
+
+/* Welcome Container: Flexbox row for larger screens */
+.welcome-container {
+    display: flex;
+    flex-direction: row; /* Set to row for side-by-side layout */
+    align-items: center;
+    justify-content: space-between; /* Space between image and text */
+    max-width: 1000px;
+    margin: 0 auto;
+    gap: 30px; /* Add space between image and text */
+}
+
+/* Image on the left */
+.welcome-image {
+    max-width: 100%;
+    height: auto;
+    width: 400px; /* Adjust width as needed */
+}
+
+/* Welcome Text on the right */
+.welcome-text {
+    max-width: 90%; /* Adjust text width */
+    justify-content: center;
+}
+
+.welcome-text h1 {
+    font-size: 36px;
+    color: #5B392C;
+    font-weight: bold;
+}
+
+.welcome-text p {
+    font-size: 18px;
+    color: #5B392C;
+    margin: 20px 0;
+}
+
+.get-started-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #FF7F7E;
+    color: #FFF;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.admin {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: black;
+    color: #FFF;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+/* Guarantee Section */
+.guarantee-section {
+    margin-top: 60px;
+}
+
+.guarantee-section h2 {
+    font-size: 28px;
+    color: #5B392C;
+    margin-bottom: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+
+/* Guarantee Cards */
+.guarantee-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 60px;
+}
+
+.cardG {
+    background-color: #FFF;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 280px;
+    text-align: center;
+    height: 220px;
+    width:180px;
+
+
+}
+
+.cardG img {
+    height: 100px;
+    width: auto;
+    margin-bottom: 20px;
+}
+
+.cardG h3 {
+    font-size: 18px;
+    color: #5B392C;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .welcome-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .guarantee-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+    }
+}
+
+
+
+/* Footer Styles */
+footer {
+    background-color: #FFF1EE;
+    padding: 40px 0;
+    text-align: center;
+    position: sticky;
+}
+
+
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo img {
+    width: 80px;
+}
+
+.footer-logo p {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Abhaya Libre SemiBold;
+    margin-left:-20px;
+}
+
+.footer-center {
+    text-align: center;
+}
+
+.slogan {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #777;
+}
+
+.footer-contact p {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.footer-contact a {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    margin-left: 22px;
+
+}
+
+
+
+footer p {
+    margin: 5px 0;
+}
+
+/* Gallery Section */
+.gallery-section {
+    padding: 60px 20px;
+        background-color: #ffddd2;
+}
+
+.gallery-section h1 {
+    font-size: 36px;
+    color: #5B392C;
+    margin-bottom: 40px;
+    margin-top: 9px;
+    margin-left: 50px;
+
+}
+
+/* Gallery Container */
+.gallery-container {
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px; 
+    max-width: 1100px; 
+    margin-left: auto;
+    margin-right: auto;
+    column-gap: 0%;
+
+}
+
+/* Gallery Cards */
+.gallery-card {
+    background-color: #FFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 210px;
+
+}
+
+.gallery-card:hover {
+    transform: scale(1.05); 
+}
+
+
+.gallery-card img {
+    width: 210px;  
+    height: 200px;
+     object-fit: cover; 
+    object-position: center; 
+    border-radius: 10px;
+
+
+}
+
+
+.gallery-card p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #5B392C;
+}
+
+.gallery-card span {
+    font-size: 14px;
+    color: #777;
+}
+
+
+
+/* Modal Styles */
+.galler-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.6); /* Black with opacity */
+}
+
+.galler-modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 1200px;
+    width: 500px;
+}
+
+.galler-modal-image img {
+    width: 250px;
+    height: auto;
+    border-radius: 20px;
+    margin: auto;
+}
+
+.galler-modal-text {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.galler-modal-text h2 {
+    font-size: 28px;
+    color: #5B392C;
+}
+
+.galler-modal-text p {
+    font-size: 18px;
+    color: #777;
+}
+
+.galler-modal-text h4 {
+    font-size: 18px;
+    color: #777;
+}
+
+.galler-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+}
+
+.galler-close-btn:hover {
+    color: red;
+}
+
+/* About Section */
+.about-section {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #ffddd2;
+    margin-bottom: 50px;
+}
+.about-container {
+    background-color: white;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 15px;
+    max-width: 800px;
+    margin: 0 auto; 
+}
+
+
+.about-section h1 {
+    font-size: 36px;
+    color: #5B392C;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.about-section p {
+    font-size: 18px;
+    color: #5B392C;
+    max-width: 800px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+}
+.user-profile {
+    background-color: #e89c8c;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: #fff;
+}
+
+.form-container {
+    background: white;
+    padding: 30px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 600px; 
+    text-align: center;
+    justify-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 148px;
+    margin-bottom: 160px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-content {
+    display: flex;
+    gap: 50px; 
+}
+
+.form-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between form fields */
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    margin-left: 100px;
+}
+
+.form-buttons button {
+    background-color: #f09792;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.form-buttons button:hover {
+    background-color: #e07a76;
+}
+
+button[type="button"] {
+    background-color: #ddd;
+    color: #333;
+}
+
+button[type="button"]:hover {
+    background-color: #bbb}
+.logcontainer {
+    position: relative;
+    width: 100%;
+    max-width: 1024px;
+    height: 100%;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.admin-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+/* Login box styling */
+.login-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: auto;
+    height: 400px;
+}
+
+.login-box h2{
+    margin-bottom: 40px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+    margin-left: 5px;
+    margin-right: 20px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.sign-in-btn {
+    width: 40%;
+    background-color: black;
+    color: white;
+    padding: 15px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.signup-link {
+    color: red;
+    text-decoration: none;
+
+}
+
+
+/*admin*/
+
+.admincontainer {
+    position: relative;
+    width: 100%;
+    max-width: 1024px;
+    height: 100%;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.admin-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+/* Login box styling */
+.admin-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 290px;
+    margin: auto;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: auto;
+    height: 300px;
+}
+
+.admin-box h2{
+    margin-bottom: 40px;
+}
+
+.admin-group {
+    margin-bottom: 15px;
+    text-align: left;
+    margin-left: 5px;
+    margin-right: 20px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.admin-btn {
+    width: 40%;
+    background-color: black;
+    color: white;
+    padding: 15px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.admin-link {
+    color: red;
+    text-decoration: none;
+    
+}
+
+/* Profile Picture Section */
+.profile-picture-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 1px;
+}
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid #ccc;
+}
+
+#profile-picture-input {
+    font-size: 14px;
+}
+
+/*edit account*/
+
+.acc-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: auto;
+    height: 400px;
+    padding-bottom: 100px;
+}
+
+.acc-box h2{
+    margin-bottom: 10px;
+}
+
+.acc-group {
+    margin-bottom: 15px;
+    text-align: left;
+    margin-left: 5px;
+    margin-right: 20px;
+}
+
+/* sign up */
+.signup-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: auto;
+    height: 400px;
+    padding-bottom: 350px;
+    gap: 50px;
+}
+
+.signup-box h2{
+    margin-bottom: 40px;
+}
+
+.signup-group {
+    margin-bottom: 15px;
+    text-align: left;
+    margin-left: 5px;
+    margin-right: 20px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    
+}
+
+.signup-btn {
+    width: 40%;
+    background-color: black;
+    color: white;
+    padding: 15px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.signup-link {
+    color: red;
+    text-decoration: none;
+
+}
+
+.signup-gif {
+    width: 300px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    /* Optional styles for better alignment */
+    border-radius: 10px; /* Optional for rounded corners */
+    display: flex;
+    justify-content: center;
+    
+}
+
+.gifcontainer {
+    display: flex;
+    flex-direction: column; /* Stack the buttons and form vertically */
+}

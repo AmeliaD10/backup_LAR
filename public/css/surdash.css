@@ -1,0 +1,888 @@
+
+.sidebar {
+    width: 250px;
+    background-color: #FFDDD2;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar-logo {
+    text-align: center;
+}
+
+.sidebar-logo img {
+    width: 80px;
+}
+
+.sidebar h1 {
+    font-size: 24px;
+    color: #5B392C;
+}
+
+.menu-icon {
+    width: 20px; /* Set width for icons */
+    height: 20px; /* Set height for icons */
+    margin-right: 10px; /* Space between icon and text */
+    vertical-align: middle; /* Align the icon vertically with text */
+}
+
+/* Menu Title Styles */
+.menu-title {
+    width: 100%;
+    text-align: left;
+}
+
+.menu-title h2 {
+    font-size: 18px;
+    color: #5B392C;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 0;
+}
+
+.menu-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 0;
+    width: 100%;
+}
+
+.menu-list li {
+    margin-bottom: 20px;
+}
+
+.menu-list li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-list li a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+/* New dashboard styles */
+.dashboard-container {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; 
+}
+
+.dashboard-item {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    color: #000;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.dashboard-item:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Change background on hover for visual feedback */
+}
+
+.dashboard-icon {
+    width: 20px; /* Set a consistent width for all icons */
+    height: 20px; /* Set a consistent height for all icons */
+}
+
+.dashboard-item a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px; /* Updated padding */
+}
+
+.search-container {
+    width: 490px; /* Set the maximum width */
+    border-radius: 23px; /* Rounded corners */
+    background-color: #F5F3FF; /* Background color */
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Center items vertically */
+    padding: 11px 21px; /* Padding for the container */
+    color: #5041BC; /* Text color */
+    font: 500 14px Montserrat, sans-serif; /* Font styling */
+}
+
+.search-input {
+    border: none; /* Remove border */
+    outline: none; /* Remove outline */
+    background: transparent; /* Transparent background */
+    color: #5041BC; /* Match text color */
+    font: 500 14px Montserrat, sans-serif; /* Match font styling */
+    flex-grow: 1; /* Take up remaining space */
+    margin-right: 10px; /* Space between input and icon */
+}
+
+.search-icon {
+    width: 18px; /* Icon width */
+    aspect-ratio: 1; /* Maintain aspect ratio */
+    object-fit: contain; /* Contain the image */
+}
+
+/* User Profile Styles */
+.dash-user-profile {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    position: relative; /* Enable positioning context for the dropdown */
+}
+
+.user-info {
+    display: flex; /* Flexbox for user info */
+    align-items: center; /* Center items vertically */
+}
+
+.user-avatar {
+    width: 44px; /* Set fixed width */
+    height: 44px; /* Set fixed height */
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover; /* Ensure the image covers the element */
+    margin-right: 10px; /* Space between image and username */
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column; /* Stack username and role vertically */
+}
+
+.user-name {
+    font-size: 16px; /* Font size for the username */
+    color: #333; /* Text color */
+    margin: 0; /* Remove default margin */
+}
+
+.user-role {
+    font-size: 14px; /* Font size for the role */
+    color: #666; /* Lighter color for the role */
+    margin: 0; /* Remove default margin */
+}
+
+.dropdown-icon {
+    width: 18px; /* Fixed width for dropdown icon */
+    height: 18px; /* Fixed height for dropdown icon */
+    align-self: center; /* Center it vertically */
+    margin-left: 10px; /* Space between user info and dropdown icon */
+}
+
+.logout-button {
+    position: absolute; /* Position the logout button absolutely */
+    top: 100%; /* Position it below the user info */
+    right: 0; /* Align it to the right */
+    display: none; /* Hide it by default */
+}
+
+/* Add a class to control visibility */
+.logout-button.visible {
+    display: flex; /* Show it when the class is added */
+}
+
+.logout-button {
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid #d6d6d6;
+    align-self: end;
+    display: flex;
+    margin-top: 7px;
+    min-height: 31px;
+    gap: 16px;
+    color: #a3a3a3;
+    white-space: nowrap;
+    text-align: center;
+    justify-content: start;
+    padding: 6px 12px;
+    font: 400 14px/1 'Poppins', sans-serif;
+}
+
+.logout-text {
+    align-self: stretch;
+    display: flex;
+    width: 100%;
+    gap: 12px;
+    justify-content: start;
+    flex: 1;
+    flex-basis: 0%;
+    margin: auto 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Patients Section */
+.patient-overview {
+    margin: 60px 0; /* Increase the top and bottom margin to create space */
+    display: flex;
+    justify-content: center;
+}
+
+.dash-card {
+    background-color: #DCC4E4; /* Changed to match the previous styles */
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center; /* Center text within the card */
+    width: 300px;
+    height:100px;
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+}
+
+.dash-card img {
+    width: 40px; /* Adjust image size if needed */
+    margin-right: 10px; /* Space between the image and text */
+}
+
+/* Updated card image size for consistency */
+.dash-card-content {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start (left) */
+    color: #333; /* Text color */
+}
+
+.dash-card-content h2 {
+    font-size: 20px; /* Font size for the heading */
+    font-weight: bold; /* Bold text */
+    margin: 0; /* Remove default margin */
+}
+
+.dash-card-content p {
+    font-size: 14px; /* Font size for the description */
+    color: #666; /* Lighter color for description */
+    margin: 5px 0; /* Margin for spacing */
+}
+
+.dash-card-content span {
+    font-size: 16px; /* Font size for the patient count */
+    font-weight: 600; /* Semi-bold for emphasis */
+    color: #000; /* Dark color for visibility */
+}
+
+
+
+/*doctors to the lahi sa header for the purpose */
+/* Doctors Table Container */
+.doctors-table-doc {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Table Header */
+.table-header-doc {
+    background-color: #f7f7f7;
+    padding: 10px 0;
+    font-weight: 600;
+    color: #333;
+}
+
+.header-row-doc {
+    display: flex;
+    padding: 15px;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+/* Header Cells */
+.header-cell-doc {
+    flex: 1;
+    padding: 10px 15px;
+    text-align: left;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Table Row */
+.table-row-doc {
+    display: flex;
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    transition: background-color 0.3s;
+}
+
+.table-row-doc:hover {
+    background-color: #f9f9f9;
+}
+
+/* Row Content Cells */
+.name-doc, .patients-doc, .action-doc {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.name-doc {
+    font-weight: 500;
+}
+
+.patients-doc {
+    text-align: center;
+}
+
+.action-doc {
+    text-align: right;
+}
+
+/* Delete Icon */
+.delete-icon-doc {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.delete-icon-doc:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+
+
+
+/* Doctors Section */
+
+
+.doctors-section h2 {
+    margin-top: 100px;
+    font-size: 24px;
+    color: #5B392C;
+    margin-bottom: 20px;
+}
+
+.doctor-list {
+    display: flex;
+    justify-content: space-between; /* Space the doctor cards evenly */
+    flex-wrap: wrap; /* Allow wrapping to the next line if necessary */
+    gap: 20px; /* Space between cards */
+    max-width: 800px; /* Limit the width for better alignment */
+    margin: 0 auto; /* Center the list */
+}
+
+.doctor-card {
+    background-color: rgb(247, 217, 243);
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    width: calc(50% - 10px); /* Make two cards fit in a row with some margin */
+    text-align: center;
+    cursor: pointer;
+}
+.doctor-card:hover {
+    background-color: #FF7F50;
+}
+
+
+/* Appointments Table Styles */
+
+.doctor-dropdown {
+    position: absolute; /* Position it below the button */
+    background: white;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    margin-top: 5px;
+    width: 150px; /* Adjust as needed */
+}
+
+.doctor-dropdown ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-size-adjust: 10;
+}
+
+.doctor-dropdown li {
+    padding: 10px;
+    padding-right: 200%;
+    cursor: pointer;
+}
+
+.doctor-dropdown li:hover {
+    background-color: #f0f0f0; /* Highlight on hover */
+}
+
+.hidden {
+    display: none;
+}
+.approved {
+    color: white; /* Approved color */
+}
+
+.cancelled {
+    color: white;
+
+}
+
+.container {
+    margin: 50px auto;
+    max-width: 1000px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #5B392C;
+}
+
+.appointment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.appointment-table th,
+.appointment-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.appointment-table th {
+    background-color: #f2f2f2;
+    color: #5B392C;
+}
+
+.appointment-table td {
+    font-size: 16px;
+}
+
+/* Status styles */
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.status.approved {
+    background-color: #28a745;
+}
+
+.status.cancelled {
+    background-color: #dc3545;
+}
+
+.status.pending {
+    background-color: #ffc107;
+    color: red;
+}
+
+/* Button styles */
+.assign-btn, .cancel-btn, .confirm-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.assign-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.cancel-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.confirm-btn {
+    background-color: #28a745;
+    color: white;
+    margin-top: 10px;
+}
+
+/* Hidden class for elements */
+.hidden {
+    display: none;
+}
+
+/* Doctor dropdown styles */
+.doctor-select {
+    width: 200px;
+    padding: 5px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+
+
+/* Doctor Form Styles */
+.doctor-form-container {
+    margin-top: 100px;
+    width: 309px;
+    margin: 100px auto; 
+    padding: 50px;
+    background-color: white;
+    border-radius: 30px; 
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); 
+    border: 1px solid black; 
+}
+
+.doctor-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.doctor-form label {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.doctor-form input {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 8px; /* Rounded input field */
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.add-doctor-button {
+    padding: 10px 20px;
+    background-color: black; /* Black button */
+    color: white;
+    border: none;
+    border-radius: 20px; /* Rounded button */
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    margin: 0 auto; /* Center the button */
+    width: 100px; /* Fixed button width */
+}
+
+.add-doctor-button:hover {
+    background-color: #333;
+}
+
+
+
+
+/* doctor styles */
+
+.action-bar {
+    display: flex;
+    margin-top: 38px;
+    width: 694px;
+    max-width: 100%;
+    gap: 40px 100px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    flex-wrap: wrap;
+  }
+  .add-doctor-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    font-size: 12px;
+    color: #fff;
+    flex: 1;
+  }
+  .add-icon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 39px;
+    align-self: flex-start;
+  }
+  .btn-text {
+    background-color:#624DE3;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 10px;
+  }
+  .section-title {
+    color: #000;
+    font-size: 32px;
+    line-height: 1.4;
+    align-self: flex-start;
+    margin-top: 15px;
+  }
+  .doctors-table {
+    display: flex;
+    width: 904px;
+    max-width: 100%;
+    flex-direction: column;
+    color: #000;
+    margin: 130px 0 0 77px;
+    font: 500 14px Montserrat, sans-serif;
+  }
+  @media (max-width: 991px) { .doctors-table { margin-top: 40px; } }
+  .table-content {
+    display: flex;
+    height: 176px;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  @media (max-width: 991px) { .table-content { max-width: 100%; } }
+  .table-header {
+    background-color: #fff;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 700;
+    white-space: nowrap;
+    padding: 8px 70px 23px;
+  }
+  @media (max-width: 991px) {
+    .table-header {
+      max-width: 100%;
+      white-space: initial;
+      padding: 0 20px;
+    }
+  }
+  .header-row {
+    display: flex;
+    margin-left: 73px;
+    width: 288px;
+    max-width: 100%;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  @media (max-width: 991px) { .header-row { white-space: initial; } }
+  .header-cell { text-align: center; }
+  .table-row {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 7px 70px 30px;
+  }
+  .table-row:nth-child(even) { background-color: #f7f6fe; }
+  .table-row:nth-child(odd) { background-color: #fff; }
+  @media (max-width: 991px) {
+    .table-row { max-width: 100%; padding: 0 20px; }
+  }
+  .row-content {
+    display: flex;
+    margin-left: 59px;
+    width: 301px;
+    max-width: 100%;
+    align-items: flex-start;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  .doctor-name { text-align: center; align-self: stretch; }
+  .action-icon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 24px;
+  }
+
+
+
+ /* Patients Table Styles */
+.action-bar-pet {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-title-pet {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.patients-table-pet {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.table-content-pet {
+    display: flex;
+    flex-direction: column;
+}
+
+.table-header-pet {
+    display: flex;
+    background-color: #f7f7f7;
+    padding: 10px 0;
+    font-weight: 600;
+    color: #333;
+}
+
+.header-row-pet, .table-row-pet {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header-cell-pet, .cell-content-pet {
+    flex: 1;
+    padding: 10px 15px;
+    text-align: left;
+    font-size: 14px;
+    color: #555;
+}
+
+.table-row-pet {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    transition: background-color 0.3s;
+}
+
+.table-row-pet:hover {
+    background-color: #f9f9f9;
+}
+
+.bold-text-pet {
+    font-weight: bold;
+}
+
+.table-row-pet:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+
+
+
+/* Adding patients record */
+
+.addpat-form-container {
+    margin-top: 100px;
+    width: 100%; /* Changed to 100% to allow full width usage for 2 columns */
+    max-width: 800px; /* Set a max-width for better responsiveness */
+    margin: 100px auto; 
+    padding: 50px;
+    background-color: white;
+    border-radius: 30px; 
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); 
+    border: 1px solid black; 
+}
+
+.addpat-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 50px; /* Space between the columns */
+}
+
+.addpat-form label {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.addpat-form input,
+.addpat-form select {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 8px; /* Rounded input field */
+    border: 1px solid #ccc;
+    width: 100%; /* Ensures inputs take up full width in their column */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+    margin-bottom: 20px;
+}
+
+.addpat-button {
+    padding: 10px 20px;
+    background-color: black; 
+    color: white;
+    border: none;
+    border-radius: 20px; 
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    margin: 0 auto; 
+    width: 100px; 
+    grid-column: span 2;
+}
+.addpat-button:hover {
+    background-color: #333;
+}
+
+.addpat-name {
+    text-align: center;
+    align-self: stretch;
+}
+
+.action-icon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 24px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.addpat-form select {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 8px; 
+    border: 1px solid #ccc; 
+    margin-bottom: 20px;
+    background-color: white; 
+    width: 100%; 
+}
+

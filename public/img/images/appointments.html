@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PurrfectPaw - Dashboard</title>
+    <link rel="stylesheet" href="surdash.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Menu -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="images/ball.png" alt="">
+            <h1>PurrfectPaw</h1>
+        </div>
+        
+        <!-- Menu Title -->
+        <div class="menu-title">
+            <h2>Menu</h2>
+        </div>
+<!-- Dashboard Navigation -->
+<nav class="dashboard-container">
+    <div class="dashboard-item">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6e8bd773eacc25a5a7c40ef9519fa49fa25227792ae45f3bbde5bffe096108dc?placeholderIfAbsent=true&apiKey=02853cff8a504be0a91f61afb8cdbbcd" alt="Dashboard Icon" class="dashboard-icon" />
+        <span class="dashboard-text">Dashboard</span>
+    </div>
+    <div class="dashboard-item">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0c81f4896780ee5fff882420cda3496b54a0b384d49af9f6ad84b888fc0a6f14?placeholderIfAbsent=true&apiKey=02853cff8a504be0a91f61afb8cdbbcd" alt="Appointments Icon" class="dashboard-icon" />
+        <span class="dashboard-text">Appointments</span>
+    </div>
+    <div class="dashboard-item">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0c81f4896780ee5fff882420cda3496b54a0b384d49af9f6ad84b888fc0a6f14?placeholderIfAbsent=true&apiKey=02853cff8a504be0a91f61afb8cdbbcd" alt="Doctors Icon" class="dashboard-icon" />
+        <span class="dashboard-text">Doctors</span>
+    </div>
+    <div class="dashboard-item">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1f4ba720e3eb36f88cbeeb39506756fb59283ea9643aba3db323aa6e8f900afe?placeholderIfAbsent=true&apiKey=02853cff8a504be0a91f61afb8cdbbcd" alt="Patients Record Icon" class="dashboard-icon" />
+        <span class="dashboard-text">Patients Record</span>
+    </div>
+</nav>
+    </aside>
+  
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header with Search and User Info -->
+        <header class="header">
+            <div class="search-container">
+                <input type="text" placeholder="Search" class="search-input">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cd078eb6f9ce86265999269e4046c2dcec9bec7d140ae886d7ae3f419a2c7a16?placeholderIfAbsent=true&apiKey=02853cff8a504be0a91f61afb8cdbbcd" alt="Search icon" class="search-icon" loading="lazy">
+            </div>
+        
+            <!-- User Profile Section -->
+            <section class="user-profile">
+                <div class="user-info">
+                    <img src="images/clarenceadmin.jpg" alt="Moni Roy's profile picture" class="user-avatar" />
+                    <div class="user-details">
+                        <h2 class="user-name">Gumball</h2>
+                        <p class="user-role">Admin</p>
+                    </div>
+                    <img src="images/dropdown.png" alt="Dropdown icon" class="dropdown-icon" />
+                </div>
+                <button class="logout-button hidden" id="logout-button">
+                    <span class="logout-text">Logout</span>
+                </button>
+            </section>
+        </header>
+
+        <!-- Appointments Section -->
+        <div class="container">
+            <h1>Surigao Pet Doctors</h1>
+            <table class="appointment-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Appointment Date & Time</th>
+                        <th>Treatment</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pearl Gene Ivan Petallo</td>
+                        <td>+91 9876543210</td>
+                        <td>13-Aug-2023 at 10:00 AM</td>
+                        <td>Rabies</td>
+                        <td><span class="status approved">Approved</span></td>
+                        <td>
+                            <button class="assign-btn">Assign</button>
+                            <button class="cancel-btn">Cancel</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Wade</td>
+                        <td>+91 9876543210</td>
+                        <td>13-Aug-2023 at 10:00 AM</td>
+                        <td>Rabies</td>
+                        <td><span class="status approved">Approved</span></td>
+                        <td>
+                            <button class="assign-btn">Assign</button>
+                            <button class="cancel-btn">Cancel</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Brooklyn</td>
+                        <td>+91 9876543210</td>
+                        <td>13-Aug-2023 at 10:00 AM</td>
+                        <td>Rabies</td>
+                        <td><span class="status cancelled">Cancelled</span></td>
+                        <td>
+                            <button class="assign-btn">Assign</button>
+                            <button class="cancel-btn">Cancel</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cameron</td>
+                        <td>+91 9876543210</td>
+                        <td>13-Aug-2023 at 10:00 AM</td>
+                        <td>Rabies</td>
+                        <td><span class="status cancelled">Cancelled</span></td>
+                        <td>
+                            <button class="assign-btn">Assign</button>
+                            <button class="cancel-btn">Cancel</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="surdash.js"></script>
+</body>
+</html>
