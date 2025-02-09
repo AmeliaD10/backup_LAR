@@ -209,6 +209,7 @@ export default {
     },
     cancelAppointment(appointment) {
       // Change the appointment status to 'Cancelled'
+      //adwdawdkjawdkjahwkdjhakjdhakwjhdkjawhdjk
       appointment.status = 'Cancelled';
     },
   },
@@ -452,3 +453,4 @@ export default {
   background-color: #c0392b;
   }
 </style>
+
