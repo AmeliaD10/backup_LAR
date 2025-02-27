@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name'); // Last Name (REQUIRED)
             $table->string('email')->unique(); // Email (unique and REQUIRED)
             $table->string('password'); // Password (REQUIRED)
-            // $table->string('profile_picture'); // Profile Picture (optional)
+            $table->tinyInteger('role')->default(0); // Role (0 = User, 1 = Admin) ✅ FIXED
             $table->timestamps(); // Created_at and Updated_at
         });
     }

@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\PatientRecordController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -62,10 +64,10 @@ Route::post('/appointments', [AppointmentController::class, 'store']);
 
 Route::get('/appointments', [AppointmentController::class, 'index']);
 
+Route::put('/appointments/{id}', [AppointmentController::class, 'update']);
+Route::put('/appointments/{id}/assign-doctor', [AppointmentController::class, 'assignDoctor']);
 
 
-
-
-
-
-
+Route::middleware('auth:sanctum')->get('/admin', function (Request $request) {
+    return Auth::user(); // Returns logged-in admin data
+});

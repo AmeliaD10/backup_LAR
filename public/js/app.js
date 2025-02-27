@@ -5167,6 +5167,16 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5184,16 +5194,16 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     }
   },
   created: function created() {
-    // Check if user data exists in localStorage
     var userData = localStorage.getItem("0");
     if (userData) {
       var user = JSON.parse(userData);
       this.firstName = user.first_name;
       this.lastName = user.last_name;
       this.profilePic = user.profile_picture || "/img/default-profile.jpg";
+      this.isLoggedIn = true; // Set user as logged in
     }
 
-    // Also fetch latest data from API
+    // Fetch latest data from API
     this.getUserProfile();
   },
   methods: {
@@ -5213,6 +5223,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 _this.firstName = response.data.first_name;
                 _this.lastName = response.data.last_name;
                 _this.profilePic = response.data.profile_picture || "/img/default-profile.jpg";
+                _this.isLoggedIn = true; // User is logged in
               }
               _context.next = 10;
               break;
@@ -5238,18 +5249,19 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/logout");
             case 3:
               localStorage.removeItem("0"); // Clear stored user data
+              _this2.isLoggedIn = false; // User is now logged out
               _this2.$router.push("/login");
-              _context2.next = 10;
+              _context2.next = 11;
               break;
-            case 7:
-              _context2.prev = 7;
+            case 8:
+              _context2.prev = 8;
               _context2.t0 = _context2["catch"](0);
               console.error("Error logging out:", _context2.t0);
-            case 10:
+            case 11:
             case "end":
               return _context2.stop();
           }
-        }, _callee2, null, [[0, 7]]);
+        }, _callee2, null, [[0, 8]]);
       }))();
     }
   }
@@ -5669,15 +5681,20 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       clinics: [],
-      // Array to store clinic data
       firstName: "",
       lastName: "",
-      profilePic: "/img/default-profile.jpg"
+      profilePic: "/img/default-profile.jpg",
+      isLoggedIn: false
     };
   },
   computed: {
@@ -5687,26 +5704,23 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
   },
   created: function created() {
     this.fetchClinics();
-    // Check if user data exists in localStorage
     var userData = localStorage.getItem("0");
     if (userData) {
       var user = JSON.parse(userData);
       this.firstName = user.first_name;
       this.lastName = user.last_name;
       this.profilePic = user.profile_picture || "/img/default-profile.jpg";
+      this.isLoggedIn = true;
     }
-
-    // Also fetch latest data from API
     this.getUserProfile();
   },
   methods: {
     fetchClinics: function fetchClinics() {
       var _this = this;
-      // Fetch clinics from the API
       axios.get('/api/clinics').then(function (response) {
         _this.clinics = response.data;
       })["catch"](function (error) {
-        console.error("There was an error fetching the clinics:", error);
+        console.error("Error fetching clinics:", error);
       });
     },
     getUserProfile: function getUserProfile() {
@@ -5725,6 +5739,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 _this2.firstName = response.data.first_name;
                 _this2.lastName = response.data.last_name;
                 _this2.profilePic = response.data.profile_picture || "/img/default-profile.jpg";
+                _this2.isLoggedIn = true;
               }
               _context.next = 10;
               break;
@@ -5749,19 +5764,20 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               _context2.next = 3;
               return axios.post("/logout");
             case 3:
-              localStorage.removeItem("0"); // Clear stored user data
+              localStorage.removeItem("0");
+              _this3.isLoggedIn = false;
               _this3.$router.push("/login");
-              _context2.next = 10;
+              _context2.next = 11;
               break;
-            case 7:
-              _context2.prev = 7;
+            case 8:
+              _context2.prev = 8;
               _context2.t0 = _context2["catch"](0);
               console.error("Error logging out:", _context2.t0);
-            case 10:
+            case 11:
             case "end":
               return _context2.stop();
           }
-        }, _callee2, null, [[0, 7]]);
+        }, _callee2, null, [[0, 8]]);
       }))();
     }
   }
@@ -6437,6 +6453,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6608,45 +6637,192 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       appointments: [],
-      // This will hold the fetched appointments
-      doctors: [] // This will hold the fetched list of doctors
+      displayedAppointments: [],
+      doctors: [],
+      searchQuery: ''
     };
   },
   mounted: function mounted() {
-    var _this = this;
-    // Fetch appointments from the API when the component is mounted
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/appointments').then(function (response) {
-      _this.appointments = response.data; // Set the appointments data
-    })["catch"](function (error) {
-      console.error('There was an error fetching appointments:', error);
-    });
-
-    // Fetch doctors from the API
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/doctors').then(function (response) {
-      _this.doctors = response.data; // Set the doctors data
-    })["catch"](function (error) {
-      console.error('There was an error fetching doctors:', error);
-    });
+    this.fetchAppointments();
+    this.fetchDoctors();
   },
   methods: {
+    fetchAppointments: function fetchAppointments() {
+      var _this = this;
+      return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/appointments');
+            case 3:
+              response = _context.sent;
+              _this.appointments = response.data;
+              _this.displayedAppointments = response.data;
+              _context.next = 11;
+              break;
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
+              console.error('Error fetching appointments:', _context.t0);
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[0, 8]]);
+      }))();
+    },
+    fetchDoctors: function fetchDoctors() {
+      var _this2 = this;
+      return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/doctors');
+            case 3:
+              response = _context2.sent;
+              _this2.doctors = response.data;
+              console.log('Doctors fetched:', _this2.doctors); // Debug log
+              _context2.next = 11;
+              break;
+            case 8:
+              _context2.prev = 8;
+              _context2.t0 = _context2["catch"](0);
+              console.error('Error fetching doctors:', _context2.t0);
+            case 11:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, null, [[0, 8]]);
+      }))();
+    },
     toggleDoctorDropdown: function toggleDoctorDropdown(appointment) {
-      // Toggle the visibility of the doctor dropdown for the selected appointment
+      var _this3 = this;
       this.appointments.forEach(function (app) {
-        if (app.id !== appointment.id) {
-          app.showDoctorDropdown = false; // Close other dropdowns
+        if (app !== appointment) {
+          _this3.$set(app, 'showDropdown', false);
         }
       });
-      appointment.showDoctorDropdown = !appointment.showDoctorDropdown;
+      this.$set(appointment, 'showDropdown', !appointment.showDropdown);
     },
     assignDoctor: function assignDoctor(appointment, doctor) {
-      // Assign the selected doctor to the appointment
-      appointment.doctor = doctor.name; // Using doctor name here
-      appointment.showDoctorDropdown = false; // Close the dropdown after assigning
+      var _this4 = this;
+      return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var response, _error$response;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              console.log('Assigning doctor:', {
+                appointmentId: appointment.id,
+                doctorId: doctor.id
+              });
+              _context3.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/appointments/".concat(appointment.id), {
+                doctor_id: doctor.id,
+                status: 'Assigned'
+              });
+            case 4:
+              response = _context3.sent;
+              console.log('Assignment response:', response.data);
+              if (!response.data.success) {
+                _context3.next = 15;
+                break;
+              }
+              // Update the appointment locally
+              appointment.doctor_id = doctor.id;
+              appointment.status = 'Assigned';
+              appointment.showDropdown = false;
+
+              // Show success message
+              alert('Doctor assigned successfully!');
+
+              // Refresh the appointments list
+              _context3.next = 13;
+              return _this4.fetchAppointments();
+            case 13:
+              _context3.next = 16;
+              break;
+            case 15:
+              throw new Error(response.data.message);
+            case 16:
+              _context3.next = 22;
+              break;
+            case 18:
+              _context3.prev = 18;
+              _context3.t0 = _context3["catch"](0);
+              console.error('Assignment error:', _context3.t0);
+              alert('Failed to assign doctor: ' + (((_error$response = _context3.t0.response) === null || _error$response === void 0 || (_error$response = _error$response.data) === null || _error$response === void 0 ? void 0 : _error$response.message) || _context3.t0.message));
+            case 22:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3, null, [[0, 18]]);
+      }))();
     },
     cancelAppointment: function cancelAppointment(appointment) {
-      // Change the appointment status to 'Cancelled'
-      //adwdawdkjawdkjahwkdjhakjdhakwjhdkjawhdjk
-      appointment.status = 'Cancelled';
+      var _this5 = this;
+      return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        var response, _error$response2;
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              if (confirm('Are you sure you want to cancel this appointment?')) {
+                _context4.next = 2;
+                break;
+              }
+              return _context4.abrupt("return");
+            case 2:
+              _context4.prev = 2;
+              _context4.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/appointments/".concat(appointment.id), {
+                status: 'Cancelled'
+              });
+            case 5:
+              response = _context4.sent;
+              if (!response.data.success) {
+                _context4.next = 13;
+                break;
+              }
+              appointment.status = 'Cancelled';
+              alert('Appointment cancelled successfully!');
+              _context4.next = 11;
+              return _this5.fetchAppointments();
+            case 11:
+              _context4.next = 14;
+              break;
+            case 13:
+              throw new Error(response.data.message);
+            case 14:
+              _context4.next = 20;
+              break;
+            case 16:
+              _context4.prev = 16;
+              _context4.t0 = _context4["catch"](2);
+              console.error('Cancel error:', _context4.t0);
+              alert('Failed to cancel appointment: ' + (((_error$response2 = _context4.t0.response) === null || _error$response2 === void 0 || (_error$response2 = _error$response2.data) === null || _error$response2 === void 0 ? void 0 : _error$response2.message) || _context4.t0.message));
+            case 20:
+            case "end":
+              return _context4.stop();
+          }
+        }, _callee4, null, [[2, 16]]);
+      }))();
+    },
+    filterAppointments: function filterAppointments() {
+      if (!this.searchQuery) {
+        this.displayedAppointments = this.appointments;
+        return;
+      }
+      var query = this.searchQuery.toLowerCase();
+      this.displayedAppointments = this.appointments.filter(function (appointment) {
+        var _appointment$name, _appointment$phone, _appointment$treatmen, _appointment$status, _appointment$date;
+        return ((_appointment$name = appointment.name) === null || _appointment$name === void 0 ? void 0 : _appointment$name.toLowerCase().includes(query)) || ((_appointment$phone = appointment.phone) === null || _appointment$phone === void 0 ? void 0 : _appointment$phone.toLowerCase().includes(query)) || ((_appointment$treatmen = appointment.treatment) === null || _appointment$treatmen === void 0 ? void 0 : _appointment$treatmen.toLowerCase().includes(query)) || ((_appointment$status = appointment.status) === null || _appointment$status === void 0 ? void 0 : _appointment$status.toLowerCase().includes(query)) || ((_appointment$date = appointment.date) === null || _appointment$date === void 0 ? void 0 : _appointment$date.toLowerCase().includes(query));
+      });
     }
   }
 });
@@ -6939,8 +7115,69 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7100,20 +7337,13 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
   data: function data() {
     return {
       doctors: [],
-      searchTerm: ''
+      displayedDoctors: [],
+      searchQuery: ''
     };
-  },
-  computed: {
-    filteredDoctors: function filteredDoctors() {
-      var _this = this;
-      return this.doctors.filter(function (doctor) {
-        return doctor.name.toLowerCase().includes(_this.searchTerm.toLowerCase());
-      });
-    }
   },
   methods: {
     fetchDoctors: function fetchDoctors() {
-      var _this2 = this;
+      var _this = this;
       return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -7124,22 +7354,41 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/doctors');
             case 3:
               response = _context.sent;
-              _this2.doctors = response.data;
-              _context.next = 10;
+              // Initialize each doctor with appointments array and showPatients flag
+              _this.doctors = response.data.map(function (doctor) {
+                return _objectSpread(_objectSpread({}, doctor), {}, {
+                  appointments: [],
+                  showPatients: false
+                });
+              });
+              _this.displayedDoctors = _toConsumableArray(_this.doctors); // Create a new array reference
+              console.log('Doctors fetched:', _this.displayedDoctors); // Debug log
+              _context.next = 12;
               break;
-            case 7:
-              _context.prev = 7;
+            case 9:
+              _context.prev = 9;
               _context.t0 = _context["catch"](0);
               console.error('Error fetching doctors:', _context.t0);
-            case 10:
+            case 12:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 9]]);
       }))();
     },
+    filterDoctors: function filterDoctors() {
+      if (!this.searchQuery) {
+        this.displayedDoctors = this.doctors;
+        return;
+      }
+      var query = this.searchQuery.toLowerCase();
+      this.displayedDoctors = this.doctors.filter(function (doctor) {
+        var _doctor$name, _doctor$email, _doctor$number, _doctor$address;
+        return ((_doctor$name = doctor.name) === null || _doctor$name === void 0 ? void 0 : _doctor$name.toLowerCase().includes(query)) || ((_doctor$email = doctor.email) === null || _doctor$email === void 0 ? void 0 : _doctor$email.toLowerCase().includes(query)) || ((_doctor$number = doctor.number) === null || _doctor$number === void 0 ? void 0 : _doctor$number.toLowerCase().includes(query)) || ((_doctor$address = doctor.address) === null || _doctor$address === void 0 ? void 0 : _doctor$address.toLowerCase().includes(query));
+      });
+    },
     deleteDoctor: function deleteDoctor(id) {
-      var _this3 = this;
+      var _this2 = this;
       return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
@@ -7152,7 +7401,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               _context2.next = 4;
               return axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]("/api/doctors/".concat(id));
             case 4:
-              _this3.fetchDoctors(); // Refresh the list after deletion
+              _this2.fetchDoctors(); // Refresh the list after deletion
               alert('Doctor deleted successfully');
             case 6:
               _context2.next = 11;
@@ -7176,6 +7425,47 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
           id: id
         }
       });
+    },
+    togglePatients: function togglePatients(doctor) {
+      return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              doctor.showPatients = !doctor.showPatients;
+              if (!doctor.showPatients) {
+                _context3.next = 9;
+                break;
+              }
+              console.log('Fetching appointments for doctor:', doctor.id);
+              _context3.next = 6;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/doctors/".concat(doctor.id, "/appointments"));
+            case 6:
+              response = _context3.sent;
+              console.log('Appointments response:', response.data);
+              if (Array.isArray(response.data)) {
+                doctor.appointments = response.data;
+              } else {
+                doctor.appointments = [];
+                console.warn('No appointments found for doctor');
+              }
+            case 9:
+              _context3.next = 17;
+              break;
+            case 11:
+              _context3.prev = 11;
+              _context3.t0 = _context3["catch"](0);
+              console.error('Error fetching appointments:', _context3.t0);
+              doctor.appointments = [];
+              doctor.showPatients = false;
+              alert('Failed to fetch appointments');
+            case 17:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3, null, [[0, 11]]);
+      }))();
     }
   },
   mounted: function mounted() {
@@ -7930,6 +8220,16 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -8000,7 +8300,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       }],
       firstName: "",
       lastName: "",
-      profilePic: "/img/default-profile.jpg"
+      profilePic: "/img/default-profile.jpg",
+      isLoggedIn: false
     };
   },
   computed: {
@@ -8009,16 +8310,14 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     }
   },
   created: function created() {
-    // Check if user data exists in localStorage
     var userData = localStorage.getItem("0");
     if (userData) {
       var user = JSON.parse(userData);
       this.firstName = user.first_name;
       this.lastName = user.last_name;
       this.profilePic = user.profile_picture || "/img/default-profile.jpg";
+      this.isLoggedIn = true;
     }
-
-    // Also fetch latest data from API
     this.getUserProfile();
   },
   methods: {
@@ -8047,6 +8346,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 _this.firstName = response.data.first_name;
                 _this.lastName = response.data.last_name;
                 _this.profilePic = response.data.profile_picture || "/img/default-profile.jpg";
+                _this.isLoggedIn = true;
               }
               _context.next = 10;
               break;
@@ -8071,19 +8371,20 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               _context2.next = 3;
               return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/logout");
             case 3:
-              localStorage.removeItem("0"); // Clear stored user data
+              localStorage.removeItem("0");
+              _this2.isLoggedIn = false;
               _this2.$router.push("/login");
-              _context2.next = 10;
+              _context2.next = 11;
               break;
-            case 7:
-              _context2.prev = 7;
+            case 8:
+              _context2.prev = 8;
               _context2.t0 = _context2["catch"](0);
               console.error("Error logging out:", _context2.t0);
-            case 10:
+            case 11:
             case "end":
               return _context2.stop();
           }
-        }, _callee2, null, [[0, 7]]);
+        }, _callee2, null, [[0, 8]]);
       }))();
     }
   }
@@ -8202,6 +8503,16 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -8209,7 +8520,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     return {
       firstName: "",
       lastName: "",
-      profilePic: "/img/default-profile.jpg"
+      profilePic: "/img/default-profile.jpg",
+      isLoggedIn: false // Track if user is logged in
     };
   },
   computed: {
@@ -8218,16 +8530,16 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     }
   },
   created: function created() {
-    // Check if user data exists in localStorage
     var userData = localStorage.getItem("0");
     if (userData) {
       var user = JSON.parse(userData);
       this.firstName = user.first_name;
       this.lastName = user.last_name;
       this.profilePic = user.profile_picture || "/img/default-profile.jpg";
+      this.isLoggedIn = true; // Set user as logged in
     }
 
-    // Also fetch latest data from API
+    // Fetch latest data from API
     this.getUserProfile();
   },
   methods: {
@@ -8247,6 +8559,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 _this.firstName = response.data.first_name;
                 _this.lastName = response.data.last_name;
                 _this.profilePic = response.data.profile_picture || "/img/default-profile.jpg";
+                _this.isLoggedIn = true; // User is logged in
               }
               _context.next = 10;
               break;
@@ -8272,18 +8585,19 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/logout");
             case 3:
               localStorage.removeItem("0"); // Clear stored user data
+              _this2.isLoggedIn = false; // User is now logged out
               _this2.$router.push("/login");
-              _context2.next = 10;
+              _context2.next = 11;
               break;
-            case 7:
-              _context2.prev = 7;
+            case 8:
+              _context2.prev = 8;
               _context2.t0 = _context2["catch"](0);
               console.error("Error logging out:", _context2.t0);
-            case 10:
+            case 11:
             case "end":
               return _context2.stop();
           }
-        }, _callee2, null, [[0, 7]]);
+        }, _callee2, null, [[0, 8]]);
       }))();
     }
   }
@@ -8554,8 +8868,6 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
-//
-//
 
  // Import axios to make API requests
 
@@ -8735,7 +9047,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 
               // const fileInput = this.$refs.profilePictureInput?.files[0];
               // if (fileInput) {
-              //   formData.append("profile_picture", fileInput);
+              //   formData.append("profile_picture", fi  leInput);
               // }
               _context.next = 9;
               return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/register", formData, {
@@ -8912,6 +9224,16 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8931,6 +9253,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       firstName: "",
       lastName: "",
       profilePic: "/img/default-profile.jpg",
+      isLoggedIn: false,
+      // Track if user is logged in
       dropdownVisible: false
     };
   },
@@ -8946,7 +9270,10 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       this.firstName = user.first_name;
       this.lastName = user.last_name;
       this.profilePic = user.profile_picture || "/img/default-profile.jpg";
+      this.isLoggedIn = true; // Set user as logged in
     }
+
+    // Fetch latest user data
     this.getUserProfile();
   },
   methods: {
@@ -8966,6 +9293,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 _this.firstName = response.data.first_name;
                 _this.lastName = response.data.last_name;
                 _this.profilePic = response.data.profile_picture || "/img/default-profile.jpg";
+                _this.isLoggedIn = true; // User is logged in
               }
               _context.next = 10;
               break;
@@ -8990,19 +9318,20 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               _context2.next = 3;
               return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/logout");
             case 3:
-              localStorage.removeItem("0");
+              localStorage.removeItem("0"); // Clear stored user data
+              _this2.isLoggedIn = false; // User is now logged out
               _this2.$router.push("/login");
-              _context2.next = 10;
+              _context2.next = 11;
               break;
-            case 7:
-              _context2.prev = 7;
+            case 8:
+              _context2.prev = 8;
               _context2.t0 = _context2["catch"](0);
               console.error("Error logging out:", _context2.t0);
-            case 10:
+            case 11:
             case "end":
               return _context2.stop();
           }
-        }, _callee2, null, [[0, 7]]);
+        }, _callee2, null, [[0, 8]]);
       }))();
     },
     toggleDropdown: function toggleDropdown() {
@@ -9036,7 +9365,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
         confirmButtonText: "Yes, confirm appointment!"
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/appointments', _this4.formData).then(function (response) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/appointments', _this4.formData).then(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
               title: "Success!",
               text: "Your appointment has been confirmed.",
@@ -9044,7 +9373,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               confirmButtonText: "Great!"
             });
             _this4.$router.push('/appointment');
-          })["catch"](function (error) {
+          })["catch"](function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
               title: "Error",
               text: "There was an issue submitting your appointment.",
@@ -13795,7 +14124,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_8_0_rules_0_use_1_public_css_style_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.auth-section[data-v-19b32af0] {\n  display: flex;\n  align-items: center;\n}\n.auth-btn[data-v-19b32af0] {\n  padding: 8px 15px;\n  border-radius: 5px;\n  text-decoration: none;\n  color: white;\n  margin-left: 10px;\n}\n.login-btn[data-v-19b32af0],\n.signup-btn[data-v-19b32af0] {\n  background-color: #e07a9d; /* Soft pink for login */\n  color: white;\n  padding: 6px 14px; /* Smaller padding */\n  border-radius: 6px; /* Smooth edges */\n  font-size: 14px; /* Slightly smaller text */\n  font-weight: 500;\n  transition: all 0.3s ease;\n  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n  border: none;\n  cursor: pointer;\n}\n.signup-btn[data-v-19b32af0] {\n  background-color: #62c178; /* Soft green for signup */\n  margin-top: 0px;\n}\n.login-btn[data-v-19b32af0]:hover {\n  background-color: #d15595; /* Slightly darker pink */\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);\n}\n.signup-btn[data-v-19b32af0]:hover {\n  background-color: #28a745; /* Slightly darker green */\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);\n}\n  ", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13850,6 +14179,30 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_8_0_rules_0_use_1_public_css_style_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n ", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/appointment.vue?vue&type=style&index=0&id=723e91b8&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/appointment.vue?vue&type=style&index=0&id=723e91b8&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.auth-section[data-v-723e91b8] {\n  display: flex;\n  align-items: center;\n}\n.auth-btn[data-v-723e91b8] {\n  padding: 8px 15px;\n  border-radius: 5px;\n  text-decoration: none;\n  color: white;\n  margin-left: 10px;\n}\n.login-btn[data-v-723e91b8],\n.signup-btn[data-v-723e91b8] {\n  background-color: #e07a9d;\n  color: white;\n  padding: 6px 14px;\n  border-radius: 6px;\n  font-size: 14px;\n  font-weight: 500;\n  transition: all 0.3s ease;\n  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n  border: none;\n  cursor: pointer;\n}\n.signup-btn[data-v-723e91b8] {\n  background-color: #62c178;\n  margin-top: 0px;\n}\n.login-btn[data-v-723e91b8]:hover {\n  background-color: #d15595;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);\n}\n.signup-btn[data-v-723e91b8]:hover {\n  background-color: #28a745;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13948,7 +14301,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Sidebar Menu */\nbody[data-v-897dcc26] {\nfont-family: 'Arial', sans-serif;\nmargin: 0;\ndisplay: flex;\nbackground-color: #f0f0f0;\n}\n.sidebar[data-v-897dcc26] {\nwidth: 250px;\nbackground-color: #ffddd2;\npadding: 20px;\nposition: fixed;\nheight: 100%;\ntop: 0;\nleft: 0;\nbox-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);\n}\n.sidebar-logo[data-v-897dcc26] {\ndisplay: flex;\nalign-items: center;\nmargin-bottom: 30px;\n}\n.sidebar-logo img[data-v-897dcc26] {\nwidth: 50px;\nheight: 50px;\nmargin-right: 10px;\n}\n.sidebar-logo h1[data-v-897dcc26] {\nfont-size: 24px;\ncolor: #333;\nfont-weight: bold;\n}\n.menu-title[data-v-897dcc26] {\nmargin-bottom: 20px;\n}\n.menu-title h2[data-v-897dcc26] {\nfont-size: 18px;\ncolor: #333;\n}\n.dashboard-container[data-v-897dcc26] {\ndisplay: flex;\nflex-direction: column;\n}\n.dashboard-item[data-v-897dcc26] {\nmargin: 10px 0;\n}\n.dashboard-item a[data-v-897dcc26] {\ndisplay: flex;\nalign-items: center;\ntext-decoration: none;\n}\n.dashboard-icon[data-v-897dcc26] {\nwidth: 24px;\nheight: 24px;\nmargin-right: 10px;\n}\n.dashboard-text[data-v-897dcc26] {\nfont-size: 16px;\ncolor: #333;\n}\n\n/* Main Content */\n.main-content[data-v-897dcc26] {\nmargin-left: 250px;\npadding: 20px;\npadding-bottom: 500px;\nbackground-color:#f0f0f0;\n}\n.header[data-v-897dcc26] {\ndisplay: flex;\njustify-content: space-between;\nalign-items: center;\nmargin-bottom: 20px;\n}\n.search-container[data-v-897dcc26] {\ndisplay: flex;\nalign-items: center;\nbackground-color: #f0f0f0;\nmargin-left: 20px;\n}\n.search-input[data-v-897dcc26] {\npadding: 10px;\nfont-size: 16px;\nborder: 1px solid #ccc;\nborder-radius: 5px;\nmargin-right: 10px;\nborder-color: #333;\n}\n.search-icon[data-v-897dcc26] {\nwidth: 24px;\nheight: 24px;\n}\n.dash-user-profile[data-v-897dcc26] {\ndisplay: flex;\nalign-items: center;\n}\n.user-info[data-v-897dcc26] {\ndisplay: flex;\nalign-items: center;\n}\n.user-avatar[data-v-897dcc26] {\nwidth: 40px;\nheight: 40px;\nborder-radius: 50%;\nmargin-right: 10px;\n}\n.user-details[data-v-897dcc26] {\nmargin-right: 10px;\n}\n.user-name[data-v-897dcc26] {\nfont-size: 18px;\ncolor: #333;\n}\n.user-role[data-v-897dcc26] {\nfont-size: 14px;\ncolor: #666;\n}\n.dropdown-icon[data-v-897dcc26] {\nwidth: 20px;\nheight: 20px;\n}\n.logout-button[data-v-897dcc26] {\nbackground-color: #e74c3c;\ncolor: white;\npadding: 10px 20px;\nborder-radius: 5px;\nborder: none;\n}\n.logout-button.hidden[data-v-897dcc26] {\ndisplay: none;\n}\n.container[data-v-897dcc26] {\nmargin: 50px auto;\nmax-width: 800px;\n}\n.appointment-table[data-v-897dcc26] {\nwidth: 100%;\nborder-collapse: collapse;\n}\n.appointment-table th[data-v-897dcc26], .appointment-table td[data-v-897dcc26] {\npadding: 20px;\ntext-align: left;\nborder: 1px solid #ddd;\npadding-left: 30px;\n}\n.appointment-table th[data-v-897dcc26] {\nbackground-color: #f4f4f4;\n}\n.status[data-v-897dcc26] {\ndisplay: inline-block;\nwidth: 10px;\nheight: 10px;\nborder-radius: 50%;\nbackground-color: green; /* Example status color */\n}\n.assign-btn[data-v-897dcc26] {\nbackground-color: #3498db;\ncolor: white;\npadding: 5px 10px;\nborder: none;\nborder-radius: 5px;\ncursor: pointer;\n}\n.assign-btn[data-v-897dcc26]:hover {\nbackground-color: #2980b9;\n}\n.doctor-dropdown[data-v-897dcc26] {\ndisplay: none;\nposition: absolute;\nbackground-color: white;\nborder: 1px solid #ddd;\nbox-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);\npadding: 10px;\n}\n.doctor-dropdown ul[data-v-897dcc26] {\nlist-style: none;\npadding: 0;\n}\n.doctor-dropdown li[data-v-897dcc26] {\npadding: 5px 0;\ncursor: pointer;\n}\n.doctor-dropdown li[data-v-897dcc26]:hover {\nbackground-color: #f1f1f1;\n}\n.cancel-btn[data-v-897dcc26] {\nbackground-color: #e74c3c;\ncolor: white;\npadding: 5px 10px;\nborder: none;\nborder-radius: 5px;\ncursor: pointer;\n}\n.cancel-btn[data-v-897dcc26]:hover {\nbackground-color: #c0392b;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Sidebar Menu */\nbody[data-v-897dcc26] {\nfont-family: 'Arial', sans-serif;\nmargin: 0;\ndisplay: flex;\nbackground-color: #f0f0f0;\n}\n.sidebar[data-v-897dcc26] {\nwidth: 250px;\nbackground-color: #ffddd2;\npadding: 20px;\nposition: fixed;\nheight: 100%;\ntop: 0;\nleft: 0;\nbox-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);\n}\n.sidebar-logo[data-v-897dcc26] {\ndisplay: flex;\nalign-items: center;\nmargin-bottom: 30px;\n}\n.sidebar-logo img[data-v-897dcc26] {\nwidth: 50px;\nheight: 50px;\nmargin-right: 10px;\n}\n.sidebar-logo h1[data-v-897dcc26] {\nfont-size: 24px;\ncolor: #333;\nfont-weight: bold;\n}\n.menu-title[data-v-897dcc26] {\nmargin-bottom: 20px;\n}\n.menu-title h2[data-v-897dcc26] {\nfont-size: 18px;\ncolor: #333;\n}\n.dashboard-container[data-v-897dcc26] {\ndisplay: flex;\nflex-direction: column;\n}\n.dashboard-item[data-v-897dcc26] {\nmargin: 10px 0;\n}\n.dashboard-item a[data-v-897dcc26] {\ndisplay: flex;\nalign-items: center;\ntext-decoration: none;\n}\n.dashboard-icon[data-v-897dcc26] {\nwidth: 24px;\nheight: 24px;\nmargin-right: 10px;\n}\n.dashboard-text[data-v-897dcc26] {\nfont-size: 16px;\ncolor: #333;\n}\n\n/* Main Content */\n.main-content[data-v-897dcc26] {\nmargin-left: 250px;\npadding: 20px;\npadding-bottom: 500px;\nbackground-color:#f0f0f0;\n}\n.header[data-v-897dcc26] {\ndisplay: flex;\njustify-content: space-between;\nalign-items: center;\nmargin-bottom: 20px;\n}\n.search-container[data-v-897dcc26] {\ndisplay: flex;\nalign-items: center;\nbackground-color: #f0f0f0;\nmargin-left: 20px;\n}\n.search-input[data-v-897dcc26] {\npadding: 10px;\nfont-size: 16px;\nborder: 1px solid #ccc;\nborder-radius: 5px;\nmargin-right: 10px;\nborder-color: #333;\n}\n.search-icon[data-v-897dcc26] {\nwidth: 24px;\nheight: 24px;\n}\n.dash-user-profile[data-v-897dcc26] {\ndisplay: flex;\nalign-items: center;\n}\n.user-info[data-v-897dcc26] {\ndisplay: flex;\nalign-items: center;\n}\n.user-avatar[data-v-897dcc26] {\nwidth: 40px;\nheight: 40px;\nborder-radius: 50%;\nmargin-right: 10px;\n}\n.user-details[data-v-897dcc26] {\nmargin-right: 10px;\n}\n.user-name[data-v-897dcc26] {\nfont-size: 18px;\ncolor: #333;\n}\n.user-role[data-v-897dcc26] {\nfont-size: 14px;\ncolor: #666;\n}\n.dropdown-icon[data-v-897dcc26] {\nwidth: 20px;\nheight: 20px;\n}\n.logout-button[data-v-897dcc26] {\nbackground-color: #e74c3c;\ncolor: white;\npadding: 10px 20px;\nborder-radius: 5px;\nborder: none;\n}\n.logout-button.hidden[data-v-897dcc26] {\ndisplay: none;\n}\n.container[data-v-897dcc26] {\nmargin: 20px auto;\nwidth: 90%;\nmax-width: 1200px;\nbackground-color: white;\nborder-radius: 16px;\nbox-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);\npadding: 30px;\n}\n.container h1[data-v-897dcc26] {\nfont-size: 28px;\ncolor: #2c3e50;\nfont-weight: 600;\nmargin-bottom: 25px;\npadding-bottom: 15px;\nborder-bottom: 2px solid #f0f0f0;\n}\n.appointment-table[data-v-897dcc26] {\nwidth: 100%;\nborder-collapse: separate;\nborder-spacing: 0;\nborder-radius: 12px;\noverflow: hidden;\nbackground-color: #F8F9FF;\nbox-shadow: 0 4px 20px rgba(98, 77, 227, 0.1);\n}\n.appointment-table th[data-v-897dcc26] {\nbackground-color: #624DE3;\ncolor: white;\nfont-weight: 600;\npadding: 20px 24px;\ntext-transform: uppercase;\nfont-size: 14px;\nletter-spacing: 0.5px;\nborder: none;\ntext-align: left;\n}\n.appointment-table td[data-v-897dcc26] {\npadding: 20px 24px;\nfont-size: 15px;\ncolor: #2D3748;\nbackground-color: #E8EAFF;\nborder-bottom: 2px solid #FFFFFF;\ntransition: all 0.2s ease;\nposition: relative;\n}\n.appointment-table tr:nth-child(even) td[data-v-897dcc26] {\nbackground-color: #F3F4FF;\n}\n.appointment-table tr:hover td[data-v-897dcc26] {\nbackground-color: #FFFFFF !important;\ntransform: translateY(-1px);\nbox-shadow: 0 2px 4px rgba(98, 77, 227, 0.1);\n}\n.status-badge[data-v-897dcc26] {\ndisplay: inline-flex;\nalign-items: center;\njustify-content: center;\npadding: 8px 16px;\nborder-radius: 20px;\nfont-size: 14px;\nfont-weight: 500;\ntext-align: center;\nmin-width: 100px;\nbox-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);\n}\n.assigned[data-v-897dcc26] {\nbackground-color: #E6F7E9;\ncolor: #34C759;\nborder: 1px solid rgba(52, 199, 89, 0.1);\n}\n.pending[data-v-897dcc26] {\nbackground-color: #FFF4DE;\ncolor: #FFA043;\nborder: 1px solid rgba(255, 160, 67, 0.1);\n}\n.cancelled[data-v-897dcc26] {\nbackground-color: #FFE6E6;\ncolor: #FF3B30;\nborder: 1px solid rgba(255, 59, 48, 0.1);\n}\n.completed[data-v-897dcc26] {\nbackground-color: #E6EDFE;\ncolor: #624DE3;\nborder: 1px solid rgba(98, 77, 227, 0.1);\n}\n.assign-btn[data-v-897dcc26], .cancel-btn[data-v-897dcc26] {\ndisplay: inline-flex;\nalign-items: center;\npadding: 8px 16px;\nborder: none;\nborder-radius: 8px;\nfont-size: 14px;\nfont-weight: 500;\ncursor: pointer;\ntransition: all 0.2s ease;\ngap: 8px;\nbox-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);\nmargin-right: 8px;\n}\n.assign-btn[data-v-897dcc26] {\nposition: relative;\nbackground-color: #624DE3;\ncolor: white;\nz-index: 999;\n}\n.assign-btn[data-v-897dcc26]:hover {\nbackground-color: #5A45DD;\ntransform: translateY(-1px);\nbox-shadow: 0 4px 6px rgba(98, 77, 227, 0.2);\n}\n.cancel-btn[data-v-897dcc26] {\nbackground-color: #FF3B30;\ncolor: white;\n}\n.cancel-btn[data-v-897dcc26]:hover {\nbackground-color: #E6352B;\ntransform: translateY(-1px);\nbox-shadow: 0 4px 6px rgba(255, 59, 48, 0.2);\n}\n.doctor-dropdown[data-v-897dcc26] {\nposition: absolute;\ntop: calc(100% + 5px); /* Position below the button with a small gap */\nright: 0; /* Align to the right instead of left */\nbackground-color: #FFFFFF;\nborder-radius: 12px;\nborder: 1px solid rgba(98, 77, 227, 0.15);\nbox-shadow: 0 8px 24px rgba(98, 77, 227, 0.15);\npadding: 8px 0;\nz-index: 1000;\nmin-width: 220px;\nanimation: dropdownFade-data-v-897dcc26 0.2s ease;\n/* Ensure the dropdown doesn't go off-screen on the right */\nmax-width: 300px;\n/* Add max-height to prevent very long dropdowns */\nmax-height: 400px;\noverflow-y: auto;\n}\n@keyframes dropdownFade-data-v-897dcc26 {\nfrom {\n  opacity: 0;\n  transform: translateY(-10px);\n}\nto {\n  opacity: 1;\n  transform: translateY(0);\n}\n}\n.doctor-dropdown[data-v-897dcc26]::before {\ncontent: '';\nposition: absolute;\ntop: -6px;\nright: 20px; /* Align arrow to the right */\nleft: auto; /* Remove left positioning */\nwidth: 12px;\nheight: 12px;\nbackground-color: #FFFFFF;\nborder-left: 1px solid rgba(98, 77, 227, 0.15);\nborder-top: 1px solid rgba(98, 77, 227, 0.15);\ntransform: rotate(45deg);\n}\n.doctor-dropdown ul[data-v-897dcc26] {\nlist-style: none;\npadding: 0;\nmargin: 0;\nmax-height: 300px;\noverflow-y: auto;\n}\n.doctor-dropdown ul[data-v-897dcc26]::-webkit-scrollbar {\nwidth: 8px;\n}\n.doctor-dropdown ul[data-v-897dcc26]::-webkit-scrollbar-track {\nbackground: #F0F3FF;\nborder-radius: 4px;\n}\n.doctor-dropdown ul[data-v-897dcc26]::-webkit-scrollbar-thumb {\nbackground: #624DE3;\nborder-radius: 4px;\n}\n.doctor-dropdown li[data-v-897dcc26] {\npadding: 12px 16px;\ncursor: pointer;\ncolor: #2D3748;\ntransition: all 0.2s ease;\nfont-size: 14px;\ndisplay: flex;\nalign-items: center;\nposition: relative;\n}\n.doctor-dropdown li[data-v-897dcc26]:not(:last-child) {\nborder-bottom: 1px solid rgba(98, 77, 227, 0.08);\n}\n.doctor-dropdown li[data-v-897dcc26]:hover {\nbackground-color: #F0F3FF;\ncolor: #624DE3;\npadding-left: 20px;\n}\n.doctor-dropdown li[data-v-897dcc26]::before {\ncontent: '';\nposition: absolute;\nleft: 0;\nwidth: 3px;\nheight: 0;\nbackground-color: #624DE3;\ntransition: height 0.2s ease;\n}\n.doctor-dropdown li[data-v-897dcc26]:hover::before {\nheight: 100%;\n}\n\n/* Add position relative to td containing the dropdown */\n.appointment-table td[data-v-897dcc26] {\nposition: relative;\n}\n\n/* Ensure the dropdown appears above other elements */\n.appointment-table tr[data-v-897dcc26]:hover {\nz-index: 10;\nposition: relative;\n}\n\n/* Adjust the action buttons container */\n.action-buttons[data-v-897dcc26] {\n  display: flex;\n  gap: 8px;\n  position: relative;\n}\n\n/* Updated dropdown positioning */\n.doctor-dropdown[data-v-897dcc26] {\n  position: absolute;\n  top: calc(100% + 5px); /* Position below the button with a small gap */\n  right: 0; /* Align to the right instead of left */\n  background-color: #FFFFFF;\n  border-radius: 12px;\n  border: 1px solid rgba(98, 77, 227, 0.15);\n  box-shadow: 0 8px 24px rgba(98, 77, 227, 0.15);\n  padding: 8px 0;\n  z-index: 1000;\n  min-width: 220px;\n  animation: dropdownFade-data-v-897dcc26 0.2s ease;\n  /* Ensure the dropdown doesn't go off-screen on the right */\n  max-width: 300px;\n  /* Add max-height to prevent very long dropdowns */\n  max-height: 400px;\n  overflow-y: auto;\n}\n\n/* Adjust the arrow position for right alignment */\n.doctor-dropdown[data-v-897dcc26]::before {\n  content: '';\n  position: absolute;\n  top: -6px;\n  right: 20px; /* Align arrow to the right */\n  left: auto; /* Remove left positioning */\n  width: 12px;\n  height: 12px;\n  background-color: #FFFFFF;\n  border-left: 1px solid rgba(98, 77, 227, 0.15);\n  border-top: 1px solid rgba(98, 77, 227, 0.15);\n  transform: rotate(45deg);\n}\n\n/* Ensure the dropdown list is scrollable if too long */\n.doctor-dropdown ul[data-v-897dcc26] {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  max-height: 300px;\n  overflow-y: auto;\n}\n\n/* Add some spacing in the table cell for the dropdown */\n.appointment-table td[data-v-897dcc26]:last-child {\n  min-width: 200px; /* Ensure enough space for buttons */\n  padding-right: 30px; /* Add some extra padding on the right */\n}\n\n/* Make sure the buttons stay visible */\n.assign-btn[data-v-897dcc26], .cancel-btn[data-v-897dcc26] {\n  position: relative;\n  z-index: 998; /* Slightly lower than dropdown */\n}\n\n/* When dropdown is open, ensure it's above other elements */\n.doctor-dropdown[data-v-897dcc26] {\n  z-index: 1000;\n}\n\n/* Update table row z-index behavior */\n.appointment-table tr[data-v-897dcc26] {\n  position: relative;\n  z-index: 1;\n}\n\n/* When row has active dropdown, bring it to front */\n.appointment-table tr[data-v-897dcc26]:has(.doctor-dropdown) {\n  z-index: 1000;\n}\n\n/* Action buttons container */\n.action-buttons[data-v-897dcc26] {\n  display: flex;\n  gap: 8px;\n  position: relative;\n  z-index: 2; /* Base z-index for the container */\n}\n\n/* Update dropdown to ensure it's always on top */\n.doctor-dropdown[data-v-897dcc26] {\n  position: absolute;\n  top: 100%;\n  left: 0;\n  background-color: #FFFFFF;\n  border-radius: 8px;\n  border: 1px solid rgba(98, 77, 227, 0.15);\n  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);\n  padding: 8px 0;\n  z-index: 9999; /* Much higher z-index to ensure it's above everything */\n  min-width: 200px;\n  max-width: 300px;\n  max-height: 300px;\n  overflow-y: auto;\n}\n\n/* Ensure the table cell containing the dropdown has the correct stacking context */\n.appointment-table td[data-v-897dcc26]:last-child {\n  position: relative;\n  z-index: 2;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13996,7 +14349,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* Sidebar Menu */\nbody[data-v-7bb6ebfc] {\r\n    font-family: 'Arial', sans-serif;\r\n    margin: 0;\r\n    display: flex;\r\n    background-color: #f0f0f0;\n}\n.sidebar[data-v-7bb6ebfc] {\r\n    width: 250px;\r\n    background-color: #ffddd2;\r\n    padding: 20px;\r\n    position: fixed;\r\n    height: 100%;\r\n    top: 0;\r\n    left: 0;\r\n    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);\n}\n.sidebar-logo[data-v-7bb6ebfc] {\r\n    display: flex;\r\n    align-items: center;\r\n    margin-bottom: 30px;\n}\n.sidebar-logo img[data-v-7bb6ebfc] {\r\n    width: 50px;\r\n    height: 50px;\r\n    margin-right: 10px;\n}\n.sidebar-logo h1[data-v-7bb6ebfc] {\r\n    font-size: 24px;\r\n    color: #333;\r\n    font-weight: bold;\n}\n.menu-title[data-v-7bb6ebfc] {\r\n    margin-bottom: 20px;\n}\n.menu-title h2[data-v-7bb6ebfc] {\r\n    font-size: 18px;\r\n    color: #333;\n}\n.dashboard-container[data-v-7bb6ebfc] {\r\n    display: flex;\r\n    flex-direction: column;\n}\n.dashboard-item[data-v-7bb6ebfc] {\r\n    margin: 10px 0;\n}\n.dashboard-item a[data-v-7bb6ebfc] {\r\n    display: flex;\r\n    align-items: center;\r\n    text-decoration: none;\n}\n.dashboard-icon[data-v-7bb6ebfc] {\r\n    width: 24px;\r\n    height: 24px;\r\n    margin-right: 10px;\n}\n.dashboard-text[data-v-7bb6ebfc] {\r\n    font-size: 16px;\r\n    color: #333;\n}\r\n\r\n/* search */\n.search-container[data-v-7bb6ebfc] {\r\n    display: flex;\r\n    align-items: center;\r\n    background-color: #f0f0f0;\r\n    margin-left: 20px;\n}\n.search-input[data-v-7bb6ebfc] {\r\n    padding: 10px;\r\n    font-size: 16px;\r\n    border: 1px solid #ccc;\r\n    border-radius: 5px;\r\n    margin-right: 10px;\r\n    border-color: #333;\n}\n.search-icon[data-v-7bb6ebfc] {\r\n    width: 24px;\r\n    height: 24px;\n}\n.dash-user-profile[data-v-7bb6ebfc] {\r\n    display: flex;\r\n    align-items: center;\n}\n.user-info[data-v-7bb6ebfc] {\r\n  display: flex;\r\n  align-items: center;\n}\n.user-avatar[data-v-7bb6ebfc] {\r\n  width: 40px;\r\n  height: 40px;\r\n  border-radius: 50%;\r\n  margin-right: 10px;\n}\n.user-details[data-v-7bb6ebfc] {\r\n  margin-right: 10px;\n}\n.user-name[data-v-7bb6ebfc] {\r\n  font-size: 18px;\r\n  color: #333;\n}\n.user-role[data-v-7bb6ebfc] {\r\n  font-size: 14px;\r\n  color: #666;\n}\r\n\r\n\r\n\r\n\r\n/* Main Content */\n.main-content[data-v-7bb6ebfc] {\r\n    margin-left: 250px;\r\n    padding: 20px;\r\n    padding-bottom: 500px;\r\n    background-color:#f0f0f0;\n}\n.header[data-v-7bb6ebfc] {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin-bottom: 20px;\n}\n.dropdown-icon[data-v-7bb6ebfc] {\r\n    width: 20px;\r\n    height: 20px;\n}\n.logout-button[data-v-7bb6ebfc] {\r\n  background-color: #f44336;\r\n  color: white;\r\n  padding: 10px 15px;\r\n  border: none;\r\n  border-radius: 5px;\r\n  cursor: pointer;\r\n  display: none;\n}\n.logout-button[data-v-7bb6ebfc]:hover {\r\n  background-color: #e53935;\n}\r\n\r\n/* Doctors Section */\n.action-bar[data-v-7bb6ebfc] {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  margin-bottom: 20px;\r\n  margin-left: 100px;\n}\n.add-doctor-btn a[data-v-7bb6ebfc] {\r\n  padding: 10px 20px;\r\n  background-color: #4caf50;\r\n  color: white;\r\n  border-radius: 5px;\r\n  text-decoration: none;\r\n  font-size: 14px;\n}\n.add-doctor-btn a[data-v-7bb6ebfc]:hover {\r\n  background-color: #45a049;\n}\n.section-title[data-v-7bb6ebfc] {\r\n  font-size: 24px;\r\n  color: #333;\r\n  font-weight: bold;\r\n  margin-left: 80px;\n}\n.doctors-table-doc[data-v-7bb6ebfc] {\r\n    width: 90%;\r\n    border-collapse: collapse;\r\n    margin-top: 20px;\r\n    background-color: #ffffff;\r\n    border-radius: 8px;\r\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n    overflow: hidden;\r\n    margin-left: 70px;\n}\r\n\r\n/* Table Header */\n.table-header-doc[data-v-7bb6ebfc] {\r\n    background-color: #f7f7f7;\r\n    padding: 10px 0;\r\n    font-weight: 600;\r\n    color: #333;\n}\n.header-row-doc[data-v-7bb6ebfc] {\r\n    display: flex;\r\n    padding: 10px;\r\n    border-bottom: 2px solid #e5e5e5;\n}\r\n\r\n/* Header Cells */\n.header-cell-doc[data-v-7bb6ebfc] {\r\n    flex: 1;\r\n    padding: 10px 10px;\r\n    text-align: left;\r\n    font-size: 14px;\r\n    color: #555;\n}\r\n\r\n/* Table Row */\n.table-row-doc[data-v-7bb6ebfc] {\r\n    display: flex;\r\n    padding: 15px;\r\n    border-bottom: 1px solid #e5e5e5;\r\n    transition: background-color 0.3s;\n}\n.table-row-doc[data-v-7bb6ebfc]:hover {\r\n    background-color: #f9f9f9;\n}\r\n\r\n/* Row Content Cells */\n.name-doc[data-v-7bb6ebfc], .patients-doc[data-v-7bb6ebfc], .action-doc[data-v-7bb6ebfc] {\r\n    flex: 1;\r\n    padding: 10px 15px;\r\n    font-size: 14px;\r\n    color: #333;\n}\n.name-doc[data-v-7bb6ebfc] {\r\n    font-weight: 500;\n}\n.patients-doc[data-v-7bb6ebfc] {\r\n    text-align: center;\n}\n.action-doc[data-v-7bb6ebfc] {\r\n    text-align: center;\n}\r\n\r\n/* Delete Icon */\n.delete-icon-doc[data-v-7bb6ebfc] {\r\n    width: 20px;\r\n    height: 20px;\r\n    cursor: pointer;\r\n    transition: transform 0.2s;\n}\n.delete-icon-doc[data-v-7bb6ebfc]:hover {\r\n    transform: scale(1.1);\n}\n.btn-text[data-v-7bb6ebfc] {\r\n    background-color:#624DE3;\r\n    color: white;\r\n    border: none;\r\n    padding: 10px;\r\n    font-size: 14px;\r\n    cursor: pointer;\r\n    text-decoration: none;\r\n    border-radius: 10px;\r\n    margin-left: 50px;\n}\n.doctor-list[data-v-7bb6ebfc] {\r\n  padding: 15px;\r\n  margin-left: 100px;\r\n  background-color: #fafafa;\r\n  border-radius: 8px;\r\n  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);\n}\n.doctor-list table[data-v-7bb6ebfc] {\r\n  width: 100%;\r\n  border-collapse: collapse;\r\n  margin-top: 20px;\n}\n.doctor-list th[data-v-7bb6ebfc],\r\n.doctor-list td[data-v-7bb6ebfc] {\r\n  padding: 12px 15px;\r\n  border: 1px solid #e0e0e0;\r\n  text-align: left;\r\n  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n}\n.doctor-list td[data-v-7bb6ebfc] {\r\n  padding: 12px 15px;\r\n  border: 1px solid #e0e0e0;\r\n  text-align: left;\r\n  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\r\n  margin-right: 100px;\n}\n.doctor-list th[data-v-7bb6ebfc] {\r\n  background-color: #f7f7f7;\r\n  font-weight: 600;\r\n  color: #333;\r\n  padding-right: 50px;\n}\n.doctor-list tr[data-v-7bb6ebfc] {\r\n  transition: background-color 0.3s;\n}\n.doctor-list tr[data-v-7bb6ebfc]:hover {\r\n  background-color: #f1f1f1;\n}\n.doctor-list td[data-v-7bb6ebfc] {\r\n  color: #555;\n}\n.doctor-list tr:last-child td[data-v-7bb6ebfc] {\r\n  border-bottom: none;\n}\n.doctor-list th[data-v-7bb6ebfc]:first-child,\r\n.doctor-list td[data-v-7bb6ebfc]:first-child {\r\n  padding-left: 20px;\n}\n.doctor-list th[data-v-7bb6ebfc]:last-child,\r\n.doctor-list td[data-v-7bb6ebfc]:last-child {\r\n  padding-right: 50px;\n}\n.edit-button[data-v-7bb6ebfc],\r\n.delete-button[data-v-7bb6ebfc] {\r\n  padding: 6px 15px;\r\n  border: none;\r\n  border-radius: 5px;\r\n  font-size: 14px;\r\n  cursor: pointer;\r\n  transition: background-color 0.3s;\n}\n.edit-button[data-v-7bb6ebfc] {\r\n  background-color: #4caf50;\r\n  color: white;\r\n  margin-bottom: 5px;\r\n  margin-left: 50px\n}\n.edit-button[data-v-7bb6ebfc]:hover {\r\n  background-color: #45a049;\n}\n.delete-button[data-v-7bb6ebfc] {\r\n  background-color: #f44336;\r\n  color: white;\r\n  margin-left: 40px;\n}\n.delete-button[data-v-7bb6ebfc]:hover {\r\n  background-color: #e53935;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Sidebar Menu */\nbody[data-v-7bb6ebfc] {\n    font-family: 'Arial', sans-serif;\n    margin: 0;\n    display: flex;\n    background-color: #f0f0f0;\n}\n.sidebar[data-v-7bb6ebfc] {\n    width: 250px;\n    background-color: #ffddd2;\n    padding: 20px;\n    position: fixed;\n    height: 100%;\n    top: 0;\n    left: 0;\n    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);\n}\n.sidebar-logo[data-v-7bb6ebfc] {\n    display: flex;\n    align-items: center;\n    margin-bottom: 30px;\n}\n.sidebar-logo img[data-v-7bb6ebfc] {\n    width: 50px;\n    height: 50px;\n    margin-right: 10px;\n}\n.sidebar-logo h1[data-v-7bb6ebfc] {\n    font-size: 24px;\n    color: #333;\n    font-weight: bold;\n}\n.menu-title[data-v-7bb6ebfc] {\n    margin-bottom: 20px;\n}\n.menu-title h2[data-v-7bb6ebfc] {\n    font-size: 18px;\n    color: #333;\n}\n.dashboard-container[data-v-7bb6ebfc] {\n    display: flex;\n    flex-direction: column;\n}\n.dashboard-item[data-v-7bb6ebfc] {\n    margin: 10px 0;\n}\n.dashboard-item a[data-v-7bb6ebfc] {\n    display: flex;\n    align-items: center;\n    text-decoration: none;\n}\n.dashboard-icon[data-v-7bb6ebfc] {\n    width: 24px;\n    height: 24px;\n    margin-right: 10px;\n}\n.dashboard-text[data-v-7bb6ebfc] {\n    font-size: 16px;\n    color: #333;\n}\n\n/* search */\n.search-container[data-v-7bb6ebfc] {\n    display: flex;\n    align-items: center;\n    background-color: #f0f0f0;\n    margin-left: 20px;\n}\n.search-input[data-v-7bb6ebfc] {\n    padding: 10px;\n    font-size: 16px;\n    border: 1px solid #ccc;\n    border-radius: 5px;\n    margin-right: 10px;\n    border-color: #333;\n}\n.search-icon[data-v-7bb6ebfc] {\n    width: 24px;\n    height: 24px;\n}\n.dash-user-profile[data-v-7bb6ebfc] {\n    display: flex;\n    align-items: center;\n}\n.user-info[data-v-7bb6ebfc] {\n  display: flex;\n  align-items: center;\n}\n.user-avatar[data-v-7bb6ebfc] {\n  width: 40px;\n  height: 40px;\n  border-radius: 50%;\n  margin-right: 10px;\n}\n.user-details[data-v-7bb6ebfc] {\n  margin-right: 10px;\n}\n.user-name[data-v-7bb6ebfc] {\n  font-size: 18px;\n  color: #333;\n}\n.user-role[data-v-7bb6ebfc] {\n  font-size: 14px;\n  color: #666;\n}\n\n\n\n\n/* Main Content */\n.main-content[data-v-7bb6ebfc] {\n  margin-left: 250px;\n  padding: 20px;\n  padding-bottom: 50px;\n  background-color: #f0f0f0;\n  min-height: 100vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center; /* Center content horizontally */\n}\n.header[data-v-7bb6ebfc] {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 20px;\n}\n.dropdown-icon[data-v-7bb6ebfc] {\n    width: 20px;\n    height: 20px;\n}\n.logout-button[data-v-7bb6ebfc] {\n  background-color: #f44336;\n  color: white;\n  padding: 10px 15px;\n  border: none;\n  border-radius: 5px;\n  cursor: pointer;\n  display: none;\n}\n.logout-button[data-v-7bb6ebfc]:hover {\n  background-color: #e53935;\n}\n\n/* Doctors Section */\n.action-bar[data-v-7bb6ebfc] {\n  width: 90%;\n  max-width: 1200px;\n  margin: 20px auto;\n  display: flex;\n  justify-content: flex-end; /* Align to the right */\n  padding: 0;\n}\n.add-doctor-btn[data-v-7bb6ebfc] {\n  margin: 0; /* Remove any existing margins */\n}\n.section-title[data-v-7bb6ebfc] {\n  font-size: 28px;\n  color: #2c3e50;\n  font-weight: 600;\n  margin-bottom: 25px;\n  padding-bottom: 15px;\n  border-bottom: 2px solid #f0f0f0;\n}\n.doctors-table-doc[data-v-7bb6ebfc] {\n    width: 90%;\n    border-collapse: collapse;\n    margin-top: 20px;\n    background-color: #ffffff;\n    border-radius: 8px;\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n    overflow: hidden;\n    margin-left: 70px;\n}\n\n/* Table Header */\n.table-header-doc[data-v-7bb6ebfc] {\n    background-color: #f7f7f7;\n    padding: 10px 0;\n    font-weight: 600;\n    color: #333;\n}\n.header-row-doc[data-v-7bb6ebfc] {\n    display: flex;\n    padding: 10px;\n    border-bottom: 2px solid #e5e5e5;\n}\n\n/* Header Cells */\n.header-cell-doc[data-v-7bb6ebfc] {\n    flex: 1;\n    padding: 10px 10px;\n    text-align: left;\n    font-size: 14px;\n    color: #555;\n}\n\n/* Table Row */\n.table-row-doc[data-v-7bb6ebfc] {\n    display: flex;\n    padding: 15px;\n    border-bottom: 1px solid #e5e5e5;\n    transition: background-color 0.3s;\n}\n.table-row-doc[data-v-7bb6ebfc]:hover {\n    background-color: #f9f9f9;\n}\n\n/* Row Content Cells */\n.name-doc[data-v-7bb6ebfc], .patients-doc[data-v-7bb6ebfc], .action-doc[data-v-7bb6ebfc] {\n    flex: 1;\n    padding: 10px 15px;\n    font-size: 14px;\n    color: #333;\n}\n.name-doc[data-v-7bb6ebfc] {\n    font-weight: 500;\n}\n.patients-doc[data-v-7bb6ebfc] {\n    text-align: center;\n}\n.action-doc[data-v-7bb6ebfc] {\n    text-align: center;\n}\n\n/* Delete Icon */\n.delete-icon-doc[data-v-7bb6ebfc] {\n    width: 20px;\n    height: 20px;\n    cursor: pointer;\n    transition: transform 0.2s;\n}\n.delete-icon-doc[data-v-7bb6ebfc]:hover {\n    transform: scale(1.1);\n}\n.btn-text[data-v-7bb6ebfc] {\n    background-color:#624DE3;\n    color: white;\n    border: none;\n    padding: 10px;\n    font-size: 14px;\n    cursor: pointer;\n    text-decoration: none;\n    border-radius: 10px;\n    margin-left: 50px;\n}\n.doctor-list[data-v-7bb6ebfc] {\n  background-color: white;\n  border-radius: 16px;\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);\n  margin: 20px auto;\n  padding: 30px;\n  width: 90%;\n  max-width: 1200px;\n}\n.doctor-list table[data-v-7bb6ebfc] {\n  width: 100%;\n  border-collapse: separate;\n  border-spacing: 0;\n  border-radius: 12px;\n  overflow: hidden;\n  background-color: #F8F9FF;\n  box-shadow: 0 4px 20px rgba(98, 77, 227, 0.1);\n}\n.doctor-list th[data-v-7bb6ebfc] {\n  background-color: #624DE3;\n  color: white;\n  font-weight: 600;\n  padding: 20px 24px;\n  text-transform: uppercase;\n  font-size: 14px;\n  letter-spacing: 0.5px;\n  border: none;\n  text-align: left;\n}\n.doctor-list td[data-v-7bb6ebfc] {\n  padding: 20px 24px;\n  font-size: 15px;\n  color: #2D3748;\n  background-color: #E8EAFF;\n  border-bottom: 2px solid #FFFFFF;\n  transition: all 0.2s ease;\n  position: relative;\n}\n.doctor-list tr:nth-child(even) td[data-v-7bb6ebfc] {\n  background-color: #F3F4FF;\n}\n.doctor-list tr:hover td[data-v-7bb6ebfc] {\n  background-color: #FFFFFF !important;\n  transform: translateY(-1px);\n  box-shadow: 0 2px 4px rgba(98, 77, 227, 0.1);\n}\n.doctor-list td[data-v-7bb6ebfc]:first-child {\n  font-weight: 500;\n  color: #1a202c;\n}\n.edit-button[data-v-7bb6ebfc],\n.delete-button[data-v-7bb6ebfc] {\n  padding: 6px 15px;\n  border: none;\n  border-radius: 5px;\n  font-size: 14px;\n  cursor: pointer;\n  transition: background-color 0.3s;\n}\n.edit-button[data-v-7bb6ebfc] {\n  background-color: #4caf50;\n  color: white;\n  margin-bottom: 5px;\n  margin-left: 50px\n}\n.edit-button[data-v-7bb6ebfc]:hover {\n  background-color: #45a049;\n}\n.delete-button[data-v-7bb6ebfc] {\n  background-color: #f44336;\n  color: white;\n  margin-left: 40px;\n}\n.delete-button[data-v-7bb6ebfc]:hover {\n  background-color: #e53935;\n}\n.view-patients-button[data-v-7bb6ebfc] {\n  background-color: #2196F3;\n  color: white;\n  padding: 6px 15px;\n  border: none;\n  border-radius: 5px;\n  cursor: pointer;\n  margin-left: 10px;\n}\n.view-patients-button[data-v-7bb6ebfc]:hover {\n  background-color: #1976D2;\n}\n.patients-row[data-v-7bb6ebfc] {\n  background-color: #f8fafc;\n}\n.assigned-patients[data-v-7bb6ebfc] {\n  padding: 25px;\n  background-color: #FAFBFF;\n  border-radius: 12px;\n  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);\n  margin: 15px;\n}\n.patients-header[data-v-7bb6ebfc] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 25px;\n  padding-bottom: 15px;\n  border-bottom: 2px solid #E6E8F7;\n}\n.patients-header h3[data-v-7bb6ebfc] {\n  color: #2c3e50;\n  font-size: 20px;\n  font-weight: 600;\n  margin: 0;\n}\n.patient-count[data-v-7bb6ebfc] {\n  background-color: #e0f2fe;\n  color: #0284c7;\n  padding: 6px 16px;\n  border-radius: 20px;\n  font-size: 14px;\n  font-weight: 500;\n  box-shadow: 0 2px 4px rgba(2, 132, 199, 0.1);\n}\n.patients-table[data-v-7bb6ebfc] {\n  width: 100%;\n  border-collapse: separate;\n  border-spacing: 0;\n  background-color: white;\n  border-radius: 8px;\n  overflow: hidden;\n  margin-top: 10px;\n}\n.patients-table th[data-v-7bb6ebfc] {\n  background-color: #5A45DD;\n  color: white;\n  font-weight: 600;\n  padding: 14px 20px;\n  text-align: left;\n  font-size: 14px;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  border: none;\n}\n.patients-table tr:nth-child(even) td[data-v-7bb6ebfc] {\n  background-color: #F8F9FF;\n}\n.patients-table tr:nth-child(odd) td[data-v-7bb6ebfc] {\n  background-color: white;\n}\n.patients-table td[data-v-7bb6ebfc] {\n  padding: 16px 20px;\n  background-color: #E8EAFF;\n  border-bottom: 2px solid #FFFFFF;\n  color: #2D3748;\n  font-size: 14px;\n}\n.patients-table tr:hover td[data-v-7bb6ebfc] {\n  background-color: #FFFFFF !important;\n  transform: translateY(-1px);\n}\n\n/* Status badge styles */\n.status-badge[data-v-7bb6ebfc] {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  padding: 6px 16px;\n  border-radius: 20px;\n  font-size: 14px;\n  font-weight: 500;\n  text-align: center;\n  min-width: 100px;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);\n}\n.pending[data-v-7bb6ebfc] {\n  background-color: #FFF4DE;\n  color: #FFA043;\n}\n.completed[data-v-7bb6ebfc] {\n  background-color: #E6F7E9;\n  color: #34C759;\n}\n.cancelled[data-v-7bb6ebfc] {\n  background-color: #FFE6E6;\n  color: #FF3B30;\n}\n.ongoing[data-v-7bb6ebfc] {\n  background-color: #E6EDFE;\n  color: #624DE3;\n}\n\n/* Enhanced button styling */\n.button-group[data-v-7bb6ebfc] {\n  display: flex;\n  gap: 10px;\n  justify-content: flex-start;\n  flex-wrap: wrap;\n}\n.action-btn[data-v-7bb6ebfc] {\n  display: inline-flex;\n  align-items: center;\n  padding: 8px 16px;\n  border: none;\n  border-radius: 8px;\n  font-size: 14px;\n  font-weight: 500;\n  cursor: pointer;\n  transition: all 0.2s ease;\n  gap: 8px;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);\n}\n.action-btn i[data-v-7bb6ebfc] {\n  font-size: 16px;\n}\n.action-btn.edit[data-v-7bb6ebfc] {\n  background-color: #624DE3;\n  color: white;\n}\n.action-btn.edit[data-v-7bb6ebfc]:hover {\n  background-color: #5A45DD;\n  transform: translateY(-1px);\n}\n.action-btn.delete[data-v-7bb6ebfc] {\n  background-color: #FF3B30;\n  color: white;\n}\n.action-btn.delete[data-v-7bb6ebfc]:hover {\n  background-color: #E6352B;\n  transform: translateY(-1px);\n}\n.action-btn.view[data-v-7bb6ebfc] {\n  background-color: #34C759;\n  color: white;\n}\n.action-btn.view[data-v-7bb6ebfc]:hover {\n  background-color: #2FB350;\n  transform: translateY(-1px);\n}\n\n/* Add doctor button enhancement */\n.add-doctor-btn[data-v-7bb6ebfc] {\n  margin-bottom: 20px;\n}\n.btn-text[data-v-7bb6ebfc] {\n  background-color: #3b82f6;\n  color: white;\n  padding: 12px 24px;\n  border-radius: 8px;\n  font-weight: 500;\n  text-decoration: none;\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  transition: all 0.2s ease;\n  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);\n}\n.btn-text[data-v-7bb6ebfc]:hover {\n  background-color: #2563eb;\n  transform: translateY(-1px);\n  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);\n}\n\n/* ... rest of existing styles ... */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14044,7 +14397,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n /* Sidebar Menu */\nbody[data-v-f89414a0] {\n    font-family: 'Arial', sans-serif;\n    margin: 0;\n    display: flex;\n    background-color: #f0f0f0;\n}\n.sidebar[data-v-f89414a0] {\n    width: 250px;\n    background-color: #ffddd2;\n    padding: 20px;\n    position: fixed;\n    height: 100%;\n    top: 0;\n    left: 0;\n    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);\n}\n.sidebar-logo[data-v-f89414a0] {\n    display: flex;\n    align-items: center;\n    margin-bottom: 30px;\n}\n.sidebar-logo img[data-v-f89414a0] {\n    width: 50px;\n    height: 50px;\n    margin-right: 10px;\n}\n.sidebar-logo h1[data-v-f89414a0] {\n    font-size: 24px;\n    color: #333;\n    font-weight: bold;\n}\n.menu-title[data-v-f89414a0] {\n    margin-bottom: 20px;\n}\n.menu-title h2[data-v-f89414a0] {\n    font-size: 18px;\n    color: #333;\n}\n.dashboard-container[data-v-f89414a0] {\n    display: flex;\n    flex-direction: column;\n}\n.dashboard-item[data-v-f89414a0] {\n    margin: 10px 0;\n}\n.dashboard-item a[data-v-f89414a0] {\n    display: flex;\n    align-items: center;\n    text-decoration: none;\n}\n.dashboard-icon[data-v-f89414a0] {\n    width: 24px;\n    height: 24px;\n    margin-right: 10px;\n}\n.dashboard-text[data-v-f89414a0] {\n    font-size: 16px;\n    color: #333;\n}\n\n/* search */\n.search-container[data-v-f89414a0] {\n    display: flex;\n    align-items: center;\n    background-color: #f0f0f0;\n    margin-left: 20px;\n}\n.search-input[data-v-f89414a0] {\n    padding: 10px;\n    font-size: 16px;\n    border: 1px solid #ccc;\n    border-radius: 5px;\n    margin-right: 10px;\n    border-color: #333;\n}\n.search-icon[data-v-f89414a0] {\n    width: 24px;\n    height: 24px;\n}\n.dash-user-profile[data-v-f89414a0] {\n    display: flex;\n    align-items: center;\n}\n.user-info[data-v-f89414a0] {\n  display: flex;\n  align-items: center;\n}\n.user-avatar[data-v-f89414a0] {\n  width: 40px;\n  height: 40px;\n  border-radius: 50%;\n  margin-right: 10px;\n}\n.user-details[data-v-f89414a0] {\n  margin-right: 10px;\n}\n.user-name[data-v-f89414a0] {\n  font-size: 18px;\n  color: #333;\n}\n.user-role[data-v-f89414a0] {\n  font-size: 14px;\n  color: #666;\n}\n\n\n\n\n/* Main Content */\n.main-content[data-v-f89414a0] {\n    margin-left: 250px;\n    padding: 20px;\n    padding-bottom: 500px;\n    background-color:#f0f0f0;\n}\n.header[data-v-f89414a0] {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 20px;\n}\n.dropdown-icon[data-v-f89414a0] {\n    width: 20px;\n    height: 20px;\n}\n.logout-button[data-v-f89414a0] {\n    padding: 10px 20px;\n    background-color: #ff4d4d;\n    color: white;\n    border: none;\n    border-radius: 20px;\n    font-size: 14px;\n    cursor: pointer;\n}\n.logout-button.hidden[data-v-f89414a0] {\n    display: none;\n}\n\n/* Patients Section */\n.patient-overview[data-v-f89414a0] {\n    margin: 60px 0; \n    display: flex;\n    justify-content: center;\n}\n.dash-card[data-v-f89414a0] {\n    background-color: #DCC4E4; \n    padding: 30px;\n    border-radius: 15px;\n    text-align: center; \n    width: 300px;\n    height:100px;\n    display: flex; \n    align-items: center;\n}\n.dash-card img[data-v-f89414a0] {\n    width: 40px; \n    margin-right: 10px;\n}\n\n/* Updated card image size for consistency */\n.dash-card-content[data-v-f89414a0] {\n    display: flex; \n    flex-direction: column; \n    align-items: flex-start; \n    color: #333;\n}\n.dash-card-content h2[data-v-f89414a0] {\n    font-size: 20px; \n    font-weight: bold; \n    margin: 0;\n}\n.dash-card-content p[data-v-f89414a0] {\n    font-size: 14px; \n    color: #666; \n    margin: 5px 0;\n}\n.dash-card-content span[data-v-f89414a0] {\n    font-size: 16px; \n    font-weight: 600; \n    color: #000;\n}\n\n\n/* Doctors Section */\n.doctors-section[data-v-f89414a0] {\n    margin-top: 40px;\n}\n.doctors-section h2[data-v-f89414a0] {\n    margin-top: 100px;\n    font-size: 24px;\n    color: #5B392C;\n    margin-bottom: 20px;\n    margin-left: 50px;\n}\n.doctor-list[data-v-f89414a0] {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 20px;\n}\n.doctor-card[data-v-f89414a0] {\n    background-color: rgb(247, 217, 243);\n    color: rgb(0, 0, 0);\n    border: none;\n    padding: 20px;\n    font-size: 16px;\n    border-radius: 10px;\n    width: calc(50% - 10px); \n    text-align: center;\n    cursor: pointer;\n}\n.doctor-card[data-v-f89414a0]:hover {\n    background-color: #FF7F50;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* Sidebar Menu */\nbody[data-v-f89414a0] {\r\n  font-family: 'Arial', sans-serif;\r\n  margin: 0;\r\n  display: flex;\r\n  background-color: #f0f0f0;\n}\n.sidebar[data-v-f89414a0] {\r\n  width: 250px;\r\n  background-color: #ffddd2;\r\n  padding: 20px;\r\n  position: fixed;\r\n  height: 100%;\r\n  top: 0;\r\n  left: 0;\r\n  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);\n}\n.sidebar-logo[data-v-f89414a0] {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-bottom: 30px;\n}\n.sidebar-logo img[data-v-f89414a0] {\r\n  width: 50px;\r\n  height: 50px;\r\n  margin-right: 10px;\n}\n.sidebar-logo h1[data-v-f89414a0] {\r\n  font-size: 24px;\r\n  color: #333;\r\n  font-weight: bold;\n}\n.menu-title[data-v-f89414a0] {\r\n  margin-bottom: 20px;\n}\n.menu-title h2[data-v-f89414a0] {\r\n  font-size: 18px;\r\n  color: #333;\n}\n.dashboard-container[data-v-f89414a0] {\r\n  display: flex;\r\n  flex-direction: column;\n}\n.dashboard-item[data-v-f89414a0] {\r\n  margin: 10px 0;\n}\n.dashboard-item a[data-v-f89414a0] {\r\n  display: flex;\r\n  align-items: center;\r\n  text-decoration: none;\n}\n.dashboard-icon[data-v-f89414a0] {\r\n  width: 24px;\r\n  height: 24px;\r\n  margin-right: 10px;\n}\n.dashboard-text[data-v-f89414a0] {\r\n  font-size: 16px;\r\n  color: #333;\n}\r\n\r\n/* search */\n.search-container[data-v-f89414a0] {\r\n  display: flex;\r\n  align-items: center;\r\n  background-color: #f0f0f0;\r\n  margin-left: 20px;\n}\n.search-input[data-v-f89414a0] {\r\n  padding: 10px;\r\n  font-size: 16px;\r\n  border: 1px solid #ccc;\r\n  border-radius: 5px;\r\n  margin-right: 10px;\r\n  border-color: #333;\n}\n.search-icon[data-v-f89414a0] {\r\n  width: 24px;\r\n  height: 24px;\n}\n.dash-user-profile[data-v-f89414a0] {\r\n  display: flex;\r\n  align-items: center;\n}\n.user-info[data-v-f89414a0] {\r\ndisplay: flex;\r\nalign-items: center;\n}\n.user-avatar[data-v-f89414a0] {\r\nwidth: 40px;\r\nheight: 40px;\r\nborder-radius: 50%;\r\nmargin-right: 10px;\n}\n.user-details[data-v-f89414a0] {\r\nmargin-right: 10px;\n}\n.user-name[data-v-f89414a0] {\r\nfont-size: 18px;\r\ncolor: #333;\n}\n.user-role[data-v-f89414a0] {\r\nfont-size: 14px;\r\ncolor: #666;\n}\r\n\r\n\r\n\r\n\r\n/* Main Content */\n.main-content[data-v-f89414a0] {\r\n  margin-left: 250px;\r\n  padding: 20px;\r\n  padding-bottom: 500px;\r\n  background-color:#f0f0f0;\n}\n.header[data-v-f89414a0] {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  margin-bottom: 20px;\n}\n.dropdown-icon[data-v-f89414a0] {\r\n  width: 20px;\r\n  height: 20px;\n}\n.logout-button[data-v-f89414a0] {\r\n  padding: 10px 20px;\r\n  background-color: #ff4d4d;\r\n  color: white;\r\n  border: none;\r\n  border-radius: 20px;\r\n  font-size: 14px;\r\n  cursor: pointer;\n}\n.logout-button.hidden[data-v-f89414a0] {\r\n  display: none;\n}\r\n\r\n/* Patients Section */\n.patient-overview[data-v-f89414a0] {\r\n  margin: 60px 0;\r\n  display: flex;\r\n  justify-content: center;\n}\n.dash-card[data-v-f89414a0] {\r\n  background-color: #DCC4E4;\r\n  padding: 25px;\r\n  border-radius: 15px;\r\n  width: 300px;\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 20px; /* Add spacing between icon and content */\r\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */\r\n  transition: transform 0.2s ease; /* Smooth hover effect */\n}\n.dash-card[data-v-f89414a0]:hover {\r\n  transform: translateY(-3px); /* Slight lift on hover */\n}\n.dash-card img[data-v-f89414a0] {\r\n  width: 50px;\r\n  height: 50px;\r\n  padding: 10px;\r\n  background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent background */\r\n  border-radius: 12px;\n}\n.dash-card-content[data-v-f89414a0] {\r\n  flex-grow: 1;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: flex-start;\n}\n.dash-card-content h2[data-v-f89414a0] {\r\n  font-size: 16px;\r\n  font-weight: 600;\r\n  color: #5B392C;\r\n  margin: 0;\r\n  margin-bottom: 4px;\r\n  text-transform: uppercase;\r\n  letter-spacing: 0.5px;\n}\n.dash-card-content p[data-v-f89414a0] {\r\n  font-size: 13px;\r\n  color: #666;\r\n  margin: 0;\r\n  margin-bottom: 8px;\n}\n.dash-card-content span[data-v-f89414a0] {\r\n  font-size: 24px;\r\n  font-weight: 700;\r\n  color: #5B392C;\r\n  background-color: rgba(255, 255, 255, 0.4);\r\n  padding: 4px 12px;\r\n  border-radius: 8px;\n}\r\n\r\n/* Doctors Section */\n.doctors-section[data-v-f89414a0] {\r\n  margin-top: 40px;\n}\n.doctors-section h2[data-v-f89414a0] {\r\n  margin-top: 100px;\r\n  font-size: 24px;\r\n  color: #5B392C;\r\n  margin-bottom: 20px;\r\n  margin-left: 50px;\n}\n.doctor-list[data-v-f89414a0] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  gap: 20px;\n}\n.doctor-card[data-v-f89414a0] {\r\n  background-color: rgb(247, 217, 243);\r\n  color: rgb(0, 0, 0);\r\n  border: none;\r\n  padding: 20px;\r\n  font-size: 16px;\r\n  border-radius: 10px;\r\n  width: calc(50% - 10px); \r\n  text-align: center;\r\n  cursor: pointer;\n}\n.doctor-card[data-v-f89414a0]:hover {\r\n  background-color: #FF7F50;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14095,7 +14448,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_8_0_rules_0_use_1_public_css_style_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n/* Update the profile link styling */\n.admin-link p[data-v-18100052] {\r\n  font-size: 16px !important; /* Override any other styles */\r\n  color: black !important;\r\n  margin: 0;\r\n  padding: 0;\n}\r\n\r\n/* Remove or update the conflicting style */\n.profileLink p[data-v-18100052] {\r\n  font-size: 16px;\r\n  color: gray;\n}\r\n\r\n/* Modal Styles */\n.gallery-modal[data-v-18100052] {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  z-index: 1000;\n}\n.gallery-modal-content[data-v-18100052] {\r\n  background-color: white;\r\n  border-radius: 20px;\r\n  padding: 20px;\r\n  width: 600px;\r\n  max-width: 90%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  animation: zoomIn-data-v-18100052 0.3s ease-in-out;\r\n  position: relative;\n}\n.gallery-modal-body[data-v-18100052] {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  margin: 0;\r\n  padding: 0;\n}\n.gallery-modal-image[data-v-18100052] {\r\n  width: 45%;\r\n  flex-shrink: 0;\n}\n.modal-image[data-v-18100052] {\r\n  width: 100%;\r\n  border-radius: 15px;\n}\n.gallery-modal-text[data-v-18100052] {\r\n  width: 50%;\r\n  padding-left: 20px;\n}\nh2[data-v-18100052] {\r\n  font-size: 1.8rem;\r\n  margin-bottom: 10px;\n}\np[data-v-18100052] {\r\n  font-size: 1.2rem;\r\n  color: gray;\n}\nh4[data-v-18100052] {\r\n  margin-top: 15px;\r\n  font-weight: normal;\r\n  line-height: 1.4;\n}\n.gallery-close-btn[data-v-18100052] {\r\n  position: absolute;\r\n  top: 15px;\r\n  right: 20px;\r\n  font-size: 2rem;\r\n  cursor: pointer;\r\n  color: black;\n}\n@keyframes zoomIn-data-v-18100052 {\nfrom {\r\n    transform: scale(0.5);\r\n    opacity: 0;\n}\nto {\r\n    transform: scale(1);\r\n    opacity: 1;\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n/* Update the profile link styling */\n.admin-link p[data-v-18100052] {\r\n  font-size: 16px !important; /* Override any other styles */\r\n  color: black !important;\r\n  margin: 0;\r\n  padding: 0;\n}\r\n\r\n/* Remove or update the conflicting style */\n.profileLink p[data-v-18100052] {\r\n  font-size: 16px;\r\n  color: gray;\n}\r\n\r\n/* Modal Styles */\n.gallery-modal[data-v-18100052] {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  z-index: 1000;\n}\n.gallery-modal-content[data-v-18100052] {\r\n  background-color: white;\r\n  border-radius: 20px;\r\n  padding: 20px;\r\n  width: 600px;\r\n  max-width: 90%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  animation: zoomIn-data-v-18100052 0.3s ease-in-out;\r\n  position: relative;\n}\n.gallery-modal-body[data-v-18100052] {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  margin: 0;\r\n  padding: 0;\n}\n.gallery-modal-image[data-v-18100052] {\r\n  width: 45%;\r\n  flex-shrink: 0;\n}\n.modal-image[data-v-18100052] {\r\n  width: 100%;\r\n  border-radius: 15px;\n}\n.gallery-modal-text[data-v-18100052] {\r\n  width: 50%;\r\n  padding-left: 20px;\n}\nh2[data-v-18100052] {\r\n  font-size: 1.8rem;\r\n  margin-bottom: 10px;\n}\np[data-v-18100052] {\r\n  font-size: 1.2rem;\r\n  color: gray;\n}\nh4[data-v-18100052] {\r\n  margin-top: 15px;\r\n  font-weight: normal;\r\n  line-height: 1.4;\n}\n.gallery-close-btn[data-v-18100052] {\r\n  position: absolute;\r\n  top: 15px;\r\n  right: 20px;\r\n  font-size: 2rem;\r\n  cursor: pointer;\r\n  color: black;\n}\n@keyframes zoomIn-data-v-18100052 {\nfrom {\r\n    transform: scale(0.5);\r\n    opacity: 0;\n}\nto {\r\n    transform: scale(1);\r\n    opacity: 1;\n}\n}\n.auth-section[data-v-18100052] {\r\n  display: flex;\r\n  align-items: center;\n}\n.auth-btn[data-v-18100052] {\r\n  padding: 8px 15px;\r\n  border-radius: 5px;\r\n  text-decoration: none;\r\n  color: white;\r\n  margin-left: 10px;\n}\n.login-btn[data-v-18100052],\r\n.signup-btn[data-v-18100052] {\r\n  background-color: #e07a9d; /* Soft pink for login */\r\n  color: white;\r\n  padding: 6px 14px; /* Smaller padding */\r\n  border-radius: 6px; /* Smooth edges */\r\n  font-size: 14px; /* Slightly smaller text */\r\n  font-weight: 500;\r\n  transition: all 0.3s ease;\r\n  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\r\n  border: none;\r\n  cursor: pointer;\n}\n.signup-btn[data-v-18100052] {\r\n  background-color: #62c178; /* Soft green for signup */\r\n  margin-top: 0px;\n}\n.login-btn[data-v-18100052]:hover {\r\n  background-color: #d15595; /* Slightly darker pink */\r\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);\n}\n.signup-btn[data-v-18100052]:hover {\r\n  background-color: #28a745; /* Slightly darker green */\r\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14122,7 +14475,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_8_0_rules_0_use_1_public_css_style_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.auth-section[data-v-dc924fc8] {\r\n  display: flex;\r\n  align-items: center;\n}\n.auth-btn[data-v-dc924fc8] {\r\n  padding: 8px 15px;\r\n  border-radius: 5px;\r\n  text-decoration: none;\r\n  color: white;\r\n  margin-left: 10px;\n}\n.login-btn[data-v-dc924fc8],\r\n.signup-btn[data-v-dc924fc8] {\r\n  background-color: #e07a9d; /* Soft pink for login */\r\n  color: white;\r\n  padding: 6px 14px; /* Smaller padding */\r\n  border-radius: 6px; /* Smooth edges */\r\n  font-size: 14px; /* Slightly smaller text */\r\n  font-weight: 500;\r\n  transition: all 0.3s ease;\r\n  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\r\n  border: none;\r\n  cursor: pointer;\n}\n.signup-btn[data-v-dc924fc8] {\r\n  background-color: #62c178; /* Soft green for signup */\r\n  margin-top: 0px;\n}\n.login-btn[data-v-dc924fc8]:hover {\r\n  background-color: #d15595; /* Slightly darker pink */\r\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);\n}\n.signup-btn[data-v-dc924fc8]:hover {\r\n  background-color: #28a745; /* Slightly darker green */\r\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14230,7 +14583,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_8_0_rules_0_use_1_public_css_style_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.admin-link p[data-v-1f15fa99] {\r\n  font-size: 16px !important;\r\n  color: black !important;\r\n  margin: 0;\r\n  padding: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.admin-link p[data-v-1f15fa99] {\r\n  font-size: 16px !important;\r\n  color: black !important;\r\n  margin: 0;\r\n  padding: 0;\n}\n.auth-section[data-v-1f15fa99] {\r\n  display: flex;\r\n  align-items: center;\n}\n.auth-btn[data-v-1f15fa99] {\r\n  padding: 8px 15px;\r\n  border-radius: 5px;\r\n  text-decoration: none;\r\n  color: white;\r\n  margin-left: 10px;\n}\n.login-btn[data-v-1f15fa99],\r\n.signup-btn[data-v-1f15fa99] {\r\n  background-color: #e07a9d; /* Soft pink for login */\r\n  color: white;\r\n  padding: 6px 14px; /* Smaller padding */\r\n  border-radius: 6px; /* Smooth edges */\r\n  font-size: 14px; /* Slightly smaller text */\r\n  font-weight: 500;\r\n  transition: all 0.3s ease;\r\n  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\r\n  border: none;\r\n  cursor: pointer;\n}\n.signup-btn[data-v-1f15fa99] {\r\n  background-color: #62c178; /* Soft green for signup */\r\n  margin-top: 0px;\n}\n.login-btn[data-v-1f15fa99]:hover {\r\n  background-color: #d15595; /* Slightly darker pink */\r\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);\n}\n.signup-btn[data-v-1f15fa99]:hover {\r\n  background-color: #28a745; /* Slightly darker green */\r\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14254,7 +14607,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\nbody {\r\n    font-family: 'Roboto', sans-serif;\r\n    margin: 0;\r\n    padding: 0;\r\n    background-color: #ffddd2;\r\n}\r\n\r\na {\r\n    text-decoration: none;\r\n    color: inherit;\r\n}\r\n\r\nhtml {\r\n    overflow-y: scroll;\r\n}\r\n\r\n\r\n/* Topnav */\r\n.topnav {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 20px;\r\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.logo-container {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.logo {\r\n    height: 50px;\r\n    margin-right: 10px;\r\n    margin-left: 50px;\r\n}\r\n.sur {\r\n    width: 300px; \r\n    height: auto;\r\n}\r\n\r\n.brand-name {\r\n    font-size: 24px;\r\n    font-weight: 700;\r\n    color: #333;\r\n}\r\n\r\n.nav-links {\r\n    display: flex;\r\n    list-style: none;\r\n    gap: 10px;\r\n}\r\n\r\n.nav-links li {\r\n    margin-left: 30px;\r\n    justify-items: center;\r\n}\r\n\r\n.nav-links li a {\r\n    font-size: 18px;\r\n    color: #333;\r\n}\r\n\r\n.nav-links li a:hover,\r\n.nav-links li a.active {\r\n    color: #FA8C01;\r\n    \r\n}\r\n\r\n.profile {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.profile-pic {\r\n    height: 40px;\r\n    border-radius: 50%;\r\n    margin-right: 10px;\r\n}\r\n/* Profile dropdown styling */\r\n.dropdown-menu {\r\n    display: none;\r\n    position: absolute;\r\n    background-color: #fff;\r\n    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);\r\n    padding: 3px;\r\n    border-radius: 10px;\r\n    margin-top: 100px;\r\n    margin-left: 60px;\r\n    z-index: 1;\r\n}\r\n\r\n.dropdown-menu a {\r\n    display: block;\r\n    padding: 10px 20px;\r\n    color: black;\r\n    text-decoration: none;\r\n}\r\n\r\n.dropdown-menu a:hover {\r\n    background-color: #f1f1f1;\r\n}\r\n\r\n/* Show the dropdown when it is active */\r\n.show {\r\n    display: block;\r\n}\r\n\r\n/* Main Section */\r\n/*Appointment card*/\r\n\r\n.main-section {\r\n    text-align: center;\r\n    padding: 50px 0px;\r\n    margin-top: 100px;\r\n    margin-bottom: 243px;\r\n\r\n}\r\n\r\n.cards-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: center;\r\n    gap: 60px;\r\n}\r\n\r\n\r\n.card {\r\n    background-color: white;\r\n    border-radius: 12px;\r\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n    padding: 20px;\r\n    width: 200px;\r\n    text-align: center;\r\n    transition: transform 0.3s ease; \r\n    height: 200px;\r\n    border-radius: 40px;\r\n    margin-bottom: auto;\r\n    margin-top: 50px;\r\n}\r\n\r\n.card:hover {\r\n    transform: scale(1.05); \r\n}\r\n\r\n.sur {\r\n     width: 160px; /* Set width for the circle */\r\n  height: 165px; /* Set height to match the width */\r\n  border-radius: 50%; /* Make it circular */\r\n  object-fit: cover; /* Ensure the image covers the circle */\r\n  border: 2px solid #ccc; /* Optional: add a border around the circle */\r\n}\r\n.laugo {\r\n    width: 154px;\r\n    height: 160px;\r\n}\r\n\r\n\r\n.card h3 {\r\n    margin-top: 10px;\r\n    font-size: 20px;\r\n}\r\n\r\n\r\n\r\n\r\n/* Welcome Section */\r\n.welcome-section {\r\n    padding: 60px 20px;\r\n    background-color: #FFDDD2;\r\n}\r\n\r\n/* Welcome Container: Flexbox row for larger screens */\r\n.welcome-container {\r\n    display: flex;\r\n    flex-direction: row; /* Set to row for side-by-side layout */\r\n    align-items: center;\r\n    justify-content: space-between; /* Space between image and text */\r\n    max-width: 1000px;\r\n    margin: 0 auto;\r\n    gap: 30px; /* Add space between image and text */\r\n}\r\n\r\n/* Image on the left */\r\n.welcome-image {\r\n    max-width: 100%;\r\n    height: auto;\r\n    width: 400px; /* Adjust width as needed */\r\n}\r\n\r\n/* Welcome Text on the right */\r\n.welcome-text {\r\n    max-width: 90%; /* Adjust text width */\r\n    justify-content: center;\r\n}\r\n\r\n.welcome-text h1 {\r\n    font-size: 36px;\r\n    color: #5B392C;\r\n    font-weight: bold;\r\n}\r\n\r\n.welcome-text p {\r\n    font-size: 18px;\r\n    color: #5B392C;\r\n    margin: 20px 0;\r\n}\r\n\r\n.get-started-btn {\r\n    display: inline-block;\r\n    padding: 12px 30px;\r\n    background-color: #FF7F7E;\r\n    color: #FFF;\r\n    border-radius: 25px;\r\n    text-decoration: none;\r\n    font-weight: bold;\r\n    font-size: 16px;\r\n}\r\n\r\n.admin {\r\n    display: inline-block;\r\n    padding: 12px 30px;\r\n    background-color: black;\r\n    color: #FFF;\r\n    border-radius: 25px;\r\n    text-decoration: none;\r\n    font-weight: bold;\r\n    margin-top: 5px;\r\n    font-size: 14px;\r\n}\r\n\r\n/* Guarantee Section */\r\n.guarantee-section {\r\n    margin-top: 60px;\r\n}\r\n\r\n.guarantee-section h2 {\r\n    font-size: 28px;\r\n    color: #5B392C;\r\n    margin-bottom: 40px;\r\n    font-weight: bold;\r\n    text-align: center;\r\n}\r\n\r\n\r\n\r\n\r\n/* Guarantee Cards */\r\n.guarantee-cards {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: center;\r\n    gap: 60px;\r\n}\r\n\r\n.cardG {\r\n    background-color: #FFF;\r\n    border-radius: 20px;\r\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n    padding: 20px;\r\n    width: 280px;\r\n    text-align: center;\r\n    height: 220px;\r\n    width:180px;\r\n\r\n\r\n}\r\n\r\n.cardG img {\r\n    height: 100px;\r\n    width: auto;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.cardG h3 {\r\n    font-size: 18px;\r\n    color: #5B392C;\r\n    font-weight: bold;\r\n    margin-top: 5px;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n    .welcome-container {\r\n        flex-direction: column;\r\n        text-align: center;\r\n    }\r\n\r\n    .guarantee-cards {\r\n        flex-direction: column;\r\n        align-items: center;\r\n    }\r\n\r\n    .card {\r\n        width: 90%;\r\n    }\r\n}\r\n\r\n\r\n\r\n/* Footer Styles */\r\nfooter {\r\n    background-color: #FFF1EE;\r\n    padding: 40px 0;\r\n    text-align: center;\r\n    position: sticky;\r\n}\r\n\r\n\r\n\r\n.footer-container {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    max-width: 1200px;\r\n    margin: 0 auto;\r\n    padding: 0 20px;\r\n}\r\n\r\n.footer-logo {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 10px;\r\n}\r\n\r\n.footer-logo img {\r\n    width: 80px;\r\n}\r\n\r\n.footer-logo p {\r\n    font-size: 18px;\r\n    font-weight: bold;\r\n    font-family: Abhaya Libre SemiBold;\r\n    margin-left:-20px;\r\n}\r\n\r\n.footer-center {\r\n    text-align: center;\r\n}\r\n\r\n.slogan {\r\n    font-size: 18px;\r\n    font-weight: bold;\r\n}\r\n\r\n.description {\r\n    font-size: 14px;\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\r\n    color: #777;\r\n}\r\n\r\n.footer-contact p {\r\n    font-size: 16px;\r\n    font-weight: bold;\r\n}\r\n\r\n.footer-contact a {\r\n    color: #333;\r\n    text-decoration: none;\r\n    font-size: 14px;\r\n}\r\n\r\n.social-icons {\r\n    display: flex;\r\n    gap: 20px;\r\n    margin-top: 10px;\r\n    margin-left: 22px;\r\n\r\n}\r\n\r\n\r\n\r\nfooter p {\r\n    margin: 5px 0;\r\n}\r\n\r\n/* Gallery Section */\r\n.gallery-section {\r\n    padding: 60px 20px;\r\n        background-color: #ffddd2;\r\n}\r\n\r\n.gallery-section h1 {\r\n    font-size: 36px;\r\n    color: #5B392C;\r\n    margin-bottom: 40px;\r\n    margin-top: 9px;\r\n    margin-left: 50px;\r\n\r\n}\r\n\r\n/* Gallery Container */\r\n.gallery-container {\r\n    display: grid; \r\n    grid-template-columns: repeat(4, 1fr);\r\n    gap: 30px; \r\n    max-width: 1100px; \r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    column-gap: 0%;\r\n\r\n}\r\n\r\n/* Gallery Cards */\r\n.gallery-card {\r\n    background-color: #FFF;\r\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n    padding: 20px;\r\n    text-align: center;\r\n    cursor: pointer;\r\n    border-radius: 10px;\r\n    width: 210px;\r\n\r\n}\r\n\r\n.gallery-card:hover {\r\n    transform: scale(1.05); \r\n}\r\n\r\n\r\n.gallery-card img {\r\n    width: 210px;  \r\n    height: 200px;\r\n     object-fit: cover; \r\n    object-position: center; \r\n    border-radius: 10px;\r\n\r\n\r\n}\r\n\r\n\r\n.gallery-card p {\r\n    font-size: 18px;\r\n    font-weight: bold;\r\n    color: #5B392C;\r\n}\r\n\r\n.gallery-card span {\r\n    font-size: 14px;\r\n    color: #777;\r\n}\r\n\r\n\r\n\r\n/* Modal Styles */\r\n.galler-modal {\r\n    display: none; /* Hidden by default */\r\n    position: fixed; /* Stay in place */\r\n    z-index: 100; /* Sit on top */\r\n    padding-top: 100px; /* Location of the box */\r\n    left: 0;\r\n    top: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    overflow: auto; /* Enable scroll if needed */\r\n    background-color: rgba(0, 0, 0, 0.6); /* Black with opacity */\r\n}\r\n\r\n.galler-modal-content {\r\n    background-color: #fefefe;\r\n    margin: auto;\r\n    padding: 20px;\r\n    border: 1px solid #888;\r\n    width: 60%;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-around;\r\n    max-width: 1200px;\r\n    width: 500px;\r\n}\r\n\r\n.galler-modal-image img {\r\n    width: 250px;\r\n    height: auto;\r\n    border-radius: 20px;\r\n    margin: auto;\r\n}\r\n\r\n.galler-modal-text {\r\n    text-align: left;\r\n    margin-left: 20px;\r\n}\r\n\r\n.galler-modal-text h2 {\r\n    font-size: 28px;\r\n    color: #5B392C;\r\n}\r\n\r\n.galler-modal-text p {\r\n    font-size: 18px;\r\n    color: #777;\r\n}\r\n\r\n.galler-modal-text h4 {\r\n    font-size: 18px;\r\n    color: #777;\r\n}\r\n\r\n.galler-close-btn {\r\n    position: absolute;\r\n    top: 10px;\r\n    right: 20px;\r\n    font-size: 30px;\r\n    font-weight: bold;\r\n    cursor: pointer;\r\n    color: #333;\r\n}\r\n\r\n.galler-close-btn:hover {\r\n    color: red;\r\n}\r\n\r\n/* About Section */\r\n.about-section {\r\n    text-align: center;\r\n    padding: 60px 20px;\r\n    background-color: #ffddd2;\r\n    margin-bottom: 50px;\r\n}\r\n.about-container {\r\n    background-color: white;\r\n    padding: 40px;\r\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); \r\n    border-radius: 15px;\r\n    max-width: 800px;\r\n    margin: 0 auto; \r\n}\r\n\r\n\r\n.about-section h1 {\r\n    font-size: 36px;\r\n    color: #5B392C;\r\n    font-weight: bold;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.about-section p {\r\n    font-size: 18px;\r\n    color: #5B392C;\r\n    max-width: 800px;\r\n    margin: 0 auto 20px;\r\n    line-height: 1.6;\r\n}\r\n.user-profile {\r\n    background-color: #e89c8c;\r\n    padding: 5px 10px;\r\n    border-radius: 20px;\r\n    color: #fff;\r\n}\r\n\r\n.form-container {\r\n    background: white;\r\n    padding: 30px;\r\n    margin: 20px;\r\n    border-radius: 10px;\r\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\r\n    width: 600px; \r\n    text-align: center;\r\n    justify-items: center;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    margin-top: 148px;\r\n    margin-bottom: 160px;\r\n}\r\n\r\nh2 {\r\n    margin-bottom: 20px;\r\n    color: #333;\r\n}\r\n\r\n.form-content {\r\n    display: flex;\r\n    gap: 50px; \r\n}\r\n\r\n.form-column {\r\n    flex: 1;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 15px; /* Space between form fields */\r\n}\r\n\r\n.form-group {\r\n    text-align: left;\r\n}\r\n\r\n.form-group label {\r\n    display: block;\r\n    margin-bottom: 5px;\r\n    color: #666;\r\n}\r\n\r\n.form-group input,\r\n.form-group select {\r\n    width: 100%;\r\n    padding: 10px;\r\n    border: 1px solid #ddd;\r\n    border-radius: 5px;\r\n    box-sizing: border-box;\r\n}\r\n\r\n.form-buttons {\r\n    display: flex;\r\n    gap: 15px;\r\n    margin-top: 20px;\r\n    margin-left: 100px;\r\n}\r\n\r\n.form-buttons button {\r\n    background-color: #f09792;\r\n    border: none;\r\n    padding: 10px 20px;\r\n    color: white;\r\n    border-radius: 20px;\r\n    cursor: pointer;\r\n}\r\n\r\n.form-buttons button:hover {\r\n    background-color: #e07a76;\r\n}\r\n\r\nbutton[type=\"button\"] {\r\n    background-color: #ddd;\r\n    color: #333;\r\n}\r\n\r\nbutton[type=\"button\"]:hover {\r\n    background-color: #bbb}\r\n.logcontainer {\r\n    position: relative;\r\n    width: 100%;\r\n    max-width: 1024px;\r\n    height: 100%;\r\n}\r\n\r\n.back-button {\r\n    position: absolute;\r\n    top: 20px;\r\n    left: 20px;\r\n    font-size: 24px;\r\n    background: none;\r\n    border: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.admin-button {\r\n    position: absolute;\r\n    top: 20px;\r\n    right: 20px;\r\n    background-color: black;\r\n    color: white;\r\n    border: none;\r\n    padding: 10px 20px;\r\n    cursor: pointer;\r\n    border-radius: 15px;\r\n}\r\n\r\n/* Login box styling */\r\n.login-box {\r\n    background-color: white;\r\n    padding: 40px;\r\n    border-radius: 15px;\r\n    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);\r\n    width: 300px;\r\n    margin: auto;\r\n    text-align: center;\r\n    margin-top: 100px;\r\n    margin-bottom: auto;\r\n    height: 400px;\r\n}\r\n\r\n.login-box h2{\r\n    margin-bottom: 40px;\r\n}\r\n\r\n.input-group {\r\n    margin-bottom: 15px;\r\n    text-align: left;\r\n    margin-left: 5px;\r\n    margin-right: 20px;\r\n}\r\n\r\nlabel {\r\n    display: block;\r\n    font-size: 14px;\r\n    margin-bottom: 5px;\r\n}\r\n\r\ninput {\r\n    width: 100%;\r\n    padding: 10px;\r\n    border-radius: 5px;\r\n    border: 1px solid #ccc;\r\n    font-size: 16px;\r\n}\r\n\r\n.sign-in-btn {\r\n    width: 40%;\r\n    background-color: black;\r\n    color: white;\r\n    padding: 15px;\r\n    border-radius: 25px;\r\n    border: none;\r\n    cursor: pointer;\r\n    margin-top: 20px;\r\n}\r\n\r\n.signup-link {\r\n    color: red;\r\n    text-decoration: none;\r\n\r\n}\r\n\r\n\r\n/*admin*/\r\n\r\n.admincontainer {\r\n    position: relative;\r\n    width: 100%;\r\n    max-width: 1024px;\r\n    height: 100%;\r\n}\r\n\r\n.back-button {\r\n    position: absolute;\r\n    top: 20px;\r\n    left: 20px;\r\n    font-size: 24px;\r\n    background: none;\r\n    border: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.admin-button {\r\n    position: absolute;\r\n    top: 20px;\r\n    right: 20px;\r\n    background-color: black;\r\n    color: white;\r\n    border: none;\r\n    padding: 10px 20px;\r\n    cursor: pointer;\r\n    border-radius: 15px;\r\n}\r\n\r\n/* Login box styling */\r\n.admin-box {\r\n    background-color: white;\r\n    padding: 40px;\r\n    border-radius: 15px;\r\n    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);\r\n    width: 290px;\r\n    margin: auto;\r\n    text-align: center;\r\n    margin-top: 100px;\r\n    margin-bottom: auto;\r\n    height: 300px;\r\n}\r\n\r\n.admin-box h2{\r\n    margin-bottom: 40px;\r\n}\r\n\r\n.admin-group {\r\n    margin-bottom: 15px;\r\n    text-align: left;\r\n    margin-left: 5px;\r\n    margin-right: 20px;\r\n}\r\n\r\nlabel {\r\n    display: block;\r\n    font-size: 14px;\r\n    margin-bottom: 5px;\r\n}\r\n\r\ninput {\r\n    width: 100%;\r\n    padding: 10px;\r\n    border-radius: 5px;\r\n    border: 1px solid #ccc;\r\n    font-size: 16px;\r\n}\r\n\r\n.admin-btn {\r\n    width: 40%;\r\n    background-color: black;\r\n    color: white;\r\n    padding: 15px;\r\n    border-radius: 25px;\r\n    border: none;\r\n    cursor: pointer;\r\n    margin-top: 20px;\r\n}\r\n\r\n.admin-link {\r\n    color: red;\r\n    text-decoration: none;\r\n    \r\n}\r\n\r\n/* Profile Picture Section */\r\n.profile-picture-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    margin-bottom: 20px;\r\n    margin-top: 1px;\r\n}\r\n\r\n.profile-picture {\r\n    width: 50px;\r\n    height: 50px;\r\n    object-fit: cover;\r\n    border-radius: 50%;\r\n    margin-bottom: 10px;\r\n    border: 2px solid #ccc;\r\n}\r\n\r\n#profile-picture-input {\r\n    font-size: 14px;\r\n}\r\n\r\n/*edit account*/\r\n\r\n.acc-box {\r\n    background-color: white;\r\n    padding: 40px;\r\n    border-radius: 15px;\r\n    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);\r\n    width: 300px;\r\n    margin: auto;\r\n    text-align: center;\r\n    margin-top: 100px;\r\n    margin-bottom: auto;\r\n    height: 400px;\r\n    padding-bottom: 100px;\r\n}\r\n\r\n.acc-box h2{\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.acc-group {\r\n    margin-bottom: 15px;\r\n    text-align: left;\r\n    margin-left: 5px;\r\n    margin-right: 20px;\r\n}\r\n\r\n/* sign up */\r\n.signup-box {\r\n    background-color: white;\r\n    padding: 40px;\r\n    border-radius: 15px;\r\n    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);\r\n    width: 300px;\r\n    margin: auto;\r\n    text-align: center;\r\n    margin-top: 100px;\r\n    margin-bottom: auto;\r\n    height: 400px;\r\n    padding-bottom: 350px;\r\n    gap: 50px;\r\n}\r\n\r\n.signup-box h2{\r\n    margin-bottom: 40px;\r\n}\r\n\r\n.signup-group {\r\n    margin-bottom: 15px;\r\n    text-align: left;\r\n    margin-left: 5px;\r\n    margin-right: 20px;\r\n}\r\n\r\nlabel {\r\n    display: block;\r\n    font-size: 14px;\r\n    margin-bottom: 5px;\r\n}\r\n\r\ninput {\r\n    width: 100%;\r\n    padding: 10px;\r\n    border-radius: 5px;\r\n    border: 1px solid #ccc;\r\n    font-size: 16px;\r\n    \r\n}\r\n\r\n.signup-btn {\r\n    width: 40%;\r\n    background-color: black;\r\n    color: white;\r\n    padding: 15px;\r\n    border-radius: 25px;\r\n    border: none;\r\n    cursor: pointer;\r\n    margin-top: 20px;\r\n}\r\n\r\n.signup-link {\r\n    color: red;\r\n    text-decoration: none;\r\n\r\n}\r\n\r\n.signup-gif {\r\n    width: 300px; /* Adjust as needed */\r\n    height: auto; /* Maintain aspect ratio */\r\n    /* Optional styles for better alignment */\r\n    border-radius: 10px; /* Optional for rounded corners */\r\n    display: flex;\r\n    justify-content: center;\r\n    \r\n}\r\n\r\n.gifcontainer {\r\n    display: flex;\r\n    flex-direction: column; /* Stack the buttons and form vertically */\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\nbody {\r\n    font-family: 'Roboto', sans-serif;\r\n    margin: 0;\r\n    padding: 0;\r\n    background-color: #ffddd2;\r\n}\r\n\r\na {\r\n    text-decoration: none;\r\n    color: inherit;\r\n}\r\n\r\nhtml {\r\n    overflow-y: scroll;\r\n}\r\n\r\n\r\n/* Topnav */\r\n.topnav {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 20px;\r\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.logo-container {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.logo {\r\n    height: 50px;\r\n    margin-right: 10px;\r\n    margin-left: 50px;\r\n}\r\n.sur {\r\n    width: 300px; \r\n    height: auto;\r\n}\r\n\r\n.brand-name {\r\n    font-size: 24px;\r\n    font-weight: 700;\r\n    color: #333;\r\n}\r\n\r\n.nav-links {\r\n    display: flex;\r\n    list-style: none;\r\n    gap: 10px;\r\n}\r\n\r\n.nav-links li {\r\n    margin-left: 30px;\r\n    justify-items: center;\r\n}\r\n\r\n.nav-links li a {\r\n    font-size: 18px;\r\n    color: #333;\r\n}\r\n\r\n.nav-links li a:hover,\r\n.nav-links li a.active {\r\n    color: #FA8C01;\r\n    \r\n}\r\n\r\n.profile {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.profile-pic {\r\n    height: 40px;\r\n    border-radius: 50%;\r\n    margin-right: 10px;\r\n}\r\n/* Profile dropdown styling */\r\n.dropdown-menu {\r\n    display: none;\r\n    position: absolute;\r\n    background-color: #fff;\r\n    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);\r\n    padding: 3px;\r\n    border-radius: 10px;\r\n    margin-top: 150px;\r\n    margin-left: 10px;\r\n    margin-right: 50px;\r\n    z-index: 1;\r\n}\r\n\r\n.dropdown-menu a {\r\n    display: block;\r\n    padding: 10px 20px;\r\n    color: black;\r\n    text-decoration: none;\r\n}\r\n\r\n.dropdown-menu a:hover {\r\n    background-color: #f1f1f1;\r\n}\r\n\r\n/* Show the dropdown when it is active */\r\n.show {\r\n    display: block;\r\n}\r\n\r\n/* Main Section */\r\n/*Appointment card*/\r\n\r\n.main-section {\r\n    text-align: center;\r\n    padding: 50px 0px;\r\n    margin-top: 100px;\r\n    margin-bottom: 243px;\r\n\r\n}\r\n\r\n.cards-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: center;\r\n    gap: 60px;\r\n}\r\n\r\n\r\n.card {\r\n    background-color: white;\r\n    border-radius: 12px;\r\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n    padding: 20px;\r\n    width: 200px;\r\n    text-align: center;\r\n    transition: transform 0.3s ease; \r\n    height: 200px;\r\n    border-radius: 40px;\r\n    margin-bottom: auto;\r\n    margin-top: 50px;\r\n}\r\n\r\n.card:hover {\r\n    transform: scale(1.05); \r\n}\r\n\r\n.sur {\r\n     width: 160px; /* Set width for the circle */\r\n  height: 165px; /* Set height to match the width */\r\n  border-radius: 50%; /* Make it circular */\r\n  object-fit: cover; /* Ensure the image covers the circle */\r\n  border: 2px solid #ccc; /* Optional: add a border around the circle */\r\n}\r\n.laugo {\r\n    width: 154px;\r\n    height: 160px;\r\n}\r\n\r\n\r\n.card h3 {\r\n    margin-top: 10px;\r\n    font-size: 20px;\r\n}\r\n\r\n\r\n\r\n\r\n/* Welcome Section */\r\n.welcome-section {\r\n    padding: 60px 20px;\r\n    background-color: #FFDDD2;\r\n}\r\n\r\n/* Welcome Container: Flexbox row for larger screens */\r\n.welcome-container {\r\n    display: flex;\r\n    flex-direction: row; /* Set to row for side-by-side layout */\r\n    align-items: center;\r\n    justify-content: space-between; /* Space between image and text */\r\n    max-width: 1000px;\r\n    margin: 0 auto;\r\n    gap: 30px; /* Add space between image and text */\r\n}\r\n\r\n/* Image on the left */\r\n.welcome-image {\r\n    max-width: 100%;\r\n    height: auto;\r\n    width: 400px; /* Adjust width as needed */\r\n}\r\n\r\n/* Welcome Text on the right */\r\n.welcome-text {\r\n    max-width: 90%; /* Adjust text width */\r\n    justify-content: center;\r\n}\r\n\r\n.welcome-text h1 {\r\n    font-size: 36px;\r\n    color: #5B392C;\r\n    font-weight: bold;\r\n}\r\n\r\n.welcome-text p {\r\n    font-size: 18px;\r\n    color: #5B392C;\r\n    margin: 20px 0;\r\n}\r\n\r\n.get-started-btn {\r\n    display: inline-block;\r\n    padding: 12px 30px;\r\n    background-color: #FF7F7E;\r\n    color: #FFF;\r\n    border-radius: 25px;\r\n    text-decoration: none;\r\n    font-weight: bold;\r\n    font-size: 16px;\r\n}\r\n\r\n.admin {\r\n    display: inline-block;\r\n    padding: 12px 30px;\r\n    background-color: black;\r\n    color: #FFF;\r\n    border-radius: 25px;\r\n    text-decoration: none;\r\n    font-weight: bold;\r\n    margin-top: 5px;\r\n    font-size: 14px;\r\n}\r\n\r\n/* Guarantee Section */\r\n.guarantee-section {\r\n    margin-top: 60px;\r\n}\r\n\r\n.guarantee-section h2 {\r\n    font-size: 28px;\r\n    color: #5B392C;\r\n    margin-bottom: 40px;\r\n    font-weight: bold;\r\n    text-align: center;\r\n}\r\n\r\n\r\n\r\n\r\n/* Guarantee Cards */\r\n.guarantee-cards {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: center;\r\n    gap: 60px;\r\n}\r\n\r\n.cardG {\r\n    background-color: #FFF;\r\n    border-radius: 20px;\r\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n    padding: 20px;\r\n    width: 280px;\r\n    text-align: center;\r\n    height: 220px;\r\n    width:180px;\r\n\r\n\r\n}\r\n\r\n.cardG img {\r\n    height: 100px;\r\n    width: auto;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.cardG h3 {\r\n    font-size: 18px;\r\n    color: #5B392C;\r\n    font-weight: bold;\r\n    margin-top: 5px;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n    .welcome-container {\r\n        flex-direction: column;\r\n        text-align: center;\r\n    }\r\n\r\n    .guarantee-cards {\r\n        flex-direction: column;\r\n        align-items: center;\r\n    }\r\n\r\n    .card {\r\n        width: 90%;\r\n    }\r\n}\r\n\r\n\r\n\r\n/* Footer Styles */\r\nfooter {\r\n    background-color: #FFF1EE;\r\n    padding: 40px 0;\r\n    text-align: center;\r\n    position: sticky;\r\n}\r\n\r\n\r\n\r\n.footer-container {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    max-width: 1200px;\r\n    margin: 0 auto;\r\n    padding: 0 20px;\r\n}\r\n\r\n.footer-logo {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 10px;\r\n}\r\n\r\n.footer-logo img {\r\n    width: 80px;\r\n}\r\n\r\n.footer-logo p {\r\n    font-size: 18px;\r\n    font-weight: bold;\r\n    font-family: Abhaya Libre SemiBold;\r\n    margin-left:-20px;\r\n}\r\n\r\n.footer-center {\r\n    text-align: center;\r\n}\r\n\r\n.slogan {\r\n    font-size: 18px;\r\n    font-weight: bold;\r\n}\r\n\r\n.description {\r\n    font-size: 14px;\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\r\n    color: #777;\r\n}\r\n\r\n.footer-contact p {\r\n    font-size: 16px;\r\n    font-weight: bold;\r\n}\r\n\r\n.footer-contact a {\r\n    color: #333;\r\n    text-decoration: none;\r\n    font-size: 14px;\r\n}\r\n\r\n.social-icons {\r\n    display: flex;\r\n    gap: 20px;\r\n    margin-top: 10px;\r\n    margin-left: 22px;\r\n\r\n}\r\n\r\n\r\n\r\nfooter p {\r\n    margin: 5px 0;\r\n}\r\n\r\n/* Gallery Section */\r\n.gallery-section {\r\n    padding: 60px 20px;\r\n        background-color: #ffddd2;\r\n}\r\n\r\n.gallery-section h1 {\r\n    font-size: 36px;\r\n    color: #5B392C;\r\n    margin-bottom: 40px;\r\n    margin-top: 9px;\r\n    margin-left: 50px;\r\n\r\n}\r\n\r\n/* Gallery Container */\r\n.gallery-container {\r\n    display: grid; \r\n    grid-template-columns: repeat(4, 1fr);\r\n    gap: 30px; \r\n    max-width: 1100px; \r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    column-gap: 0%;\r\n\r\n}\r\n\r\n/* Gallery Cards */\r\n.gallery-card {\r\n    background-color: #FFF;\r\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n    padding: 20px;\r\n    text-align: center;\r\n    cursor: pointer;\r\n    border-radius: 10px;\r\n    width: 210px;\r\n\r\n}\r\n\r\n.gallery-card:hover {\r\n    transform: scale(1.05); \r\n}\r\n\r\n\r\n.gallery-card img {\r\n    width: 210px;  \r\n    height: 200px;\r\n     object-fit: cover; \r\n    object-position: center; \r\n    border-radius: 10px;\r\n\r\n\r\n}\r\n\r\n\r\n.gallery-card p {\r\n    font-size: 18px;\r\n    font-weight: bold;\r\n    color: #5B392C;\r\n}\r\n\r\n.gallery-card span {\r\n    font-size: 14px;\r\n    color: #777;\r\n}\r\n\r\n\r\n\r\n/* Modal Styles */\r\n.galler-modal {\r\n    display: none; /* Hidden by default */\r\n    position: fixed; /* Stay in place */\r\n    z-index: 100; /* Sit on top */\r\n    padding-top: 100px; /* Location of the box */\r\n    left: 0;\r\n    top: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    overflow: auto; /* Enable scroll if needed */\r\n    background-color: rgba(0, 0, 0, 0.6); /* Black with opacity */\r\n}\r\n\r\n.galler-modal-content {\r\n    background-color: #fefefe;\r\n    margin: auto;\r\n    padding: 20px;\r\n    border: 1px solid #888;\r\n    width: 60%;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-around;\r\n    max-width: 1200px;\r\n    width: 500px;\r\n}\r\n\r\n.galler-modal-image img {\r\n    width: 250px;\r\n    height: auto;\r\n    border-radius: 20px;\r\n    margin: auto;\r\n}\r\n\r\n.galler-modal-text {\r\n    text-align: left;\r\n    margin-left: 20px;\r\n}\r\n\r\n.galler-modal-text h2 {\r\n    font-size: 28px;\r\n    color: #5B392C;\r\n}\r\n\r\n.galler-modal-text p {\r\n    font-size: 18px;\r\n    color: #777;\r\n}\r\n\r\n.galler-modal-text h4 {\r\n    font-size: 18px;\r\n    color: #777;\r\n}\r\n\r\n.galler-close-btn {\r\n    position: absolute;\r\n    top: 10px;\r\n    right: 20px;\r\n    font-size: 30px;\r\n    font-weight: bold;\r\n    cursor: pointer;\r\n    color: #333;\r\n}\r\n\r\n.galler-close-btn:hover {\r\n    color: red;\r\n}\r\n\r\n/* About Section */\r\n.about-section {\r\n    text-align: center;\r\n    padding: 60px 20px;\r\n    background-color: #ffddd2;\r\n    margin-bottom: 50px;\r\n}\r\n.about-container {\r\n    background-color: white;\r\n    padding: 40px;\r\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); \r\n    border-radius: 15px;\r\n    max-width: 800px;\r\n    margin: 0 auto; \r\n}\r\n\r\n\r\n.about-section h1 {\r\n    font-size: 36px;\r\n    color: #5B392C;\r\n    font-weight: bold;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.about-section p {\r\n    font-size: 18px;\r\n    color: #5B392C;\r\n    max-width: 800px;\r\n    margin: 0 auto 20px;\r\n    line-height: 1.6;\r\n}\r\n.user-profile {\r\n    background-color: #e89c8c;\r\n    padding: 5px 10px;\r\n    border-radius: 20px;\r\n    color: #fff;\r\n}\r\n\r\n.form-container {\r\n    background: white;\r\n    padding: 30px;\r\n    margin: 20px;\r\n    border-radius: 10px;\r\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\r\n    width: 600px; \r\n    text-align: center;\r\n    justify-items: center;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    margin-top: 148px;\r\n    margin-bottom: 160px;\r\n}\r\n\r\nh2 {\r\n    margin-bottom: 20px;\r\n    color: #333;\r\n}\r\n\r\n.form-content {\r\n    display: flex;\r\n    gap: 50px; \r\n}\r\n\r\n.form-column {\r\n    flex: 1;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 15px; /* Space between form fields */\r\n}\r\n\r\n.form-group {\r\n    text-align: left;\r\n}\r\n\r\n.form-group label {\r\n    display: block;\r\n    margin-bottom: 5px;\r\n    color: #666;\r\n}\r\n\r\n.form-group input,\r\n.form-group select {\r\n    width: 100%;\r\n    padding: 10px;\r\n    border: 1px solid #ddd;\r\n    border-radius: 5px;\r\n    box-sizing: border-box;\r\n}\r\n\r\n.form-buttons {\r\n    display: flex;\r\n    gap: 15px;\r\n    margin-top: 20px;\r\n    margin-left: 100px;\r\n}\r\n\r\n.form-buttons button {\r\n    background-color: #f09792;\r\n    border: none;\r\n    padding: 10px 20px;\r\n    color: white;\r\n    border-radius: 20px;\r\n    cursor: pointer;\r\n}\r\n\r\n.form-buttons button:hover {\r\n    background-color: #e07a76;\r\n}\r\n\r\nbutton[type=\"button\"] {\r\n    background-color: #ddd;\r\n    color: #333;\r\n}\r\n\r\nbutton[type=\"button\"]:hover {\r\n    background-color: #bbb}\r\n.logcontainer {\r\n    position: relative;\r\n    width: 100%;\r\n    max-width: 1024px;\r\n    height: 100%;\r\n}\r\n\r\n.back-button {\r\n    position: absolute;\r\n    top: 20px;\r\n    left: 20px;\r\n    font-size: 24px;\r\n    background: none;\r\n    border: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.admin-button {\r\n    position: absolute;\r\n    top: 20px;\r\n    right: 20px;\r\n    background-color: black;\r\n    color: white;\r\n    border: none;\r\n    padding: 10px 20px;\r\n    cursor: pointer;\r\n    border-radius: 15px;\r\n}\r\n\r\n/* Modern Minimalist Login Box */\r\n.login-box {\r\n    background: linear-gradient(to bottom right, #ffffff, #f8f9fa);\r\n    padding: 50px;\r\n    border-radius: 12px;\r\n    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);\r\n    width: 320px;\r\n    margin: auto;\r\n    text-align: center;\r\n    margin-top: 100px;\r\n    height: auto;\r\n    transition: all 0.3s ease-in-out;\r\n    padding-left: 30px;\r\n}\r\n\r\n.login-box:hover {\r\n    transform: scale(1.02);\r\n}\r\n\r\n.login-box h2 {\r\n    font-size: 22px;\r\n    font-weight: 600;\r\n    margin-bottom: 30px;\r\n    color: #333;\r\n}\r\n\r\n.input-group {\r\n    margin-bottom: 20px;\r\n    text-align: left;\r\n}\r\n\r\nlabel {\r\n    display: block;\r\n    font-size: 14px;\r\n    font-weight: 500;\r\n    color: #555;\r\n    margin-bottom: 5px;\r\n}\r\n\r\ninput {\r\n    width: 100%;\r\n    padding: 12px;\r\n    border-radius: 8px;\r\n    border: 1px solid #ddd;\r\n    font-size: 16px;\r\n    outline: none;\r\n    transition: all 0.3s ease;\r\n    background-color: #f9f9f9;\r\n    margin-right: 5px;\r\n}\r\n\r\ninput:focus {\r\n    border-color: #6c63ff;\r\n    box-shadow: 0 0 8px rgba(108, 99, 255, 0.2);\r\n    background-color: #ffffff;\r\n}\r\n\r\n.sign-in-btn {\r\n    width: 100%;\r\n    background: #6c63ff;\r\n    color: white;\r\n    padding: 14px;\r\n    border-radius: 8px;\r\n    border: none;\r\n    cursor: pointer;\r\n    font-size: 16px;\r\n    font-weight: 600;\r\n    transition: all 0.3s ease;\r\n    margin-top: 20px;\r\n    margin-left: 10px;\r\n}\r\n\r\n.sign-in-btn:hover {\r\n    background: #5548ff;\r\n    transform: scale(1.03);\r\n}\r\n\r\n.signup-link {\r\n    display: block;\r\n    margin-top: 15px;\r\n    font-size: 14px;\r\n    color: #6c63ff;\r\n    text-decoration: none;\r\n    transition: all 0.3s ease;\r\n}\r\n\r\n.signup-link:hover {\r\n    text-decoration: underline;\r\n    color: #5548ff;\r\n\r\n}\r\n\r\n/*admin*/\r\n\r\n.admincontainer {\r\n    position: relative;\r\n    width: 100%;\r\n    max-width: 1024px;\r\n    height: 100%;\r\n}\r\n\r\n.back-button {\r\n    position: absolute;\r\n    top: 20px;\r\n    left: 20px;\r\n    font-size: 24px;\r\n    background: none;\r\n    border: none;\r\n    cursor: pointer;\r\n}\r\n\r\n.admin-button {\r\n    position: absolute;\r\n    top: 20px;\r\n    right: 20px;\r\n    background-color: black;\r\n    color: white;\r\n    border: none;\r\n    padding: 10px 20px;\r\n    cursor: pointer;\r\n    border-radius: 15px;\r\n}\r\n\r\n/* Login box styling */\r\n.admin-box {\r\n    background-color: white;\r\n    padding: 40px;\r\n    border-radius: 15px;\r\n    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);\r\n    width: 290px;\r\n    margin: auto;\r\n    text-align: center;\r\n    margin-top: 100px;\r\n    margin-bottom: auto;\r\n    height: 300px;\r\n}\r\n\r\n.admin-box h2{\r\n    margin-bottom: 40px;\r\n}\r\n\r\n.admin-group {\r\n    margin-bottom: 15px;\r\n    text-align: left;\r\n    margin-left: 5px;\r\n    margin-right: 20px;\r\n}\r\n\r\nlabel {\r\n    display: block;\r\n    font-size: 14px;\r\n    margin-bottom: 5px;\r\n}\r\n\r\ninput {\r\n    width: 100%;\r\n    padding: 10px;\r\n    border-radius: 5px;\r\n    border: 1px solid #ccc;\r\n    font-size: 16px;\r\n}\r\n\r\n.admin-btn {\r\n    width: 40%;\r\n    background-color: black;\r\n    color: white;\r\n    padding: 15px;\r\n    border-radius: 25px;\r\n    border: none;\r\n    cursor: pointer;\r\n    margin-top: 20px;\r\n}\r\n\r\n.admin-link {\r\n    color: red;\r\n    text-decoration: none;\r\n    \r\n}\r\n\r\n/* Profile Picture Section */\r\n.profile-picture-container {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    margin-bottom: 20px;\r\n    margin-top: 1px;\r\n}\r\n\r\n.profile-picture {\r\n    width: 50px;\r\n    height: 50px;\r\n    object-fit: cover;\r\n    border-radius: 50%;\r\n    margin-bottom: 10px;\r\n    border: 2px solid #ccc;\r\n}\r\n\r\n#profile-picture-input {\r\n    font-size: 14px;\r\n}\r\n\r\n/*edit account*/\r\n\r\n.acc-box {\r\n    background-color: white;\r\n    padding: 40px;\r\n    border-radius: 15px;\r\n    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);\r\n    width: 300px;\r\n    margin: auto;\r\n    text-align: center;\r\n    margin-top: 100px;\r\n    margin-bottom: auto;\r\n    height: 400px;\r\n    padding-bottom: 100px;\r\n}\r\n\r\n.acc-box h2{\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.acc-group {\r\n    margin-bottom: 15px;\r\n    text-align: left;\r\n    margin-left: 5px;\r\n    margin-right: 20px;\r\n}\r\n\r\n/* sign up */\r\n.signup-box {\r\n    background-color: white;\r\n    padding: 40px;\r\n    border-radius: 15px;\r\n    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);\r\n    width: 290px;\r\n    margin: auto;\r\n    text-align: center;\r\n    margin-top: 100px;\r\n    margin-bottom: 50px;\r\n    height: 400px;\r\n    padding-bottom: 250px;\r\n    gap: 50px;\r\n}\r\n\r\n.signup-box h2{\r\n    margin-bottom: 40px;\r\n}\r\n\r\n.signup-group {\r\n    margin-bottom: 15px;\r\n    text-align: left;\r\n    margin-left: 5px;\r\n    margin-right: 20px;\r\n}\r\n\r\nlabel {\r\n    display: block;\r\n    font-size: 14px;\r\n    margin-bottom: 5px;\r\n}\r\n\r\ninput {\r\n    width: 100%;\r\n    padding: 10px;\r\n    border-radius: 5px;\r\n    border: 1px solid #ccc;\r\n    font-size: 16px;\r\n    \r\n}\r\n\r\n.signup-btn {\r\n    width: 40%;\r\n    background-color: black;\r\n    color: white;\r\n    padding: 10px;\r\n    border-radius: 25px;\r\n    border: none;\r\n    cursor: pointer;\r\n    margin-top: 20px;\r\n    margin-left: -5px;\r\n}\r\n\r\n.signup-link {\r\n    color: red;\r\n    text-decoration: none;\r\n\r\n}\r\n\r\n.signup-gif {\r\n    width: 300px; /* Adjust as needed */\r\n    height: auto; /* Maintain aspect ratio */\r\n    /* Optional styles for better alignment */\r\n    border-radius: 10px; /* Optional for rounded corners */\r\n    display: flex;\r\n    justify-content: center;\r\n    \r\n}\r\n\r\n.gifcontainer {\r\n    display: flex;\r\n    flex-direction: column; /* Stack the buttons and form vertically */\r\n}\r\n/* Auth Buttons */\r\n.auth-buttons {\r\n    display: flex;\r\n    gap: 15px;\r\n    align-items: center;\r\n  }\r\n  \r\n  .login-btn, .signup-btn {\r\n    padding: 8px 20px;\r\n    border-radius: 25px;\r\n    font-weight: bold;\r\n    transition: all 0.3s ease;\r\n  }\r\n  \r\n  .login-btn {\r\n    background-color: transparent;\r\n    color: #333;\r\n    border: 2px solid #FF7F7E;\r\n  }\r\n  \r\n  .login-btn:hover {\r\n    background-color: #FF7F7E;\r\n    color: white;\r\n  }\r\n  \r\n  .signup-btn {\r\n    background-color: #FF7F7E;\r\n    color: white;\r\n    border: 2px solid #FF7F7E;\r\n  }\r\n  \r\n  .signup-btn:hover {\r\n    background-color: #ff6b6a;\r\n  }", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -31893,6 +32246,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/appointment.vue?vue&type=style&index=0&id=723e91b8&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/appointment.vue?vue&type=style&index=0&id=723e91b8&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_8_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_8_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_appointment_vue_vue_type_style_index_0_id_723e91b8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./appointment.vue?vue&type=style&index=0&id=723e91b8&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/appointment.vue?vue&type=style&index=0&id=723e91b8&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_8_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_8_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_appointment_vue_vue_type_style_index_0_id_723e91b8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_8_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_8_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_appointment_vue_vue_type_style_index_0_id_723e91b8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/dash/EditUser.vue?vue&type=style&index=0&id=7b9005b7&scoped=true&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/dash/EditUser.vue?vue&type=style&index=0&id=7b9005b7&scoped=true&lang=css& ***!
@@ -37349,23 +37732,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _appointment_vue_vue_type_template_id_723e91b8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./appointment.vue?vue&type=template&id=723e91b8& */ "./resources/js/components/appointment.vue?vue&type=template&id=723e91b8&");
+/* harmony import */ var _appointment_vue_vue_type_template_id_723e91b8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./appointment.vue?vue&type=template&id=723e91b8&scoped=true& */ "./resources/js/components/appointment.vue?vue&type=template&id=723e91b8&scoped=true&");
 /* harmony import */ var _appointment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./appointment.vue?vue&type=script&lang=js& */ "./resources/js/components/appointment.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _appointment_vue_vue_type_style_index_0_id_723e91b8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./appointment.vue?vue&type=style&index=0&id=723e91b8&scoped=true&lang=css& */ "./resources/js/components/appointment.vue?vue&type=style&index=0&id=723e91b8&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _appointment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _appointment_vue_vue_type_template_id_723e91b8___WEBPACK_IMPORTED_MODULE_0__.render,
-  _appointment_vue_vue_type_template_id_723e91b8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _appointment_vue_vue_type_template_id_723e91b8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _appointment_vue_vue_type_template_id_723e91b8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  null,
+  "723e91b8",
   null
   
 )
@@ -38380,6 +38765,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/appointment.vue?vue&type=style&index=0&id=723e91b8&scoped=true&lang=css&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/appointment.vue?vue&type=style&index=0&id=723e91b8&scoped=true&lang=css& ***!
+  \**********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_8_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_8_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_appointment_vue_vue_type_style_index_0_id_723e91b8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./appointment.vue?vue&type=style&index=0&id=723e91b8&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-8[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/appointment.vue?vue&type=style&index=0&id=723e91b8&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/dash/EditUser.vue?vue&type=style&index=0&id=7b9005b7&scoped=true&lang=css&":
 /*!************************************************************************************************************!*\
   !*** ./resources/js/components/dash/EditUser.vue?vue&type=style&index=0&id=7b9005b7&scoped=true&lang=css& ***!
@@ -38660,19 +39058,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/appointment.vue?vue&type=template&id=723e91b8&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/components/appointment.vue?vue&type=template&id=723e91b8& ***!
-  \********************************************************************************/
+/***/ "./resources/js/components/appointment.vue?vue&type=template&id=723e91b8&scoped=true&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/appointment.vue?vue&type=template&id=723e91b8&scoped=true& ***!
+  \********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   render: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_appointment_vue_vue_type_template_id_723e91b8___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_appointment_vue_vue_type_template_id_723e91b8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_appointment_vue_vue_type_template_id_723e91b8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_appointment_vue_vue_type_template_id_723e91b8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_appointment_vue_vue_type_template_id_723e91b8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./appointment.vue?vue&type=template&id=723e91b8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/appointment.vue?vue&type=template&id=723e91b8&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_appointment_vue_vue_type_template_id_723e91b8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./appointment.vue?vue&type=template&id=723e91b8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/appointment.vue?vue&type=template&id=723e91b8&scoped=true&");
 
 
 /***/ }),
@@ -39010,7 +39408,7 @@ var render = function () {
             [
               _c(
                 "router-link",
-                { staticClass: "active", attrs: { to: "/about-us" } },
+                { staticClass: "active", attrs: { to: "/aboutus" } },
                 [_vm._v("About Us")]
               ),
             ],
@@ -39018,41 +39416,83 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "profile" }, [
-          _c("img", {
-            staticClass: "profile-pic",
-            attrs: { src: _vm.profilePic, alt: "Profile" },
-          }),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "admin-link",
-              attrs: { href: "#", id: "profileLink" },
-            },
-            [
-              _c("p", { staticStyle: { color: "black" } }, [
-                _vm._v(_vm._s(_vm.fullName) + " "),
-                _c("i", { staticClass: "fas fa-caret-down" }),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "dropdown-menu", attrs: { id: "dropdownMenu" } },
-            [
-              _c("router-link", { attrs: { to: "/login" } }, [
-                _vm._v("Logout"),
-              ]),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: "/account" } }, [
-                _vm._v("Account"),
-              ]),
-            ],
-            1
-          ),
-        ]),
+        _c(
+          "div",
+          { staticClass: "auth-section" },
+          [
+            _vm.isLoggedIn
+              ? [
+                  _c("div", { staticClass: "profile" }, [
+                    _c("img", {
+                      staticClass: "profile-pic",
+                      attrs: { src: _vm.profilePic, alt: "Profile" },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "admin-link",
+                        attrs: { href: "#", id: "profileLink" },
+                      },
+                      [
+                        _c("p", { staticStyle: { color: "black" } }, [
+                          _vm._v(_vm._s(_vm.fullName) + " "),
+                          _c("i", { staticClass: "fas fa-caret-down" }),
+                        ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "dropdown-menu",
+                        attrs: { id: "dropdownMenu" },
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function ($event) {
+                                $event.preventDefault()
+                                return _vm.logout.apply(null, arguments)
+                              },
+                            },
+                          },
+                          [_vm._v("Logout")]
+                        ),
+                        _vm._v(" "),
+                        _c("router-link", { attrs: { to: "/account" } }, [
+                          _vm._v("Account"),
+                        ]),
+                      ],
+                      1
+                    ),
+                  ]),
+                ]
+              : [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "auth-btn login-btn",
+                      attrs: { to: "/login" },
+                    },
+                    [_vm._v("Login")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "auth-btn signup-btn",
+                      attrs: { to: "/signup" },
+                    },
+                    [_vm._v("Sign Up")]
+                  ),
+                ],
+          ],
+          2
+        ),
       ]),
     ]),
     _vm._v(" "),
@@ -39537,10 +39977,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/appointment.vue?vue&type=template&id=723e91b8&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/appointment.vue?vue&type=template&id=723e91b8& ***!
-  \***********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/appointment.vue?vue&type=template&id=723e91b8&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/appointment.vue?vue&type=template&id=723e91b8&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -39598,51 +40038,83 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "profile" }, [
-          _c("img", {
-            staticClass: "profile-pic",
-            attrs: { src: _vm.profilePic, alt: "Profile" },
-          }),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "admin-link",
-              attrs: { href: "#", id: "profileLink" },
-            },
-            [
-              _c("p", { staticStyle: { color: "black" } }, [
-                _vm._v(_vm._s(_vm.fullName) + " "),
-                _c("i", { staticClass: "fas fa-caret-down" }),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "dropdown-menu", attrs: { id: "dropdownMenu" } },
-            [
-              _c(
-                "a",
-                {
-                  attrs: { href: "#" },
-                  on: {
-                    click: function ($event) {
-                      $event.preventDefault()
-                      return _vm.logout.apply(null, arguments)
+        _c(
+          "div",
+          { staticClass: "auth-section" },
+          [
+            _vm.isLoggedIn
+              ? [
+                  _c("div", { staticClass: "profile" }, [
+                    _c("img", {
+                      staticClass: "profile-pic",
+                      attrs: { src: _vm.profilePic, alt: "Profile" },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "admin-link",
+                        attrs: { href: "#", id: "profileLink" },
+                      },
+                      [
+                        _c("p", { staticStyle: { color: "black" } }, [
+                          _vm._v(_vm._s(_vm.fullName) + " "),
+                          _c("i", { staticClass: "fas fa-caret-down" }),
+                        ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "dropdown-menu",
+                        attrs: { id: "dropdownMenu" },
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function ($event) {
+                                $event.preventDefault()
+                                return _vm.logout.apply(null, arguments)
+                              },
+                            },
+                          },
+                          [_vm._v("Logout")]
+                        ),
+                        _vm._v(" "),
+                        _c("router-link", { attrs: { to: "/account" } }, [
+                          _vm._v("Account"),
+                        ]),
+                      ],
+                      1
+                    ),
+                  ]),
+                ]
+              : [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "auth-btn login-btn",
+                      attrs: { to: "/login" },
                     },
-                  },
-                },
-                [_vm._v("Logout")]
-              ),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: "/account" } }, [
-                _vm._v("Account"),
-              ]),
-            ],
-            1
-          ),
-        ]),
+                    [_vm._v("Login")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "auth-btn signup-btn",
+                      attrs: { to: "/signup" },
+                    },
+                    [_vm._v("Sign Up")]
+                  ),
+                ],
+          ],
+          2
+        ),
       ]),
     ]),
     _vm._v(" "),
@@ -39711,11 +40183,11 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "description" }, [
             _vm._v(
-              "\n            We're a diverse and passionate team that takes ownership of your design and empowers\n            "
+              "\n          We're a diverse and passionate team that takes ownership of your design and empowers\n          "
             ),
             _c("br"),
             _vm._v(
-              "\n            you to execute the roadmap. We stay light on our feet and truly enjoy delivering great work.\n          "
+              "\n          you to execute the roadmap. We stay light on our feet and truly enjoy delivering great work.\n        "
             ),
           ]),
           _vm._v(" "),
@@ -40958,7 +41430,48 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "main-content" }, [
-      _vm._m(2),
+      _c("header", { staticClass: "header" }, [
+        _c("div", { staticClass: "search-container" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.searchQuery,
+                expression: "searchQuery",
+              },
+            ],
+            staticClass: "search-input",
+            attrs: {
+              type: "text",
+              placeholder: "Search by name, phone, treatment...",
+            },
+            domProps: { value: _vm.searchQuery },
+            on: {
+              input: [
+                function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.searchQuery = $event.target.value
+                },
+                _vm.filterAppointments,
+              ],
+            },
+          }),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "search-icon",
+            attrs: {
+              src: "https://cdn.builder.io/api/v1/image/assets/TEMP/cd078eb6f9ce86265999269e4046c2dcec9bec7d140ae886d7ae3f419a2c7a16?placeholderIfAbsent=true&apiKey=02853cff8a504be0a91f61afb8cdbbcd",
+              alt: "Search icon",
+              loading: "lazy",
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _vm._m(2),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
         _c("h1", [_vm._v("Surigao Pet Doctors")]),
@@ -40968,7 +41481,7 @@ var render = function () {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.appointments, function (appointment) {
+            _vm._l(_vm.displayedAppointments, function (appointment) {
               return _c("tr", { key: appointment.id }, [
                 _c("td", [_vm._v(_vm._s(appointment.name))]),
                 _vm._v(" "),
@@ -40983,68 +41496,85 @@ var render = function () {
                 _c("td", [_vm._v(_vm._s(appointment.treatment))]),
                 _vm._v(" "),
                 _c("td", [
-                  _c("span", { staticClass: "status" }, [
-                    _vm._v(_vm._s(appointment.status)),
-                  ]),
+                  _c(
+                    "span",
+                    {
+                      class: ["status-badge", appointment.status.toLowerCase()],
+                    },
+                    [
+                      _vm._v(
+                        "\n                  " +
+                          _vm._s(appointment.status) +
+                          "\n                "
+                      ),
+                    ]
+                  ),
                 ]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(appointment.clinic_id))]),
-                _vm._v(" "),
                 _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "assign-btn",
-                      on: {
-                        click: function ($event) {
-                          return _vm.toggleDoctorDropdown(appointment)
+                  _c("div", { staticClass: "action-buttons" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "assign-btn",
+                        on: {
+                          click: function ($event) {
+                            return _vm.toggleDoctorDropdown(appointment)
+                          },
                         },
                       },
-                    },
-                    [_vm._v("\n                  Assign\n                ")]
-                  ),
-                  _vm._v(" "),
-                  appointment.showDoctorDropdown
-                    ? _c("div", { staticClass: "doctor-dropdown" }, [
-                        _c(
-                          "ul",
-                          _vm._l(_vm.doctors, function (doctor) {
-                            return _c(
-                              "li",
-                              {
-                                key: doctor.id,
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.assignDoctor(appointment, doctor)
+                      [
+                        _vm._v(
+                          "\n                    Assign\n                  "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    appointment.showDropdown
+                      ? _c("div", { staticClass: "doctor-dropdown" }, [
+                          _c(
+                            "ul",
+                            _vm._l(_vm.doctors, function (doctor) {
+                              return _c(
+                                "li",
+                                {
+                                  key: doctor.id,
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.assignDoctor(
+                                        appointment,
+                                        doctor
+                                      )
+                                    },
                                   },
                                 },
-                              },
-                              [
-                                _vm._v(
-                                  "\n                      " +
-                                    _vm._s(doctor.name) +
-                                    "\n                    "
-                                ),
-                              ]
-                            )
-                          }),
-                          0
-                        ),
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "cancel-btn",
-                      on: {
-                        click: function ($event) {
-                          return _vm.cancelAppointment(appointment)
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(doctor.name) +
+                                      "\n                      "
+                                  ),
+                                ]
+                              )
+                            }),
+                            0
+                          ),
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "cancel-btn",
+                        on: {
+                          click: function ($event) {
+                            return _vm.cancelAppointment(appointment)
+                          },
                         },
                       },
-                    },
-                    [_vm._v("Cancel")]
-                  ),
+                      [_vm._v("Cancel")]
+                    ),
+                  ]),
                 ]),
               ])
             }),
@@ -41078,54 +41608,33 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "header" }, [
-      _c("div", { staticClass: "search-container" }, [
-        _c("input", {
-          staticClass: "search-input",
-          attrs: { type: "text", placeholder: "Search" },
+    return _c("section", { staticClass: "dash-user-profile" }, [
+      _c("div", { staticClass: "user-info" }, [
+        _c("img", {
+          staticClass: "user-avatar",
+          attrs: {
+            src: "img/clarenceadmin.jpg",
+            alt: "Moni Roy's profile picture",
+          },
         }),
         _vm._v(" "),
+        _c("div", { staticClass: "user-details" }, [
+          _c("h2", { staticClass: "user-name" }, [_vm._v("Gumball")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "user-role" }, [_vm._v("Admin")]),
+        ]),
+        _vm._v(" "),
         _c("img", {
-          staticClass: "search-icon",
-          attrs: {
-            src: "https://cdn.builder.io/api/v1/image/assets/TEMP/cd078eb6f9ce86265999269e4046c2dcec9bec7d140ae886d7ae3f419a2c7a16?placeholderIfAbsent=true&apiKey=02853cff8a504be0a91f61afb8cdbbcd",
-            alt: "Search icon",
-            loading: "lazy",
-          },
+          staticClass: "dropdown-icon",
+          attrs: { src: "img/dropdown.png", alt: "Dropdown icon" },
         }),
       ]),
       _vm._v(" "),
-      _c("section", { staticClass: "dash-user-profile" }, [
-        _c("div", { staticClass: "user-info" }, [
-          _c("img", {
-            staticClass: "user-avatar",
-            attrs: {
-              src: "img/clarenceadmin.jpg",
-              alt: "Moni Roy's profile picture",
-            },
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "user-details" }, [
-            _c("h2", { staticClass: "user-name" }, [_vm._v("Gumball")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "user-role" }, [_vm._v("Admin")]),
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "dropdown-icon",
-            attrs: { src: "img/dropdown.png", alt: "Dropdown icon" },
-          }),
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "logout-button hidden",
-            attrs: { id: "logout-button" },
-          },
-          [_c("span", { staticClass: "logout-text" }, [_vm._v("Logout")])]
-        ),
-      ]),
+      _c(
+        "button",
+        { staticClass: "logout-button hidden", attrs: { id: "logout-button" } },
+        [_c("span", { staticClass: "logout-text" }, [_vm._v("Logout")])]
+      ),
     ])
   },
   function () {
@@ -41143,8 +41652,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Treatment")]),
         _vm._v(" "),
         _c("th", [_vm._v("Status")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Clinic ID")]),
         _vm._v(" "),
         _c("th", [_vm._v("Action")]),
       ]),
@@ -41733,7 +42240,45 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "main-content" }, [
-      _vm._m(2),
+      _c("header", { staticClass: "header" }, [
+        _c("div", { staticClass: "search-container" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.searchQuery,
+                expression: "searchQuery",
+              },
+            ],
+            staticClass: "search-input",
+            attrs: { type: "text", placeholder: "Search" },
+            domProps: { value: _vm.searchQuery },
+            on: {
+              input: [
+                function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.searchQuery = $event.target.value
+                },
+                _vm.filterDoctors,
+              ],
+            },
+          }),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "search-icon",
+            attrs: {
+              src: "https://cdn.builder.io/api/v1/image/assets/TEMP/cd078eb6f9ce86265999269e4046c2dcec9bec7d140ae886d7ae3f419a2c7a16?placeholderIfAbsent=true&apiKey=02853cff8a504be0a91f61afb8cdbbcd",
+              alt: "Search icon",
+              loading: "lazy",
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _vm._m(2),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "action-bar" }, [
         _c(
@@ -41758,46 +42303,184 @@ var render = function () {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.filteredDoctors, function (doctor) {
-              return _c("tr", { key: doctor.id }, [
-                _c("td", [_vm._v(_vm._s(doctor.name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(doctor.number))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(doctor.email))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(doctor.address))]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "edit-button",
-                      on: {
-                        click: function ($event) {
-                          return _vm.editDoctor(doctor.id)
-                        },
-                      },
-                    },
-                    [_vm._v("Edit")]
-                  ),
+            [
+              _vm._l(_vm.displayedDoctors, function (doctor) {
+                return [
+                  _c("tr", { key: doctor.id }, [
+                    _c("td", [_vm._v(_vm._s(doctor.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(doctor.number))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(doctor.email))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(doctor.address))]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "action-buttons" }, [
+                      _c("div", { staticClass: "button-group" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "action-btn edit",
+                            on: {
+                              click: function ($event) {
+                                return _vm.editDoctor(doctor.id)
+                              },
+                            },
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-edit" }),
+                            _vm._v(" Edit\n                    "),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "action-btn delete",
+                            on: {
+                              click: function ($event) {
+                                return _vm.deleteDoctor(doctor.id)
+                              },
+                            },
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-trash" }),
+                            _vm._v(" Delete\n                    "),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "action-btn view",
+                            on: {
+                              click: function ($event) {
+                                return _vm.togglePatients(doctor)
+                              },
+                            },
+                          },
+                          [
+                            _c("i", {
+                              class: doctor.showPatients
+                                ? "fas fa-chevron-up"
+                                : "fas fa-chevron-down",
+                            }),
+                            _vm._v(
+                              "\n                      " +
+                                _vm._s(
+                                  doctor.showPatients
+                                    ? "Hide Patients"
+                                    : "View Patients"
+                                ) +
+                                "\n                    "
+                            ),
+                          ]
+                        ),
+                      ]),
+                    ]),
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "delete-button",
-                      on: {
-                        click: function ($event) {
-                          return _vm.deleteDoctor(doctor.id)
+                  doctor.showPatients
+                    ? _c(
+                        "tr",
+                        {
+                          key: "patients-" + doctor.id,
+                          staticClass: "patients-row",
                         },
-                      },
-                    },
-                    [_vm._v("Delete")]
-                  ),
-                ]),
-              ])
-            }),
-            0
+                        [
+                          _c("td", { attrs: { colspan: "5" } }, [
+                            _c("div", { staticClass: "assigned-patients" }, [
+                              _c("div", { staticClass: "patients-header" }, [
+                                _c("h3", [_vm._v("Assigned Patients")]),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "patient-count" }, [
+                                  _vm._v(
+                                    _vm._s(doctor.appointments.length) +
+                                      " patients"
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "patients-table-wrapper" },
+                                [
+                                  _c(
+                                    "table",
+                                    { staticClass: "patients-table" },
+                                    [
+                                      _vm._m(4, true),
+                                      _vm._v(" "),
+                                      _c(
+                                        "tbody",
+                                        _vm._l(
+                                          doctor.appointments,
+                                          function (appointment) {
+                                            return _c(
+                                              "tr",
+                                              { key: appointment.id },
+                                              [
+                                                _c("td", [
+                                                  _vm._v(
+                                                    _vm._s(appointment.name)
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("td", [
+                                                  _vm._v(
+                                                    _vm._s(appointment.date) +
+                                                      " " +
+                                                      _vm._s(appointment.time)
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("td", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      appointment.treatment
+                                                    )
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("td", [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      class: [
+                                                        "status-badge",
+                                                        appointment.status.toLowerCase(),
+                                                      ],
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                " +
+                                                          _vm._s(
+                                                            appointment.status
+                                                          ) +
+                                                          "\n                              "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]),
+                                              ]
+                                            )
+                                          }
+                                        ),
+                                        0
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]
+                      )
+                    : _vm._e(),
+                ]
+              }),
+            ],
+            2
           ),
         ]),
       ]),
@@ -41827,54 +42510,33 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "header" }, [
-      _c("div", { staticClass: "search-container" }, [
-        _c("input", {
-          staticClass: "search-input",
-          attrs: { type: "text", placeholder: "Search" },
+    return _c("section", { staticClass: "dash-user-profile" }, [
+      _c("div", { staticClass: "user-info" }, [
+        _c("img", {
+          staticClass: "user-avatar",
+          attrs: {
+            src: "img/clarenceadmin.jpg",
+            alt: "Moni Roy's profile picture",
+          },
         }),
         _vm._v(" "),
+        _c("div", { staticClass: "user-details" }, [
+          _c("h2", { staticClass: "user-name" }, [_vm._v("Gumball")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "user-role" }, [_vm._v("Admin")]),
+        ]),
+        _vm._v(" "),
         _c("img", {
-          staticClass: "search-icon",
-          attrs: {
-            src: "https://cdn.builder.io/api/v1/image/assets/TEMP/cd078eb6f9ce86265999269e4046c2dcec9bec7d140ae886d7ae3f419a2c7a16?placeholderIfAbsent=true&apiKey=02853cff8a504be0a91f61afb8cdbbcd",
-            alt: "Search icon",
-            loading: "lazy",
-          },
+          staticClass: "dropdown-icon",
+          attrs: { src: "img/dropdown.png", alt: "Dropdown icon" },
         }),
       ]),
       _vm._v(" "),
-      _c("section", { staticClass: "dash-user-profile" }, [
-        _c("div", { staticClass: "user-info" }, [
-          _c("img", {
-            staticClass: "user-avatar",
-            attrs: {
-              src: "img/clarenceadmin.jpg",
-              alt: "Moni Roy's profile picture",
-            },
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "user-details" }, [
-            _c("h2", { staticClass: "user-name" }, [_vm._v("Gumball")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "user-role" }, [_vm._v("Admin")]),
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "dropdown-icon",
-            attrs: { src: "img/dropdown.png", alt: "Dropdown icon" },
-          }),
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "logout-button hidden",
-            attrs: { id: "logout-button" },
-          },
-          [_c("span", { staticClass: "logout-text" }, [_vm._v("Logout")])]
-        ),
-      ]),
+      _c(
+        "button",
+        { staticClass: "logout-button hidden", attrs: { id: "logout-button" } },
+        [_c("span", { staticClass: "logout-text" }, [_vm._v("Logout")])]
+      ),
     ])
   },
   function () {
@@ -41890,6 +42552,24 @@ var staticRenderFns = [
         _c("th", [_vm._v("Email")]),
         _vm._v(" "),
         _c("th", [_vm._v("Address")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Actions")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Patient Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Appointment Date")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Treatment")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Status")]),
       ]),
     ])
   },
@@ -42385,7 +43065,7 @@ var render = function () {
                   },
                 },
               },
-              [_vm._v("\n      " + _vm._s(doctor.name) + "\n    ")]
+              [_vm._v("\n    " + _vm._s(doctor.name) + "\n  ")]
             )
           }),
           0
@@ -42881,51 +43561,83 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "profile" }, [
-          _c("img", {
-            staticClass: "profile-pic",
-            attrs: { src: _vm.profilePic, alt: "Profile" },
-          }),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "admin-link",
-              attrs: { href: "#", id: "profileLink" },
-            },
-            [
-              _c("p", { staticStyle: { color: "black" } }, [
-                _vm._v(_vm._s(_vm.fullName) + " "),
-                _c("i", { staticClass: "fas fa-caret-down" }),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "dropdown-menu", attrs: { id: "dropdownMenu" } },
-            [
-              _c(
-                "a",
-                {
-                  attrs: { href: "#" },
-                  on: {
-                    click: function ($event) {
-                      $event.preventDefault()
-                      return _vm.logout.apply(null, arguments)
+        _c(
+          "div",
+          { staticClass: "auth-section" },
+          [
+            _vm.isLoggedIn
+              ? [
+                  _c("div", { staticClass: "profile" }, [
+                    _c("img", {
+                      staticClass: "profile-pic",
+                      attrs: { src: _vm.profilePic, alt: "Profile" },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "admin-link",
+                        attrs: { href: "#", id: "profileLink" },
+                      },
+                      [
+                        _c("p", { staticStyle: { color: "black" } }, [
+                          _vm._v(_vm._s(_vm.fullName) + " "),
+                          _c("i", { staticClass: "fas fa-caret-down" }),
+                        ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "dropdown-menu",
+                        attrs: { id: "dropdownMenu" },
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function ($event) {
+                                $event.preventDefault()
+                                return _vm.logout.apply(null, arguments)
+                              },
+                            },
+                          },
+                          [_vm._v("Logout")]
+                        ),
+                        _vm._v(" "),
+                        _c("router-link", { attrs: { to: "/account" } }, [
+                          _vm._v("Account"),
+                        ]),
+                      ],
+                      1
+                    ),
+                  ]),
+                ]
+              : [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "auth-btn login-btn",
+                      attrs: { to: "/login" },
                     },
-                  },
-                },
-                [_vm._v("Logout")]
-              ),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: "/account" } }, [
-                _vm._v("Account"),
-              ]),
-            ],
-            1
-          ),
-        ]),
+                    [_vm._v("Login")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "auth-btn signup-btn",
+                      attrs: { to: "/signup" },
+                    },
+                    [_vm._v("Sign Up")]
+                  ),
+                ],
+          ],
+          2
+        ),
       ]),
     ]),
     _vm._v(" "),
@@ -43027,7 +43739,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "logo-container" }, [
       _c("img", {
         staticClass: "logo",
-        attrs: { src: "/img/logo.png", alt: "PurfectPaw Logo" },
+        attrs: { src: "img/logo.png", alt: "PurfectPaw Logo" },
       }),
     ])
   },
@@ -43147,51 +43859,83 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "profile" }, [
-          _c("img", {
-            staticClass: "profile-pic",
-            attrs: { src: _vm.profilePic, alt: "Profile" },
-          }),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "admin-link",
-              attrs: { href: "#", id: "profileLink" },
-            },
-            [
-              _c("p", { staticStyle: { color: "black" } }, [
-                _vm._v(_vm._s(_vm.fullName) + " "),
-                _c("i", { staticClass: "fas fa-caret-down" }),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "dropdown-menu", attrs: { id: "dropdownMenu" } },
-            [
-              _c(
-                "a",
-                {
-                  attrs: { href: "#" },
-                  on: {
-                    click: function ($event) {
-                      $event.preventDefault()
-                      return _vm.logout.apply(null, arguments)
+        _c(
+          "div",
+          { staticClass: "auth-section" },
+          [
+            _vm.isLoggedIn
+              ? [
+                  _c("div", { staticClass: "profile" }, [
+                    _c("img", {
+                      staticClass: "profile-pic",
+                      attrs: { src: _vm.profilePic, alt: "Profile" },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "admin-link",
+                        attrs: { href: "#", id: "profileLink" },
+                      },
+                      [
+                        _c("p", { staticStyle: { color: "black" } }, [
+                          _vm._v(_vm._s(_vm.fullName) + " "),
+                          _c("i", { staticClass: "fas fa-caret-down" }),
+                        ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "dropdown-menu",
+                        attrs: { id: "dropdownMenu" },
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function ($event) {
+                                $event.preventDefault()
+                                return _vm.logout.apply(null, arguments)
+                              },
+                            },
+                          },
+                          [_vm._v("Logout")]
+                        ),
+                        _vm._v(" "),
+                        _c("router-link", { attrs: { to: "/account" } }, [
+                          _vm._v("Account"),
+                        ]),
+                      ],
+                      1
+                    ),
+                  ]),
+                ]
+              : [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "auth-btn login-btn",
+                      attrs: { to: "/login" },
                     },
-                  },
-                },
-                [_vm._v("Logout")]
-              ),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: "/account" } }, [
-                _vm._v("Account"),
-              ]),
-            ],
-            1
-          ),
-        ]),
+                    [_vm._v("Login")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "auth-btn signup-btn",
+                      attrs: { to: "/signup" },
+                    },
+                    [_vm._v("Sign Up")]
+                  ),
+                ],
+          ],
+          2
+        ),
       ]),
     ]),
     _vm._v(" "),
@@ -43895,124 +44639,105 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c("button", { staticClass: "back-button", on: { click: _vm.goBack } }, [
-        _vm._v(" < "),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "login-box" }, [
-        _c("h2", [_vm._v("Login")]),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            on: {
-              submit: function ($event) {
-                $event.preventDefault()
-                return _vm.handleLogin.apply(null, arguments)
-              },
-            },
-          },
-          [
-            _c("div", { staticClass: "input-group" }, [
-              _c("label", { attrs: { for: "email" } }, [
-                _vm._v("Email Address"),
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.email,
-                    expression: "email",
-                  },
-                ],
-                attrs: {
-                  type: "email",
-                  placeholder: "Email Address",
-                  required: "",
-                },
-                domProps: { value: _vm.email },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.email = $event.target.value
-                  },
-                },
-              }),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.password,
-                    expression: "password",
-                  },
-                ],
-                attrs: {
-                  type: "password",
-                  placeholder: "Password",
-                  required: "",
-                },
-                domProps: { value: _vm.password },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.password = $event.target.value
-                  },
-                },
-              }),
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "sign-in-btn", attrs: { type: "submit" } },
-              [_vm._v("Sign In")]
-            ),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "p",
-          [
-            _vm._v("Don't have an account? "),
-            _c(
-              "router-link",
-              { staticClass: "signup-link", attrs: { to: "/signup" } },
-              [_vm._v("Signup")]
-            ),
-          ],
-          1
-        ),
-      ]),
+  return _c("div", { staticClass: "container" }, [
+    _c("button", { staticClass: "back-button", on: { click: _vm.goBack } }, [
+      _vm._v(" < "),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "login-box" }, [
+      _c("h2", [_vm._v("Login")]),
       _vm._v(" "),
       _c(
-        "router-link",
-        { staticClass: "admin-link", attrs: { to: "/adminlog" } },
+        "form",
+        {
+          on: {
+            submit: function ($event) {
+              $event.preventDefault()
+              return _vm.handleLogin.apply(null, arguments)
+            },
+          },
+        },
         [
+          _c("div", { staticClass: "input-group" }, [
+            _c("label", { attrs: { for: "email" } }, [_vm._v("Email Address")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.email,
+                  expression: "email",
+                },
+              ],
+              attrs: {
+                type: "email",
+                placeholder: "Email Address",
+                required: "",
+              },
+              domProps: { value: _vm.email },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.email = $event.target.value
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group" }, [
+            _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.password,
+                  expression: "password",
+                },
+              ],
+              attrs: {
+                type: "password",
+                placeholder: "Password",
+                required: "",
+              },
+              domProps: { value: _vm.password },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.password = $event.target.value
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
           _c(
             "button",
-            { staticClass: "admin-button", attrs: { id: "adminBtn" } },
-            [_vm._v("Admin")]
+            { staticClass: "sign-in-btn", attrs: { type: "submit" } },
+            [_vm._v("Sign In")]
           ),
         ]
       ),
-    ],
-    1
-  )
+      _vm._v(" "),
+      _c(
+        "p",
+        [
+          _vm._v("Don't have an account? "),
+          _c(
+            "router-link",
+            { staticClass: "signup-link", attrs: { to: "/signup" } },
+            [_vm._v("Signup")]
+          ),
+        ],
+        1
+      ),
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -44278,51 +45003,83 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "profile" }, [
-          _c("img", {
-            staticClass: "profile-pic",
-            attrs: { src: _vm.profilePic, alt: "Profile" },
-          }),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "admin-link",
-              attrs: { href: "#", id: "profileLink" },
-            },
-            [
-              _c("p", { staticStyle: { color: "black" } }, [
-                _vm._v(_vm._s(_vm.fullName) + " "),
-                _c("i", { staticClass: "fas fa-caret-down" }),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "dropdown-menu", attrs: { id: "dropdownMenu" } },
-            [
-              _c(
-                "a",
-                {
-                  attrs: { href: "#" },
-                  on: {
-                    click: function ($event) {
-                      $event.preventDefault()
-                      return _vm.logout.apply(null, arguments)
+        _c(
+          "div",
+          { staticClass: "auth-section" },
+          [
+            _vm.isLoggedIn
+              ? [
+                  _c("div", { staticClass: "profile" }, [
+                    _c("img", {
+                      staticClass: "profile-pic",
+                      attrs: { src: _vm.profilePic, alt: "Profile" },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "admin-link",
+                        attrs: { href: "#", id: "profileLink" },
+                      },
+                      [
+                        _c("p", { staticStyle: { color: "black" } }, [
+                          _vm._v(_vm._s(_vm.fullName) + " "),
+                          _c("i", { staticClass: "fas fa-caret-down" }),
+                        ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "dropdown-menu",
+                        attrs: { id: "dropdownMenu" },
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function ($event) {
+                                $event.preventDefault()
+                                return _vm.logout.apply(null, arguments)
+                              },
+                            },
+                          },
+                          [_vm._v("Logout")]
+                        ),
+                        _vm._v(" "),
+                        _c("router-link", { attrs: { to: "/account" } }, [
+                          _vm._v("Account"),
+                        ]),
+                      ],
+                      1
+                    ),
+                  ]),
+                ]
+              : [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "auth-btn login-btn",
+                      attrs: { to: "/login" },
                     },
-                  },
-                },
-                [_vm._v("Logout")]
-              ),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: "/account" } }, [
-                _vm._v("Account"),
-              ]),
-            ],
-            1
-          ),
-        ]),
+                    [_vm._v("Login")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "auth-btn signup-btn",
+                      attrs: { to: "/signup" },
+                    },
+                    [_vm._v("Sign Up")]
+                  ),
+                ],
+          ],
+          2
+        ),
       ]),
     ]),
     _vm._v(" "),

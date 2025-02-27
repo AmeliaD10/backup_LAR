@@ -17,9 +17,7 @@
       <p>Don't have an account? <router-link to="/signup" class="signup-link">Signup</router-link></p>
     </div>
 
-    <router-link to="/adminlog" class="admin-link">
-      <button class="admin-button" id="adminBtn">Admin</button>
-    </router-link>
+    
   </div>
 </template>
 

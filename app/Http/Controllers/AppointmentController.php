@@ -24,12 +24,39 @@ class AppointmentController extends Controller
 
         return response()->json($appointment, 201);
     }
+
     public function index()
     {
-        // Fetch all appointments from the database
-        $appointments = Appointment::all();
-        
-        // Return the appointments as JSON response
-        return response()->json($appointments);
+        return Appointment::all();
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $appointment = Appointment::findOrFail($id);
+            
+            if ($request->has('doctor_id')) {
+                $appointment->doctor_id = $request->doctor_id;
+                $appointment->status = 'Assigned';
+            }
+            
+            if ($request->has('status')) {
+                $appointment->status = $request->status;
+            }
+            
+            $appointment->save();
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Appointment updated successfully',
+                'appointment' => $appointment
+            ]);
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update appointment: ' . $e->getMessage()
+            ], 500);
+        }
     }
 }

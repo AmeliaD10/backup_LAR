@@ -87,8 +87,9 @@ html {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     padding: 3px;
     border-radius: 10px;
-    margin-top: 100px;
-    margin-left: 60px;
+    margin-top: 150px;
+    margin-left: 10px;
+    margin-right: 50px;
     z-index: 1;
 }
 
@@ -659,62 +660,97 @@ button[type="button"]:hover {
     border-radius: 15px;
 }
 
-/* Login box styling */
+/* Modern Minimalist Login Box */
 .login-box {
-    background-color: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 320px;
     margin: auto;
     text-align: center;
     margin-top: 100px;
-    margin-bottom: auto;
-    height: 400px;
+    height: auto;
+    transition: all 0.3s ease-in-out;
+    padding-left: 30px;
 }
 
-.login-box h2{
-    margin-bottom: 40px;
+.login-box:hover {
+    transform: scale(1.02);
+}
+
+.login-box h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #333;
 }
 
 .input-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-align: left;
-    margin-left: 5px;
-    margin-right: 20px;
 }
 
 label {
     display: block;
     font-size: 14px;
+    font-weight: 500;
+    color: #555;
     margin-bottom: 5px;
 }
 
 input {
     width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
     font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+    margin-right: 5px;
+}
+
+input:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 8px rgba(108, 99, 255, 0.2);
+    background-color: #ffffff;
 }
 
 .sign-in-btn {
-    width: 40%;
-    background-color: black;
+    width: 100%;
+    background: #6c63ff;
     color: white;
-    padding: 15px;
-    border-radius: 25px;
+    padding: 14px;
+    border-radius: 8px;
     border: none;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
     margin-top: 20px;
+    margin-left: 10px;
+}
+
+.sign-in-btn:hover {
+    background: #5548ff;
+    transform: scale(1.03);
 }
 
 .signup-link {
-    color: red;
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #6c63ff;
     text-decoration: none;
-
+    transition: all 0.3s ease;
 }
 
+.signup-link:hover {
+    text-decoration: underline;
+    color: #5548ff;
+
+}
 
 /*admin*/
 
@@ -858,13 +894,13 @@ input {
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 290px;
     margin: auto;
     text-align: center;
     margin-top: 100px;
-    margin-bottom: auto;
+    margin-bottom: 50px;
     height: 400px;
-    padding-bottom: 350px;
+    padding-bottom: 250px;
     gap: 50px;
 }
 
@@ -898,11 +934,12 @@ input {
     width: 40%;
     background-color: black;
     color: white;
-    padding: 15px;
+    padding: 10px;
     border-radius: 25px;
     border: none;
     cursor: pointer;
     margin-top: 20px;
+    margin-left: -5px;
 }
 
 .signup-link {
@@ -925,3 +962,37 @@ input {
     display: flex;
     flex-direction: column; /* Stack the buttons and form vertically */
 }
+/* Auth Buttons */
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .login-btn, .signup-btn {
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .login-btn {
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #FF7F7E;
+  }
+  
+  .login-btn:hover {
+    background-color: #FF7F7E;
+    color: white;
+  }
+  
+  .signup-btn {
+    background-color: #FF7F7E;
+    color: white;
+    border: 2px solid #FF7F7E;
+  }
+  
+  .signup-btn:hover {
+    background-color: #ff6b6a;
+  }

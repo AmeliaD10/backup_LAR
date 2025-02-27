@@ -16,7 +16,7 @@
           @change="previewProfilePicture" 
           accept="image/*" 
         />
-      </div> -->
+      </div> awddaw-->
       <form @submit.prevent="handleSignup">
         <div class="signup-group">
           <label for="firstName">First Name</label>
@@ -94,7 +94,7 @@ export default {
 
         // const fileInput = this.$refs.profilePictureInput?.files[0];
         // if (fileInput) {
-        //   formData.append("profile_picture", fileInput);
+        //   formData.append("profile_picture", fi  leInput);
         // }
 
         const response = await axios.post("/register", formData, {
