@@ -11,15 +11,25 @@
           <li><router-link to="/gallery">Gallery</router-link></li>
           <li><router-link to="/aboutus">About Us</router-link></li>
         </ul>
-        <div class="profile">
-          <img :src="profilePic" alt="Profile" class="profile-pic" />
-          <a href="#" class="admin-link" id="profileLink">
-            <p style="color: black;">{{ fullName }} <i class="fas fa-caret-down"></i></p>
-          </a>
-          <div class="dropdown-menu" id="dropdownMenu">
-            <a href="#" @click.prevent="logout">Logout</a>
-            <router-link to="/account">Account</router-link>
-          </div>
+
+        <!-- Conditional Rendering for Login/Signup or Profile -->
+        <div class="auth-section">
+          <template v-if="isLoggedIn">
+            <div class="profile">
+              <img :src="profilePic" alt="Profile" class="profile-pic" />
+              <a href="#" class="admin-link" id="profileLink">
+                <p style="color: black;">{{ fullName }} <i class="fas fa-caret-down"></i></p>
+              </a>
+              <div class="dropdown-menu" id="dropdownMenu">
+                <a href="#" @click.prevent="logout">Logout</a>
+                <router-link to="/account">Account</router-link>
+              </div>
+            </div>
+          </template>
+          <template v-else>
+            <router-link to="/login" class="auth-btn login-btn">Login</router-link>
+            <router-link to="/signup" class="auth-btn signup-btn">Sign Up</router-link>
+          </template>
         </div>
       </nav>
     </header>
@@ -123,8 +133,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -142,6 +152,7 @@ export default {
       firstName: "",
       lastName: "",
       profilePic: "/img/default-profile.jpg",
+      isLoggedIn: false, // Track if user is logged in
       dropdownVisible: false,
     };
   },
@@ -152,13 +163,16 @@ export default {
   },
   created() {
     const userData = localStorage.getItem("0");
+
     if (userData) {
       const user = JSON.parse(userData);
       this.firstName = user.first_name;
       this.lastName = user.last_name;
       this.profilePic = user.profile_picture || "/img/default-profile.jpg";
+      this.isLoggedIn = true; // Set user as logged in
     }
     
+    // Fetch latest user data
     this.getUserProfile();
   },
   methods: {
@@ -169,6 +183,7 @@ export default {
           this.firstName = response.data.first_name;
           this.lastName = response.data.last_name;
           this.profilePic = response.data.profile_picture || "/img/default-profile.jpg";
+          this.isLoggedIn = true; // User is logged in
         }
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -177,7 +192,8 @@ export default {
     async logout() {
       try {
         await axios.post("/logout");
-        localStorage.removeItem("0");
+        localStorage.removeItem("0"); // Clear stored user data
+        this.isLoggedIn = false; // User is now logged out
         this.$router.push("/login");
       } catch (error) {
         console.error("Error logging out:", error);
@@ -214,7 +230,7 @@ export default {
         if (result.isConfirmed) {
           axios
             .post('/api/appointments', this.formData)
-            .then((response) => {
+            .then(() => {
               Swal.fire({
                 title: "Success!",
                 text: "Your appointment has been confirmed.",
@@ -223,7 +239,7 @@ export default {
               });
               this.$router.push('/appointment');
             })
-            .catch((error) => {
+            .catch(() => {
               Swal.fire({
                 title: "Error",
                 text: "There was an issue submitting your appointment.",
@@ -241,9 +257,10 @@ export default {
         }
       });
     },
-  },
+  }
 };
 </script>
+
 
 <style scoped>
 @import "/css/style.css";
@@ -253,5 +270,47 @@ export default {
   color: black !important;
   margin: 0;
   padding: 0;
+}
+
+.auth-section {
+  display: flex;
+  align-items: center;
+}
+
+.auth-btn {
+  padding: 8px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  margin-left: 10px;
+}
+
+.login-btn,
+.signup-btn {
+  background-color: #e07a9d; /* Soft pink for login */
+  color: white;
+  padding: 6px 14px; /* Smaller padding */
+  border-radius: 6px; /* Smooth edges */
+  font-size: 14px; /* Slightly smaller text */
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+}
+
+.signup-btn {
+  background-color: #62c178; /* Soft green for signup */
+  margin-top: 0px;
+}
+
+.login-btn:hover {
+  background-color: #d15595; /* Slightly darker pink */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.signup-btn:hover {
+  background-color: #28a745; /* Slightly darker green */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 </style>

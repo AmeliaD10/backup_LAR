@@ -19,6 +19,15 @@ class Appointment extends Model
         'petName',
         'time',
         'date',
+        'status',
+        'doctor_id',
+        'clinic_id',
+        'user_id',
+        'appointment_date'
     ];
-}
 
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
+    }
+}
