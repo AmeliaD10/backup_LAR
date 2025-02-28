@@ -159,7 +159,8 @@
                   </td>
                 </tr>
                 <!-- Patients row -->
-                <tr v-if="doctor.showPatients" :key="`patients-${doctor.id}`" class="patients-row">
+                <tr v-if="doctor.showPatients" :key="'patients-' + doctor.id" class="patients-row">
+
                   <td colspan="5">
                     <div class="assigned-patients">
                       <div class="patients-header">
@@ -251,6 +252,7 @@
         try {
           if (confirm('Are you sure you want to delete this doctor?')) {
             await axios.delete(`/api/doctors/${id}`);
+
             this.fetchDoctors(); // Refresh the list after deletion
             alert('Doctor deleted successfully');
           }
@@ -270,6 +272,7 @@
           if (doctor.showPatients) {
             console.log('Fetching appointments for doctor:', doctor.id);
             const response = await axios.get(`/api/doctors/${doctor.id}/appointments`);
+
             console.log('Appointments response:', response.data);
             
             if (Array.isArray(response.data)) {
@@ -872,5 +875,3 @@
   
   /* ... rest of existing styles ... */
   </style>
-    
-    

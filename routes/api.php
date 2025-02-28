@@ -8,8 +8,7 @@ use App\Http\Controllers\Api\PatientRecordController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Auth;
-
+use App\Models\Appointment;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,6 +38,8 @@ Route::get('/doctors', [DoctorController::class, 'index']);
 
 Route::delete('/doctors/{id}', [DoctorController::class, 'destroy']);
 
+Route::get('/doctors/{doctor}/appointments', [DoctorController::class, 'getAppointments']);
+
 
 
 //Patients 
@@ -65,9 +66,7 @@ Route::post('/appointments', [AppointmentController::class, 'store']);
 Route::get('/appointments', [AppointmentController::class, 'index']);
 
 Route::put('/appointments/{id}', [AppointmentController::class, 'update']);
-Route::put('/appointments/{id}/assign-doctor', [AppointmentController::class, 'assignDoctor']);
-
-
-Route::middleware('auth:sanctum')->get('/admin', function (Request $request) {
-    return Auth::user(); // Returns logged-in admin data
+Route::get('/appointments/count', function () {
+    $count = Appointment::count();
+    return response()->json(['count' => $count]);
 });

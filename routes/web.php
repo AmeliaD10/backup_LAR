@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\AppointmentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,3 +50,4 @@ Route::post('/logout', function (Request $request) {
     $request->session()->regenerateToken();
     return response()->json(['message' => 'Logged out']);
 });
+Route::get('/appointments/counts', [AppointmentController::class, 'getAppointmentCounts']);
