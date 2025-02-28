@@ -17,13 +17,7 @@ class UserController extends Controller
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
-            // 'profile_picture' => 'image|max:2048',
         ]);
-
-        // $profilePicturePath = null;
-        // if ($request->hasFile('profile_picture')) {
-        //     $profilePicturePath = $request->file('profile_picture')->store('profile_pictures', 'public');
-        // }
 
         // Create the user
         User::create([
@@ -32,16 +26,15 @@ class UserController extends Controller
             'last_name' => $validated['last_name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            // 'profile_picture' => $profilePicturePath,
-            'role' => 0,
+            'role' => '0', // Use '0' as a string
         ]);
 
-        return response()->json(['message' => 'User registered successfully!'], 201);
+        return response()->json(['message' => 'User  registered successfully!'], 201);
     }
 
     public function getUsers()
     {
-        $users = User::where('role', 1) // Filter only users with role = 1
+        $users = User::where('role', '1') // Use '1' as a string
                     ->select('first_name', 'middle_name', 'last_name', 'email')
                     ->get();
 
@@ -53,9 +46,9 @@ class UserController extends Controller
         $user = User::find($id);
         if ($user) {
             $user->delete();
-            return response()->json(['message' => 'User deleted successfully.']);
+            return response()->json(['message' => 'User  deleted successfully.']);
         } else {
-            return response()->json(['message' => 'User not found.'], 404);
+            return response()->json(['message' => 'User  not found.'], 404);
         }
     }
 
@@ -63,7 +56,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json(['message' => 'User  not found'], 404);
         }
 
         $validated = $request->validate([
@@ -72,15 +65,20 @@ class UserController extends Controller
             'last_name' => 'sometimes|required|string|max:255',
             'email' => 'sometimes|required|email|unique:users,email,' . $id,
             'password' => 'sometimes|required|string|min:8',
-            'role' => 'sometimes|required|in:0,1', // Validate role to be either 0 or 1
+            'role' => 'sometimes|required|in:0,1', // Validate role to be either '0' or '1'
         ]);
 
         if ($request->has('password')) {
             $validated['password'] = Hash::make($validated['password']);
         }
 
+        // Ensure role is a string
+        if (isset($validated['role'])) {
+            $validated['role'] = (string) $validated['role'];
+        }
+
         $user->update($validated);
 
-        return response()->json(['message' => 'User updated successfully']);
+        return response()->json(['message' => 'User  updated successfully']);
     }
 }

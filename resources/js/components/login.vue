@@ -1,24 +1,25 @@
 <template>
-  <div class="container">
-    <button class="back-button" @click="goBack"> &lt; </button> <!-- Back button -->
-    <div class="login-box">
-      <h2>Login</h2>
-      <form @submit.prevent="handleLogin">
-        <div class="input-group">
-          <label for="email">Email Address</label>
-          <input type="email" v-model="email" placeholder="Email Address" required />
-        </div>
-        <div class="input-group">
-          <label for="password">Password</label>
-          <input type="password" v-model="password" placeholder="Password" required />
-        </div>
-        <button type="submit" class="sign-in-btn">Sign In</button>
-      </form>
-      <p>Don't have an account? <router-link to="/signup" class="signup-link">Signup</router-link></p>
+  <!-- <div class="wrapper"> 
+    <img src="/img/pink.gif" alt="Cute Pink GIF" class="pink-gif" />  -->
+    <div class="container">
+      <button class="back-button" @click="goBack"> &lt; </button> <!-- Back button -->
+      <div class="login-box">
+        <h2>Login</h2>
+        <form @submit.prevent="handleLogin">
+          <div class="input-group">
+            <label for="email">Email Address</label>
+            <input type="email" v-model="email" placeholder="Email Address" required />
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" v-model="password" placeholder="Password" required />
+          </div>
+          <button type="submit" class="sign-in-btn">Sign In</button>
+        </form>
+        <p>Don't have an account? <router-link to="/signup" class="signup-link">Signup</router-link></p>
+      </div>
     </div>
-
-    
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -68,4 +69,24 @@ export default {
 
 <style scoped>
 @import "/css/style.css";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  
+  gap: 20px;
+  height: 100vh;
+  margin-left: 500px;
+}
+
+.pink-gif {
+  width: 350px; /* Adjust size as needed */
+  height: auto;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
 </style>

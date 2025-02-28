@@ -59,4 +59,15 @@ class AppointmentController extends Controller
             ], 500);
         }
     }
+    public function getAppointmentCounts()
+{
+    $surigaoAppointments = Appointment::where('clinic_id', 1)->count(); // Clinic ID 1: Surigao Pet Doctors
+    $laugoAppointments = Appointment::where('clinic_id', 2)->count(); // Clinic ID 2: Laugo Veterinary Clinic
+
+    return response()->json([
+        'surigao' => $surigaoAppointments,
+        'laugo' => $laugoAppointments
+    ]);
+}
+
 }

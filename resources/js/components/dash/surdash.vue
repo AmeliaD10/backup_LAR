@@ -118,14 +118,14 @@
 
       <!-- end of users-->
 
-      <!-- Main Content -->
-      <section class="patient-overview">
+    <!-- Main Content -->
+    <section class="patient-overview">
         <div class="dash-card">
           <img src="img/ball.png" alt="Paw print icon" />
           <div class="dash-card-content">
             <h2>NUMBER OF PATIENTS</h2>
             <p>SURIGAO PET DOCTORS</p>
-            <span>4 Patients</span>
+            <span>{{ appointmentCount }} Patients</span>
           </div>
         </div>
       </section>
@@ -149,34 +149,52 @@
 </template>
 
 <script>
-import axios from 'axios'; // Make sure axios is installed in your project
+import axios from 'axios';
 
 export default {
-name: "SurDash",
-data() {
-  return {
-    doctors: [], // Array to hold the doctors data
-  };
-},
-mounted() {
-  // Fetch doctors from the backend when the component is mounted
-  this.fetchDoctors();
-},
-methods: {
-  goToDoctorProfile(doctorId) {
-    this.$router.push(`/doctor/${doctorId}`);
+  name: "SurDash",
+  data() {
+    return {
+      doctors: [],
+      appointmentCount: 0, // Holds the appointment count
+    };
   },
-  fetchDoctors() {
-    axios
-      .get('/api/doctors') // Assuming your Laravel API route is set up to fetch doctors
-      .then((response) => {
-        this.doctors = response.data; // Store the doctors in the component's data
-      })
-      .catch((error) => {
-        console.error("Error fetching doctors:", error);
-      });
+  mounted() {
+    this.fetchDoctors();
+    this.fetchAppointmentCount();
   },
+  methods: {
+    goToDoctorProfile(doctorId) {
+      this.$router.push(`/doctor/${doctorId}`);
+    },
+    fetchDoctors() {
+      axios.get('/api/doctors')
+        .then((response) => {
+          this.doctors = response.data;
+        })
+        .catch((error) => {
+          console.error("Error fetching doctors:", error);
+        });
+    },
+    fetchAppointmentCount() {
+  axios.get('/api/appointments/count')
+    .then((response) => {
+      console.log("API Response:", response.data); // Debugging
+      if (response.data && response.data.count !== undefined) {
+        this.appointmentCount = response.data.count;
+      } else {
+        console.error("Invalid response structure:", response.data);
+        this.appointmentCount = 0; // Fallback value
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching appointment count:", error);
+      this.appointmentCount = 0;
+    });
 },
+
+
+  },
 };
 </script>
 
